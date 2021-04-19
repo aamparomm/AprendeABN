@@ -1,0 +1,26 @@
+{
+  "name": "AprendeABN",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine-node servidor"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aamparomm/AprendeABN.git",
+    "start":"node index.js"
+  },
+  "author": "AMM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aamparomm/AprendeABN/issues"
+  },
+  "homepage": "https://github.com/aamparomm/AprendeABN#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jasmine-node": "^3.0.0",
+    "socket.io": "^2.3.0"
+  }
+}

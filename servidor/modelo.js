@@ -9,7 +9,7 @@ function ABN(){
 				this.clases[nclase]=new Clase(nclase,profesor,numParticipantes,this);
 				profesor.clase=this.clase[nclase];
 			}
-
+		return nclase;	
 		}
 
 	}
@@ -19,20 +19,34 @@ function ABN(){
 	this.comprobarlimites=function(num){
 		return num<=40 && num>=1;
 	}
+	this.listarClases=function(){
+		var lsta=[];
+		for(i in this.clases){
+			var clase=this.clases[i];
+			var nombre=clase.nombre;
+			var profesor=clase.profesor;
+			lista.push({"Clase:":nombre,"Profesor:":profesor});
+		}
+	}
 
+	this.registrarAlumno=function(){
+
+	}
+	
 }
 function Clase(nombre, profesor,num, ABN){
 	this.nombre=nombre;
 	this.profesor=profesor;
 	this.numMax=num;
 	this.app=ABN;
-
-
 }
 function Profesor(nombre,clase){
 	this.nombre=nombre;
 	this.clase=clase;
 
+	this.crearPartida=function(nclase,numParticipantes){
+		return this.app.crearPartida(nclase,this,numParticipantes);
+	}
 }
 function Alumno(nombre, apellido, curso, clase){
 	this.nombre=nombre;
@@ -40,8 +54,7 @@ function Alumno(nombre, apellido, curso, clase){
 	this.apellido=apellido;
 	this.curso=curso;
 
-	this.crearClase=function(){
-	}
-
 }
 module.exports.ABN=ABN;
+module.exports.Profesor=Profesor;
+module.exports.Alumno=Alumno;

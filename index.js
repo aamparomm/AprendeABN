@@ -15,6 +15,8 @@ app.use(express.static(__dirname + '/'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+var abn = new modelo.ABN();
+
 app.get('/', function (request, response) {
     var contenido = fs.readFileSync(__dirname + "/cliente/index.html"); 
    
@@ -23,7 +25,6 @@ app.get('/', function (request, response) {
     
 });
 
-var abn = new ABN();
 
 server.listen(app.get('port'), function () {
     console.log('Node esta escuchando en el puerto', app.get('port'));

@@ -12,5 +12,8 @@ function ServidorWS(){
 	this.enviarGlobal=function(socket,mens,datos){
         socket.broadcast.emit(mens,datos)
     };
+    this.lanzarSocketSrv=function(io,juego){
+        
+    }
 }
 module.exports.ServidorWS=ServidorWS;

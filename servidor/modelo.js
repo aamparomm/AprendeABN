@@ -7,7 +7,7 @@ function ABN(){
 		if(this.comprobarlimites(numParticipantes)){
 			if(!this.clases[nclase]){
 				this.clases[nclase]=new Clase(nclase,profesor,numParticipantes,this);
-				profesor.clase=this.clase[nclase];
+				profesor.clase=this.clases[nclase];
 			}
 		return nclase;	
 		}
@@ -20,13 +20,15 @@ function ABN(){
 		return num<=40 && num>=1;
 	}
 	this.listarClases=function(){
-		var lsta=[];
+		var lista=[];
 		for(i in this.clases){
 			var clase=this.clases[i];
 			var nombre=clase.nombre;
 			var profesor=clase.profesor;
-			lista.push({"Clase:":nombre,"Profesor:":profesor});
+			var num=clase.numMax;
+			lista.push({"clase":nombre,"profesor":profesor,"participantes": num});
 		}
+		return lista;
 	}
 
 	this.registrarAlumno=function(){

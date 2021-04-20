@@ -3,17 +3,48 @@
 <head>
 	<title>Aprende ABN</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="cliente/lib/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+	<script src="cliente/lib/bootstrap.min.js"></script>
 	<script src="cliente/src/clienteWS.js"></script>
+	<script src="cliente/src/controlWeb.js"></script>
 </head>
 <style>
-
+.jumbotron {
+  background-color: #1a5276; /* Azul */
+  color: #ffffff;
+}
 </style>
 <body >
-	<div class="text-center">
+	<div class="jumbotron text-center">
     	<h1>Aprende ABN</h1>
   	</div>
-
+	<div class="container-fluid text-center" >
+		<div class="row">
+			
+			<div class="col-sm-12" id="inicio"></div>
+			
+		</div>
+		<div class="row">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4" id="crearClase"></div>
+			<div class="col-sm-4"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4" id="listarClases"></div>
+			<div class="col-sm-4"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-8" id="listaAlumnos"></div>
+			<div class="col-sm-4" id="registro"></div>
+		</div>
+	</div>
 <script>
+	var ws= new ClienteWS();
+	var cw=new ControlWeb($);
+	cw.mostrarInicio();
 </script>
 </body>
 </html>

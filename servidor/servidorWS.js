@@ -12,8 +12,20 @@ function ServidorWS(){
 	this.enviarGlobal=function(socket,mens,datos){
         socket.broadcast.emit(mens,datos)
     };
-    this.lanzarSocketSrv=function(io,juego){
-        
+    this.lanzarSocketSrv=function(io,app){
+        var cli = this;
+        io.on('connection',function(socket){
+            socket.on('crearClase', function(nclase,profesor,numParticipantes) {
+                var nclase=app.crearClase(nclase,profesor,numParticipantes); 
+                console.log('El profesor: '+profesor+" ha creado una clase llamada: "+ nclase+" de "+numParticipantes+" participantes");
+                socket.join(nclase);              
+                cli.enviarRemitente(socket,"claseCreada",{"nclase":nclase,"profesor":profesor,"participantes":numParticipantes});
+            });
+            socket.on('listarClases', function(nclase) {
+                var lista=app.listarClases();            
+                cli.enviarRemitente(socket,"mostrarLista",lista);
+            });
+        });
     }
 }
 module.exports.ServidorWS=ServidorWS;

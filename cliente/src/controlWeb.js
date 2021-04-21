@@ -29,8 +29,12 @@ function ControlWeb($){
 			cadena =cadena+ '<a href="#" value="'+lista[i].clase+'" class="list-group-item">Clase: '+lista[i].clase+'  Profesor:'+lista[i].profesor+'<span class="badge"> nº '+lista[i].participantes+'</span></a>';
 		}
 		cadena =cadena+ '</div>';
+		cadena=cadena+'<button type="button" id="btnEntrarClase" class="btn btn-success btn-lg">Entrar</button>';
 		cadena =cadena+ '</div>';
 		$('#listarClases').append(cadena);
+		$('#btnEntrarClase').on('click',function(){
+			//ws.entrarClase();
+		});
 	}
 	this.mostrarCrearClase=function(){
 		this.limpiar();
@@ -60,7 +64,7 @@ function ControlWeb($){
 		});
 
 	}
-	this.mostrarClase=function(){
+	this.mostrarClase=function(nclase){
 		this.limpiar();
 		var cadena='<div id="mostrarC">';
 		cadena =cadena+ '<div class="form-group">';
@@ -69,13 +73,68 @@ function ControlWeb($){
 		cadena=cadena +'</div>';
 		$('#registro').append(cadena);
 		$('#btnRegistrarAlumno').on('click',function(){
+			cw.registrarAlumno(nclase);
 		});
 
+	}
+	this.registrarAlumno=function(nclase){
+		this.limpiar();
+		var cadena='<div id="registrarA">';
+		cadena =cadena+ '<div class="form-group">';
+		cadena=cadena +'<label for ="nalumno">Nombre del alumno:</label>';
+		cadena=cadena +'<input type="text" class="form-control" size="50" id="nalumno" placeholder="Escribe el nombre del alumno">';
+		cadena=cadena +'</div>';
+		cadena =cadena+'<div class="form-group">';
+		cadena=cadena +'<label for ="apellido">Apellido del alumno:</label>';
+		cadena=cadena +'<input type="text" class="form-control" size="50" id="apellido" placeholder="Escribe el apellido de el alumno">';
+		cadena=cadena +'</div>';
+		cadena =cadena+'<div class="form-group">';
+		cadena=cadena +'<label for ="curso">Curso: </label>';
+		cadena=cadena +'<select name="curso" class="custom-select">';
+		cadena=cadena +'<option selected> Elige el curso del alumno </option>';
+		cadena=cadena +'<option value="3"> 3 Años </option>';
+		cadena=cadena +'<option value="4"> 4 Años </option>';
+		cadena=cadena +'<option value="5"> 5 Años </option>';
+		cadena=cadena +'<option value="11"> 1º Primaria </option>';
+		cadena=cadena +'</select>';
+		cadena=cadena +'</div>';
+		cadena=cadena+'<button type="button" id="btnRegistrarA" class="btn btn-success btn-lg">Registrar alumno</button>';
+		cadena=cadena +'</div>';
+		$('#registroA').append(cadena);
+		$('#btnRegistrarA').on('click',function(){
+			var nalumno=$('#nalumno').val();
+			var apellido=$('#apellido').val();
+			var curso=$('#curso').val();
+			if(nalumno!=""){
+				ws.registrarAlumno(nalumno,apellido,curso,nclase);
+			}
+		});
+
+	}
+	this.listarAlumnos=function(lista){
+		this.limpiar();
+		var cadena='<div id="mostrarLA">';
+		
+		cadena =cadena+ '<div class="list-group">';
+		cadena=cadena +'<label for ="Clases">Alumnos:</label>';
+		
+		for(var i=0 ; i<lista.length;i++){
+			cadena =cadena+ '<a href="#" value="'+lista[i].nombre+'" class="list-group-item">'+lista[i].nombre+' '+lista[i].apellido+'<span class="badge"> Curso '+lista[i].curso+'</span></a>';
+		}
+		cadena =cadena+ '</div>';
+		cadena=cadena+'<button type="button" id="btnComenzar" class="btn btn-success btn-lg">Comenzar</button>';
+		cadena =cadena+ '</div>';
+		$('#listarClases').append(cadena);
+		$('#btnComenzar').on('click',function(){
+			//cw.mostrarEjercicios();
+		});
 	}
 	this.limpiar=function(){
 		$('#mostrarCC').remove();
 		$('#mostrarLC').remove();
+		$('#mostrarLA').remove();
 		$('#mostrarC').remove();
 		$('#mostrarI').remove();
+		$('#registrarA').remove();
 	}
 }

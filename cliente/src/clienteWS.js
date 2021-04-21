@@ -14,6 +14,10 @@ function ClienteWS(){
 	this.listaClases=function(){
 		this.socket.emit("listarClases");
 	}
+	this.registrarAlumno=function(nombre,apellido,curso,clase){
+		this.socket.emit("registrarAlumno",nombre,apellido,curso,clase);
+
+	}
 	this.lanzarSocketSrv=function(){
 		var cli=this;
 		this.socket.on('connect',function(){
@@ -24,7 +28,7 @@ function ClienteWS(){
 			console.log(data);
 			if(data.nclase!=undefined){
 				cli.profesor=true;
-				cw.mostrarClase();
+				cw.mostrarClase(data.nclase);
 			}else{
 				console.log("La clase no se ha creado correctamente: es indefinida");
 			}
@@ -32,6 +36,11 @@ function ClienteWS(){
 		this.socket.on("mostrarLista",function(lista){
 			console.log(lista);
 			cw.listarClases(lista);
+		});
+		this.socket.on("alumnoRegistrado",function(lista){
+			console.log(lista);
+			cw.mostrarClase(lista.clase);
+			cw.listarAlumnos(lista);
 		});
 	}
 	this.ini();

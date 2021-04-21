@@ -31,7 +31,23 @@ function ABN(){
 		return lista;
 	}
 
-	this.registrarAlumno=function(){
+	this.registrarAlumno=function(nombre, apellido, curso,clase){
+		var lista=[];
+		var clase=this.clases[clase];
+		if(clase!=undefined){
+			this.clases[clase].alumnos=new Alumno(nombre,apellido,curso,this);
+			for (i in clase.alumnos){
+				var alumno= clase.alumnos[i];
+				var nombre=alumno.nombre;
+				var apellido=alumno.apellido;
+				var curso=alumno.curso;
+				lista.push({"clase":clase,"nombre":nombre,"apellidos":apellido,"curso": curso});
+			}
+			
+		}else{
+			console.log("No se puede unir a la clase ya que esta no esta definida");
+		}
+		return lista;
 
 	}
 	
@@ -41,6 +57,7 @@ function Clase(nombre, profesor,num, ABN){
 	this.profesor=profesor;
 	this.numMax=num;
 	this.app=ABN;
+	this.alumnos={};
 }
 function Profesor(nombre,clase){
 	this.nombre=nombre;

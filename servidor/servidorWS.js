@@ -21,9 +21,14 @@ function ServidorWS(){
                 socket.join(nclase);              
                 cli.enviarRemitente(socket,"claseCreada",{"nclase":nclase,"profesor":profesor,"participantes":numParticipantes});
             });
-            socket.on('listarClases', function(nclase) {
+            socket.on('listarClases', function() {
                 var lista=app.listarClases();            
                 cli.enviarRemitente(socket,"mostrarLista",lista);
+            });
+            socket.on('registrarAlumno', function(nombre,apellido,curso,clase) {
+                var lista=app.registrarAlumno(nombre,apellido,curso,clase);
+                console.log('El alumno: '+nombre+" del curso: "+ curso+" ha sido registrado en la clase"+clase);           
+                cli.enviarRemitente(socket,"alumnoRegistrado",lista);
             });
         });
     }

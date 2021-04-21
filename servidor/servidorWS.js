@@ -30,6 +30,18 @@ function ServidorWS(){
                 console.log('El alumno: '+nombre+" del curso: "+ curso+" ha sido registrado en la clase"+clase);           
                 cli.enviarRemitente(socket,"alumnoRegistrado",lista);
             });
+            socket.on('listarAlumnos', function(nclase) {
+                var lista=app.clases[nclase].listarAlumnos();            
+                cli.enviarRemitente(socket,"mostrarAlumnos",lista);
+            });
+            socket.on('entrarClase', function(nclase) {
+                var res=app.entrarClase(nclase);
+                console.log(res);
+                if(res!=-1){
+                    cli.enviarRemitente(socket,"entrarClase");
+                }
+                
+            });
         });
     }
 }

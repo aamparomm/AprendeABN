@@ -31,34 +31,68 @@ function ABN(){
 		return lista;
 	}
 
-	this.registrarAlumno=function(nombre, apellido, curso,clase){
+	//Se registra a el alumno en la lista de alumnos de la claseque tiene como identificador su nombre
+	// se crea una lista para poder leer los datos de los alumnos que se encuentran en la clase determinada
+	this.registrarAlumno=function(nombre, apellido, curso,nclase){
 		var lista=[];
-		var clase=this.clases[clase];
+		var alumno=[]
+		var clase=this.clases[nclase];
 		if(clase!=undefined){
-			this.clases[clase].alumnos=new Alumno(nombre,apellido,curso,this);
-			for (i in clase.alumnos){
-				var alumno= clase.alumnos[i];
-				var nombre=alumno.nombre;
-				var apellido=alumno.apellido;
-				var curso=alumno.curso;
-				lista.push({"clase":clase,"nombre":nombre,"apellidos":apellido,"curso": curso});
-			}
-			
+			alumno=clase.agregarAlumno(nombre,apellido,curso);
+			console.log(alumno);
+			lista=clase.listarAlumnos();	
 		}else{
-			console.log("No se puede unir a la clase ya que esta no esta definida");
+			console.log("No se puede registrar en la clase ya que esta no esta definida");
 		}
 		return lista;
 
 	}
+
+	this.entrarClase=function(nclase){
+		var res=-1;
+		if (this.clases[nclase]){
+			res = 0;	
+		}
+		return res;
+	}
 	
 }
+
+//Clase que incluye todas las funciones y atributos que ha de tener una clase
 function Clase(nombre, profesor,num, ABN){
 	this.nombre=nombre;
 	this.profesor=profesor;
 	this.numMax=num;
 	this.app=ABN;
 	this.alumnos={};
+
+	//Función que devuelve la lista de alumnos que se encuentran en la clase 
+	this.listarAlumnos=function(){
+		let lista=[];
+		for (var i in this.alumnos){
+			var alumno=this.alumnos[i];
+			var nombre= alumno.nombre;
+			var apellido= alumno.apellido;
+			var curso=alumno.curso;
+			lista.push({"nombre":nombre,"apellidos":apellido,"curso":curso});
+		}
+		
+		return lista;
+	}
+	this.agregarAlumno=function(nombre,apellido,curso){
+		let n=nombre;
+		this.alumnos[n]=new Alumno(nombre,apellido,curso);
+		this.alumnos[n].clase=this;
+		var a=this.alumnos[nombre];
+		var nombre=a.nombre;
+		var apellidos=a.apellido;
+		var curso=a.curso;
+		return {"clase":this.nombre,"nombre":nombre,"apellidos":apellidos,"curso":curso};
+
+	}
 }
+
+//Clase que incluye todas las funciones y atributos que ha de tener el Profesor
 function Profesor(nombre,clase){
 	this.nombre=nombre;
 	this.clase=clase;
@@ -67,11 +101,13 @@ function Profesor(nombre,clase){
 		return this.app.crearPartida(nclase,this,numParticipantes);
 	}
 }
-function Alumno(nombre, apellido, curso, clase){
+
+//Clase que incluye todas las funciones y atributos que ha de tener el ALumno
+function Alumno(nombre, apellido, curso){
 	this.nombre=nombre;
-	this.clase=clase;
 	this.apellido=apellido;
 	this.curso=curso;
+	this.clase;
 
 }
 module.exports.ABN=ABN;

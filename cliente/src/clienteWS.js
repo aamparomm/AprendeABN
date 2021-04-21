@@ -14,9 +14,17 @@ function ClienteWS(){
 	this.listaClases=function(){
 		this.socket.emit("listarClases");
 	}
-	this.registrarAlumno=function(nombre,apellido,curso,clase){
-		this.socket.emit("registrarAlumno",nombre,apellido,curso,clase);
+	this.registrarAlumno=function(nombre,apellido,curso){
+		console.log(this.nclase);
+		this.socket.emit("registrarAlumno",nombre,apellido,curso,this.nclase);
 
+	}
+	this.listarAlumnos=function(){
+		this.socket.emit("listarAlumnos",this.nclase);
+	}
+	this.entrarClase=function(nclase){
+		this.nclase=nclase;
+		this.socket.emit("entrarClase",nclase);
 	}
 	this.lanzarSocketSrv=function(){
 		var cli=this;
@@ -29,6 +37,7 @@ function ClienteWS(){
 			if(data.nclase!=undefined){
 				cli.profesor=true;
 				cw.mostrarClase(data.nclase);
+				ws.listarAlumnos();
 			}else{
 				console.log("La clase no se ha creado correctamente: es indefinida");
 			}
@@ -37,11 +46,21 @@ function ClienteWS(){
 			console.log(lista);
 			cw.listarClases(lista);
 		});
-		this.socket.on("alumnoRegistrado",function(lista){
+		this.socket.on("mostrarAlumnos",function(lista){
 			console.log(lista);
-			cw.mostrarClase(lista.clase);
 			cw.listarAlumnos(lista);
 		});
+		this.socket.on("alumnoRegistrado",function(lista){
+			console.log(lista);
+			cw.mostrarClase();
+			ws.listarAlumnos();
+		});
+		this.socket.on("entrarClase",function(){
+			cw.mostrarClase();
+			ws.listarAlumnos();
+
+		});
+		
 	}
 	this.ini();
 }

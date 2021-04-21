@@ -32,8 +32,16 @@ function ControlWeb($){
 		cadena=cadena+'<button type="button" id="btnEntrarClase" class="btn btn-success btn-lg">Entrar</button>';
 		cadena =cadena+ '</div>';
 		$('#listarClases').append(cadena);
+
+		var StoreValue = []; //Declare array
+		$(".list-group a").click(function(){
+			StoreValue = []; //clear array
+			StoreValue.push($(this).attr("value")); // add text to array
+		});
+
 		$('#btnEntrarClase').on('click',function(){
-			//ws.entrarClase();
+			var nclase=StoreValue[0];
+			ws.entrarClase(nclase);
 		});
 	}
 	this.mostrarCrearClase=function(){
@@ -64,20 +72,20 @@ function ControlWeb($){
 		});
 
 	}
-	this.mostrarClase=function(nclase){
+	this.mostrarClase=function(){
 		this.limpiar();
 		var cadena='<div id="mostrarC">';
 		cadena =cadena+ '<div class="form-group">';
-		cadena=cadena+'<button type="button" id="btnRegistrarAlumno" class="btn btn-primary">Registrar alumno</button>';
+		cadena=cadena+'<button type="button" id="btnRegistrarAlumno" class="btn btn-primary btn-lg">Registrar alumno</button>';
 		cadena =cadena+ '</div>';
 		cadena=cadena +'</div>';
 		$('#registro').append(cadena);
 		$('#btnRegistrarAlumno').on('click',function(){
-			cw.registrarAlumno(nclase);
+			cw.registrarAlumno();
 		});
 
 	}
-	this.registrarAlumno=function(nclase){
+	this.registrarAlumno=function(){
 		this.limpiar();
 		var cadena='<div id="registrarA">';
 		cadena =cadena+ '<div class="form-group">';
@@ -89,37 +97,39 @@ function ControlWeb($){
 		cadena=cadena +'<input type="text" class="form-control" size="50" id="apellido" placeholder="Escribe el apellido de el alumno">';
 		cadena=cadena +'</div>';
 		cadena =cadena+'<div class="form-group">';
-		cadena=cadena +'<label for ="curso">Curso: </label>';
+		cadena=cadena +'<label for ="c">Curso: </label>';
 		cadena=cadena +'<select name="curso" class="custom-select">';
 		cadena=cadena +'<option selected> Elige el curso del alumno </option>';
 		cadena=cadena +'<option value="3"> 3 Años </option>';
 		cadena=cadena +'<option value="4"> 4 Años </option>';
 		cadena=cadena +'<option value="5"> 5 Años </option>';
-		cadena=cadena +'<option value="11"> 1º Primaria </option>';
+		cadena=cadena +'<option value="1"> 1º Primaria </option>';
 		cadena=cadena +'</select>';
 		cadena=cadena +'</div>';
 		cadena=cadena+'<button type="button" id="btnRegistrarA" class="btn btn-success btn-lg">Registrar alumno</button>';
 		cadena=cadena +'</div>';
 		$('#registroA').append(cadena);
+
 		$('#btnRegistrarA').on('click',function(){
+
 			var nalumno=$('#nalumno').val();
 			var apellido=$('#apellido').val();
 			var curso=$('#curso').val();
+			console.log(curso);
 			if(nalumno!=""){
-				ws.registrarAlumno(nalumno,apellido,curso,nclase);
+				ws.registrarAlumno(nalumno,apellido,curso);
 			}
 		});
 
 	}
 	this.listarAlumnos=function(lista){
-		this.limpiar();
 		var cadena='<div id="mostrarLA">';
 		
 		cadena =cadena+ '<div class="list-group">';
 		cadena=cadena +'<label for ="Clases">Alumnos:</label>';
 		
 		for(var i=0 ; i<lista.length;i++){
-			cadena =cadena+ '<a href="#" value="'+lista[i].nombre+'" class="list-group-item">'+lista[i].nombre+' '+lista[i].apellido+'<span class="badge"> Curso '+lista[i].curso+'</span></a>';
+			cadena =cadena+ '<a href="#" value="'+lista[i].nombre+'" class="list-group-item">'+lista[i].nombre+' '+lista[i].apellidos+'</a>';
 		}
 		cadena =cadena+ '</div>';
 		cadena=cadena+'<button type="button" id="btnComenzar" class="btn btn-success btn-lg">Comenzar</button>';

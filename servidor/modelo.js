@@ -37,13 +37,13 @@ function ABN(){
 		var lista=[];
 		var alumno=[]
 		var clase=this.clases[nclase];
-		if(clase!=undefined){
+		if(clase!=undefined && clase.comprobarMaximo()){
 			alumno=clase.agregarAlumno(nombre,apellido,curso);
-			console.log(alumno);
-			lista=clase.listarAlumnos();	
+			console.log(alumno);	
 		}else{
-			console.log("No se puede registrar en la clase ya que esta no esta definida");
+			console.log("No se puede registrar en la clase: clase ya definida o el cupo de la clase esta completo");
 		}
+		lista=clase.listarAlumnos();
 		return lista;
 
 	}
@@ -59,8 +59,8 @@ function ABN(){
 }
 
 //Clase que incluye todas las funciones y atributos que ha de tener una clase
-function Clase(nombre, profesor,num, ABN){
-	this.nombre=nombre;
+function Clase(nclase, profesor,num, ABN){
+	this.nombre=nclase;
 	this.profesor=profesor;
 	this.numMax=num;
 	this.app=ABN;
@@ -90,6 +90,13 @@ function Clase(nombre, profesor,num, ABN){
 		return {"clase":this.nombre,"nombre":nombre,"apellidos":apellidos,"curso":curso};
 
 	}
+	this.comprobarMaximo=function(){
+		return this.numAlumnos()<this.numMax;
+
+	}
+	this.numAlumnos=function(){
+		return Object.keys(this.alumnos).length;
+	}
 }
 
 //Clase que incluye todas las funciones y atributos que ha de tener el Profesor
@@ -97,9 +104,9 @@ function Profesor(nombre,clase){
 	this.nombre=nombre;
 	this.clase=clase;
 
-	this.crearPartida=function(nclase,numParticipantes){
-		return this.app.crearPartida(nclase,this,numParticipantes);
-	}
+	// this.crearClase=function(nclase,numParticipantes){
+	// 	return this.app.crearPartida(nclase,this,numParticipantes);
+	// }
 }
 
 //Clase que incluye todas las funciones y atributos que ha de tener el ALumno

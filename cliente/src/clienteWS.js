@@ -52,13 +52,13 @@ function ClienteWS(){
 		});
 		this.socket.on("alumnoRegistrado",function(lista){
 			console.log(lista);
-			cw.mostrarClase();
 			ws.listarAlumnos();
+			cw.mostrarClase();
+			
 		});
 		this.socket.on("entrarClase",function(){
-			cw.mostrarClase();
 			ws.listarAlumnos();
-
+			cw.mostrarClase();
 		});
 		
 	}

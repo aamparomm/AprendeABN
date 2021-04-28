@@ -93,7 +93,7 @@ describe("Aplicación AprendeABN", function() {
 			expect(alumno2.clase).toEqual(clase);
 			
 			abn.registrarAlumno("Juan","Lucas",3,nc);
-			var alumno4=clase.alumnos["Juan"];
+			var alumno3=clase.alumnos["Juan"];
 			expect(Object.keys(clase.alumnos).length).toEqual(3);
 			expect(alumno4).toBe(undefined);
 		});

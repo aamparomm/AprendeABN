@@ -158,7 +158,7 @@ function ControlWeb($){
 	}
 	this.listarAlumnos=function(lista){
 		var cadena='<div id="mostrarLA">';
-		
+		cadena=cadena +'<h1>'+lista[0].clase+'</h1>';
 		cadena =cadena+ '<div class="list-group">';
 		cadena=cadena +'<label for ="Clases">Alumnos:</label>';
 		
@@ -183,8 +183,96 @@ function ControlWeb($){
 
 		$('#btnComenzar').on('click',function(){
 			var curso=StoreValue[0];
-			//cw.mostrarEjercicios(curso);
+			cw.mostrarEjercicios(curso);
 		});
+	}
+	this.mostrarEjercicios=function(curso){
+		if(curso==3){
+			cw.mostrarEjercicios3();
+		}else if(curso==4){
+			cw.mostrarEjercicios4();
+		}else if(curso==5){
+			cw.mostrarEjercicios5();
+		}else if(curso==1){
+			cw.mostrarEjercicios1();
+		}
+	}
+	this.mostrarEjercicios3=function(){
+		this.limpiar();
+		var cadena='<div id="mostrar3">';
+		cadena=cadena +'<h1>EJERCICIOS DE 3 AÑOS</h1>';
+		cadena=cadena +'<h3>Identificación de números</h3>';
+		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/2.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<label style="margin-right: 400px">1 al 3</label>';
+		cadena=cadena +'<label style="margin-left: 200px ">1 al 6</label>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#ejercicios').append(cadena);
+		$('#btnAtras').on('click',function(){
+			ws.listarAlumnos();
+			cw.mostrarClase();
+		});
+	}
+	this.mostrarEjercicios4=function(){
+		this.limpiar();
+		var cadena='<div id="mostrar4">';
+		cadena=cadena +'<h1>EJERCICIOS DE 4 AÑOS</h1>';
+		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/recta.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/arcoiris.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<label style="margin-right: 80px">Recta numérica</label>';
+		cadena=cadena +'<label style="margin-left: 250px">Amigos del 10</label>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#ejercicios').append(cadena);
+		$('#btnAtras').on('click',function(){
+			ws.listarAlumnos();
+			cw.mostrarClase();
+		});
+
+	}
+	this.mostrarEjercicios5=function(){
+		this.limpiar();
+		var cadena='<div id="mostrar5">';
+		cadena=cadena +'<h1>EJERCICIOS DE 5 AÑOS</h1>';
+		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/s5.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/r5.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<label style="margin-right: 200px">Suma</label>';
+		cadena=cadena +'<label style="margin-left: 200px ">Resta</label>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#ejercicios').append(cadena);
+		$('#btnAtras').on('click',function(){
+			ws.listarAlumnos();
+			cw.mostrarClase();
+		});
+
+	}
+	this.mostrarEjercicios1=function(){
+		this.limpiar();
+		var cadena='<div id="mostrar1">';
+		cadena=cadena +'<h1>EJERCICIOS DE 1º PRIMARIA</h1>';
+		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/suma.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/resta.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<label style="margin-right: 120px">Suma</label>';
+		cadena=cadena +'<label style="margin-left: 120px ">Resta</label>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#ejercicios').append(cadena);
+
+		$('#btnAtras').on('click',function(){
+			ws.listarAlumnos();
+			cw.mostrarClase();
+		});
+
 	}
 	this.limpiar=function(){
 		$('#mostrarCC').remove();
@@ -194,5 +282,10 @@ function ControlWeb($){
 		$('#mostrarI').remove();
 		$('#registrarA').remove();
 		$('#mostrarIcono').remove();
+		$('#mostrar3').remove();
+		$('#mostrar4').remove();
+		$('#mostrar5').remove();
+		$('#mostrar1').remove();
 	}
+
 }

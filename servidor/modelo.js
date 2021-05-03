@@ -74,7 +74,7 @@ function Clase(nclase, profesor,num, ABN){
 			var nombre= alumno.nombre;
 			var apellido= alumno.apellido;
 			var curso=alumno.curso;
-			lista.push({"nombre":nombre,"apellidos":apellido,"curso":curso});
+			lista.push({"nombre":nombre,"apellidos":apellido,"curso":curso,"clase":this.nombre});
 		}
 		
 		return lista;

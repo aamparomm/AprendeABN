@@ -202,8 +202,8 @@ function ControlWeb($){
 		var cadena='<div id="mostrar3">';
 		cadena=cadena +'<h1>EJERCICIOS DE 3 AÑOS</h1>';
 		cadena=cadena +'<h3>Identificación de números</h3>';
-		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/1.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/2.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn31" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn32" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/2.png"></img></button>';
 		cadena=cadena +'<p></p>';
 		cadena=cadena +'<label style="margin-right: 400px">1 al 3</label>';
 		cadena=cadena +'<label style="margin-left: 200px ">1 al 6</label>';
@@ -215,13 +215,60 @@ function ControlWeb($){
 			ws.listarAlumnos();
 			cw.mostrarClase();
 		});
+		$('#btn31').on('click',function(){
+			cw.ejercicio31();
+		});
+		$('#btn32').on('click',function(){
+			cw.ejercicio32();
+		});
+	}
+	this.ejercicio31=function(){
+		this.limpiar();
+		var num=1;
+		var cadena='<div id="mostrar31">';
+		cadena=cadena +'<h1>Identificacion de números del 1 al 3</h1>';
+		cadena=cadena +'<h3>'+num+'/10 Seleccione el número de objetos de la imagen</h3>';
+		cadena=cadena +'<img src="cliente/images/31/pulpos.png" class="rounded" alt="Eniun">';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btn1" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn2" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/2.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn3" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/3.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#ejercicios').append(cadena);
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios3();
+		});
+	}
+	this.ejercicio32=function(){
+		this.limpiar();
+		var num=1;
+		var cadena='<div id="mostrar32">';
+		cadena=cadena +'<h1>Identificacion de números del 1 al 6</h1>';
+		cadena=cadena +'<h3>'+num+'/10 Seleccione el número de objetos de la imagen</h3>';
+		cadena=cadena +'<img src="cliente/images/32/dado.png" class="rounded" alt="Eniun">';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btn1" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn2" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/2.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn3" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/3.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn4" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/4.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn5" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/5.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn6" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/6.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#ejercicios').append(cadena);
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios3();
+		});
 	}
 	this.mostrarEjercicios4=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar4">';
 		cadena=cadena +'<h1>EJERCICIOS DE 4 AÑOS</h1>';
-		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/recta.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/arcoiris.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn41" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/recta.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn42" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/arcoiris.png"></img></button>';
 		cadena=cadena +'<p></p>';
 		cadena=cadena +'<label style="margin-right: 80px">Recta numérica</label>';
 		cadena=cadena +'<label style="margin-left: 250px">Amigos del 10</label>';
@@ -233,14 +280,74 @@ function ControlWeb($){
 			ws.listarAlumnos();
 			cw.mostrarClase();
 		});
+		$('#btn41').on('click',function(){
+			cw.ejercicio41();
+		});
+		$('#btn42').on('click',function(){
+			cw.ejercicio42();
+		});
 
+	}
+	this.ejercicio41=function(){
+		this.limpiar();
+		var num=1;
+		var cadena='<div id="mostrar41">';
+		cadena=cadena +'<h1>Recta numérica</h1>';
+		cadena=cadena +'<h3>'+num+'/10 ¿A qué número llegamos si nos encontramos en el número 3 y avanzamos 2 casillas?</h3>';
+		cadena=cadena +'<img src="cliente/images/41/1.png" class="rounded" alt="Eniun">';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btn1" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn2" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/2.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn3" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/3.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn4" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/4.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn5" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/5.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btn6" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/6.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn7" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/7.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn8" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/8.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn9" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/9.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn10" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/10.png"></img></button>'
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#ejercicios').append(cadena);
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios4();
+		});
+	}
+	this.ejercicio42=function(){
+		this.limpiar();
+		var num=1;
+		var cadena='<div id="mostrar42">';
+		cadena=cadena +'<h1>Amigos del 10</h1>';
+		cadena=cadena +'<h3>'+num+'/10 ¿cuál es el amigo del 5?</h3>';
+		cadena=cadena +'<img src="cliente/images/42/1.png" class="rounded" alt="Eniun">';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btn1" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn2" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/2.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn3" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/3.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn4" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/4.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn5" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/5.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btn6" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/6.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn7" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/7.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn8" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/8.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn9" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/9.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn10" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/10.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#ejercicios').append(cadena);
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios4();
+		});
 	}
 	this.mostrarEjercicios5=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar5">';
 		cadena=cadena +'<h1>EJERCICIOS DE 5 AÑOS</h1>';
-		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/s5.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/r5.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn51" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/s5.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn52" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/r5.png"></img></button>';
 		cadena=cadena +'<p></p>';
 		cadena=cadena +'<label style="margin-right: 200px">Suma</label>';
 		cadena=cadena +'<label style="margin-left: 200px ">Resta</label>';
@@ -252,14 +359,66 @@ function ControlWeb($){
 			ws.listarAlumnos();
 			cw.mostrarClase();
 		});
+		$('#btn51').on('click',function(){
+			cw.ejercicio51(1);
+		});
+		$('#btn52').on('click',function(){
+			cw.ejercicio52(1);
+		});
 
+	}
+	this.ejercicio51=function(count){
+		this.limpiar();
+		var num=1;
+		var cadena='<div id="mostrar51">';
+		cadena=cadena +'<h1>Suma con objetos</h1>';
+		cadena=cadena +'<h3>'+num+'/10 Pulsa la casilla hasta que aparezca el número que de solución a la suma</h3>';
+		cadena=cadena +'<img src="cliente/images/s5.png" class="rounded" alt="Eniun"style="margin: 20px">';
+		cadena=cadena +'<img src="cliente/images/equal.png" class="rounded" alt="Eniun">';
+		cadena=cadena+'<button type="button" id="btnDedos" class="btn btn-light btn-lg"><img src="cliente/images/manos/'+count+'.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btn1" class="btn btn-success btn-lg"><i class="fas fa-check"></i> Hecho</button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#ejercicios').append(cadena);
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios5();
+		});
+		$('#btnDedos').on('click',function(){
+			count=((count+1)%5);
+			cw.ejercicio51(count);
+		});
+	}
+	this.ejercicio52=function(count){
+		this.limpiar();
+		var num=1;
+		var cadena='<div id="mostrar52">';
+		cadena=cadena +'<h1>Resta con objetos</h1>';
+		cadena=cadena +'<h3>'+num+'/10 Pulsa la casilla hasta que aparezca el número que de solución a la resta</h3>';
+		cadena=cadena +'<img src="cliente/images/r5.png" class="rounded" alt="Eniun">';
+		cadena=cadena +'<img src="cliente/images/equal.png" class="rounded" alt="Eniun">';
+		cadena=cadena+'<button type="button" id="btnDedos" class="btn btn-light btn-lg"><img src="cliente/images/manos/'+count+'.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnH" class="btn btn-success btn-lg"><i class="fas fa-check"></i> Hecho</button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#ejercicios').append(cadena);
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios5();
+		});
+		$('#btnDedos').on('click',function(){
+			count=((count+1)%5);
+			cw.ejercicio52(count);
+		});
 	}
 	this.mostrarEjercicios1=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar1">';
 		cadena=cadena +'<h1>EJERCICIOS DE 1º PRIMARIA</h1>';
 		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/suma.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/resta.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn12" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/resta.png"></img></button>';
 		cadena=cadena +'<p></p>';
 		cadena=cadena +'<label style="margin-right: 120px">Suma</label>';
 		cadena=cadena +'<label style="margin-left: 120px ">Resta</label>';
@@ -283,8 +442,14 @@ function ControlWeb($){
 		$('#registrarA').remove();
 		$('#mostrarIcono').remove();
 		$('#mostrar3').remove();
+		$('#mostrar31').remove();
+		$('#mostrar32').remove();
 		$('#mostrar4').remove();
+		$('#mostrar41').remove();
+		$('#mostrar42').remove();
 		$('#mostrar5').remove();
+		$('#mostrar51').remove();
+		$('#mostrar52').remove();
 		$('#mostrar1').remove();
 	}
 

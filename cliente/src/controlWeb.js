@@ -291,13 +291,13 @@ function ControlWeb($){
 			cw.mostrarEjercicios3();
 		});
 	}
-	this.ejercicio32=function(e31,num,score){
+	this.ejercicio32=function(e32,num,score){
 		this.limpiar();
-		var num=1;
+		var soluciones=[5,4,1,5,2,6,3,2,4,3];
 		var cadena='<div id="mostrar32">';
 		cadena=cadena +'<h1>Identificacion de números del 1 al 6</h1>';
 		cadena=cadena +'<h3>'+num+'/10 Seleccione el número de objetos de la imagen</h3>';
-		cadena=cadena +'<img src="cliente/images/32/dado.png" class="rounded" alt="Eniun">';
+		cadena=cadena +'<img src="cliente/images/32/'+e32+'.png" class="rounded" alt="Eniun">';
 		cadena=cadena +'<p></p>';
 		cadena=cadena+'<button type="button" id="btn1" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/1.png"></img></button>';
 		cadena=cadena+'<button type="button" id="btn2" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/2.png"></img></button>';
@@ -309,6 +309,106 @@ function ControlWeb($){
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios3();
+		});
+		$('#btn1').on('click',function(){
+			if (soluciones[e32]==1){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e32+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,3,32);
+			}else{
+				cw.ejercicio32((e32%10),num,score);
+			}
+			
+		});
+		$('#btn2').on('click',function(){
+			if (soluciones[e32]==2){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e32+=1;
+			num+=1;
+			if(num==11){
+				cw.mostrarResultados(score,3,32);
+			}else{
+				cw.ejercicio32((e32%10),num,score);
+			}
+		});
+		$('#btn3').on('click',function(){
+			if (soluciones[e32]==3){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e32+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,3,32);
+			}else{
+				cw.ejercicio32((e32%10),num,score);
+			}
+		});
+		$('#btn4').on('click',function(){
+			if (soluciones[e32]==4){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e32+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,3,32);
+			}else{
+				cw.ejercicio32((e32%10),num,score);
+			}
+		});
+		$('#btn5').on('click',function(){
+			if (soluciones[e32]==5){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e32+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,3,32);
+			}else{
+				cw.ejercicio32((e32%10),num,score);
+			}
+		});
+		$('#btn6').on('click',function(){
+			if (soluciones[e32]==6){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e32+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,3,32);
+			}else{
+				cw.ejercicio32((e32%10),num,score);
+			}
+		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios3();
 		});
@@ -331,20 +431,29 @@ function ControlWeb($){
 			cw.mostrarClase();
 		});
 		$('#btn41').on('click',function(){
-			cw.ejercicio41();
+			cw.ejercicio41(0,1,0);
 		});
 		$('#btn42').on('click',function(){
-			cw.ejercicio42();
+			cw.ejercicio42(0,1,0);
 		});
 
 	}
-	this.ejercicio41=function(){
+	this.ejercicio41=function(e41,num,score){
 		this.limpiar();
-		var num=1;
+		var inicio=[3,5,10,1,2,7,6,4,9,8];
+		var desplazamiento=[2,-1,-2,5,1,3,1,5,-8,-6];
+		var soluciones=[5,4,8,6,3,10,7,9,1,2];
 		var cadena='<div id="mostrar41">';
 		cadena=cadena +'<h1>Recta numérica</h1>';
-		cadena=cadena +'<h3>'+num+'/10 ¿A qué número llegamos si nos encontramos en el número 3 y avanzamos 2 casillas?</h3>';
-		cadena=cadena +'<img src="cliente/images/41/1.png" class="rounded" alt="Eniun">';
+		cadena=cadena +'<h3>'+num+'/10 ¿A qué número llegamos si nos encontramos en el número '+inicio[e41]+' y nos desplazamos '+desplazamiento[e41]+' casillas?</h3>';
+		cadena=cadena +'<p></p>';
+		if(desplazamiento[e41]>0){
+			cadena=cadena +'<h1>+ '+desplazamiento[e41]+'</h1>';
+		}else{
+			cadena=cadena +'<h1>'+desplazamiento[e41]+'</h1>';
+		}
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<img src="cliente/images/41/'+e41+'.png" class="rounded" alt="Eniun">';
 		cadena=cadena +'<p></p>';
 		cadena=cadena+'<button type="button" id="btn1" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/1.png"></img></button>';
 		cadena=cadena+'<button type="button" id="btn2" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/2.png"></img></button>';
@@ -361,17 +470,188 @@ function ControlWeb($){
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
+		$('#btn1').on('click',function(){
+			if (soluciones[e41]==1){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e41+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,41);
+			}else{
+				cw.ejercicio41((e41%10),num,score);
+			}
+			
+		});
+		$('#btn2').on('click',function(){
+			if (soluciones[e41]==2){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e41+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,41);
+			}else{
+				cw.ejercicio41((e41%10),num,score);
+			}
+			
+		});
+		$('#btn3').on('click',function(){
+			if (soluciones[e41]==3){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e41+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,41);
+			}else{
+				cw.ejercicio41((e41%10),num,score);
+			}
+			
+		});
+		$('#btn4').on('click',function(){
+			if (soluciones[e41]==4){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e41+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,41);
+			}else{
+				cw.ejercicio41((e41%10),num,score);
+			}
+			
+		});
+		$('#btn5').on('click',function(){
+			if (soluciones[e41]==5){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e41+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,41);
+			}else{
+				cw.ejercicio41((e41%10),num,score);
+			}
+			
+		});
+		$('#btn6').on('click',function(){
+			if (soluciones[e41]==6){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e41+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,41);
+			}else{
+				cw.ejercicio41((e41%10),num,score);
+			}
+			
+		});
+		$('#btn7').on('click',function(){
+			if (soluciones[e41]==7){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e41+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,41);
+			}else{
+				cw.ejercicio41((e41%10),num,score);
+			}
+			
+		});
+		$('#btn8').on('click',function(){
+			if (soluciones[e41]==8){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e41+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,41);
+			}else{
+				cw.ejercicio41((e41%10),num,score);
+			}
+			
+		});
+		$('#btn9').on('click',function(){
+			if (soluciones[e41]==9){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e41+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,41);
+			}else{
+				cw.ejercicio41((e41%10),num,score);
+			}
+			
+		});
+		$('#btn10').on('click',function(){
+			if (soluciones[e41]==10){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e41+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,41);
+			}else{
+				cw.ejercicio41((e41%10),num,score);
+			}
+			
+		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios4();
 		});
 	}
-	this.ejercicio42=function(){
+	this.ejercicio42=function(e42,num,score){
 		this.limpiar();
-		var num=1;
+		var numeros=[5,9,2,7,9,0,6,8,1,3];
+		var soluciones=[5,1,8,3,1,10,4,2,9,7];
 		var cadena='<div id="mostrar42">';
 		cadena=cadena +'<h1>Amigos del 10</h1>';
-		cadena=cadena +'<h3>'+num+'/10 ¿cuál es el amigo del 5?</h3>';
-		cadena=cadena +'<img src="cliente/images/42/1.png" class="rounded" alt="Eniun">';
+		cadena=cadena +'<h3>'+num+'/10 ¿cuál es el amigo del '+numeros[e42]+'?</h3>';
+		cadena=cadena +'<img src="cliente/images/42/'+e42+'.png" class="rounded" alt="Eniun">';
 		cadena=cadena +'<p></p>';
 		cadena=cadena+'<button type="button" id="btn1" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/1.png"></img></button>';
 		cadena=cadena+'<button type="button" id="btn2" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/2.png"></img></button>';
@@ -388,6 +668,176 @@ function ControlWeb($){
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
+		$('#btn1').on('click',function(){
+			if (soluciones[e42]==1){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e42+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,42);
+			}else{
+				cw.ejercicio42((e42%10),num,score);
+			}
+			
+		});
+		$('#btn2').on('click',function(){
+			if (soluciones[e42]==2){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e42+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,42);
+			}else{
+				cw.ejercicio42((e42%10),num,score);
+			}
+			
+		});
+		$('#btn3').on('click',function(){
+			if (soluciones[e42]==3){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e42+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,42);
+			}else{
+				cw.ejercicio42((e42%10),num,score);
+			}
+			
+		});
+		$('#btn4').on('click',function(){
+			if (soluciones[e42]==4){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e42+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,42);
+			}else{
+				cw.ejercicio42((e42%10),num,score);
+			}
+			
+		});
+		$('#btn5').on('click',function(){
+			if (soluciones[e42]==5){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e42+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,42);
+			}else{
+				cw.ejercicio42((e42%10),num,score);
+			}
+			
+		});
+		$('#btn6').on('click',function(){
+			if (soluciones[e42]==6){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e42+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,42);
+			}else{
+				cw.ejercicio42((e42%10),num,score);
+			}
+			
+		});
+		$('#btn7').on('click',function(){
+			if (soluciones[e42]==7){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e42+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,42);
+			}else{
+				cw.ejercicio42((e42%10),num,score);
+			}
+			
+		});
+		$('#btn8').on('click',function(){
+			if (soluciones[e42]==8){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e42+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,42);
+			}else{
+				cw.ejercicio42((e42%10),num,score);
+			}
+			
+		});
+		$('#btn9').on('click',function(){
+			if (soluciones[e42]==9){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e42+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,42);
+			}else{
+				cw.ejercicio42((e42%10),num,score);
+			}
+			
+		});
+		$('#btn10').on('click',function(){
+			if (soluciones[e42]==10){
+				console.log("!Enhorabuena, has acertado¡");
+				score++;
+			}else{
+				console.log("Ohhh, has fallado, intentalo otra vez");
+			}
+
+			e42+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,42);
+			}else{
+				cw.ejercicio42((e42%10),num,score);
+			}
+			
+		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios4();
 		});
@@ -525,11 +975,11 @@ function ControlWeb($){
 			}else if(e==32){
 				cw.ejercicio32(0,1,0);
 			}else if(e==41){
-				cw.ejercicio41();
+				cw.ejercicio41(0,1,0);
 			}else if(e==42){
-				cw.ejercicio42();
+				cw.ejercicio42(0,1,0);
 			}else if(e==51){
-				cw.ejercicio1();
+				cw.ejercicio51();
 			}else if(e==52){
 				cw.ejercicio52();
 			}else if(e==11){

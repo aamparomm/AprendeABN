@@ -225,8 +225,6 @@ function ControlWeb($){
 	}
 	this.ejercicio31=function(e31,num,score){
 		this.limpiar();
-		var m="";
-		let soluciones=[3,2,1,3,3,1,2,1,3,2];
 		var cadena='<div id="mostrar31">';
 		cadena=cadena +'<h1>Identificacion de números del 1 al 3</h1>';
 		cadena=cadena +'<h3>'+num+'/10 Seleccione el número de objetos de la imagen</h3>';
@@ -240,45 +238,47 @@ function ControlWeb($){
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
 		$('#btn1').on('click',function(){
-			if (soluciones[e31]==1){
-				m="¡Enhorabuena, has acertado!";
-				score++;
-				cw.resultado31(e31,num,score,"btn-success","btn-light","btn-light",m);
-				
-			}else{
-				m="Ohhh, has fallado, intentalo otra vez";
-				cw.resultado31(e31,num,score,"btn-danger","btn-light","btn-light",m);
-			}
+			cw.comprobar31(e31,num,score,1);
 			
 		});
 		$('#btn2').on('click',function(){
-			if (soluciones[e31]==2){
-				m="¡Enhorabuena, has acertado!";
-				score++;
-				cw.resultado31(e31,num,score,"btn-light","btn-success","btn-light",m);
-				
-			}else{
-				m="Ohhh, has fallado, intentalo otra vez";
-				cw.resultado31(e31,num,score,"btn-light","btn-danger","btn-light",m);
-			}
+			cw.comprobar31(e31,num,score,2);
 			
 		});
 		$('#btn3').on('click',function(){
-			if (soluciones[e31]==3){
-				m="¡Enhorabuena, has acertado!";
-				score++;
-				cw.resultado31(e31,num,score,"btn-light","btn-light","btn-success",m);
-				
-			}else{
-				m="Ohhh, has fallado, intentalo otra vez";
-				cw.resultado31(e31,num,score,"btn-light","btn-light","btn-danger",m);
-			}
+			cw.comprobar31(e31,num,score,3);
 		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios3();
 		});
 	}
-	this.resultado31=function(e31,num,score,b1,b2,b3,m){
+	this.comprobar31=function(e31,num,score,b){
+		var m="";
+		let soluciones=[3,2,1,3,3,1,2,1,3,2];
+		let lights=["btn-light","btn-light","btn-light"];
+		l[(soluciones[e31]-1)]="btn-success";
+		if (soluciones[e31]==b){
+				m="¡Enhorabuena, has acertado!";
+				score++;
+				for(var i=0;i<lights.length;i++){
+					if(i==(b-1)){
+						lights[i]="btn-success";
+					}
+				}
+				cw.resultado31(e31,num,score,lights,m);}
+		else{
+				m="Ohhh, has fallado, intentalo otra vez";
+
+				for(var j=0;j<lights.length;j++){
+					if(j==(b-1)){
+						lights[j]="btn-danger";
+					}
+				}
+				cw.resultado31(e31,num,score,lights,m);
+		}
+
+	}
+	this.resultado31=function(e31,num,score,b,m){
 		this.limpiar();
 		var cadena='<div id="r31">';
 		cadena=cadena +'<h1>Identificacion de números del 1 al 3</h1>';
@@ -286,9 +286,9 @@ function ControlWeb($){
 		cadena=cadena +'<p></p>';
 		cadena=cadena +'<img src="cliente/images/31/'+e31+'.png" class="rounded" alt="Eniun">';
 		cadena=cadena +'<p></p>';
-		cadena=cadena+'<button type="button" id="btn1" class="btn '+b1+' btn-lg" style="margin: 50px"><img src="cliente/images/num/1.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn2" class="btn '+b2+' btn-lg" style="margin: 50px"><img src="cliente/images/num/2.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn3" class="btn '+b3+' btn-lg" style="margin: 50px"><img src="cliente/images/num/3.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn1" class="btn '+b[0]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn2" class="btn '+b[1]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/2.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn3" class="btn '+b[2]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/3.png"></img></button>';
 		cadena=cadena +'<p></p>';
 		cadena=cadena+'<button type="button" id="btnS" class="btn btn-success btn-lg"><i class="fas fa-angle-double-right"></i> Siguiente</button>';		
 		cadena=cadena +'<p></p>';
@@ -329,95 +329,71 @@ function ControlWeb($){
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
-		$('#btnAtras').on('click',function(){
-			cw.mostrarEjercicios3();
-		});
+
 		$('#btn1').on('click',function(){
-			var m="";
-			if (soluciones[e32]==1){
-				m="¡Enhorabuena, has acertado!";
-				score++;
-				cw.resultado32(e32,num,score,"btn-success","btn-light","btn-light","btn-light","btn-light","btn-light",m);
-			}else{
-				m="Ohhh, has fallado, intentalo otra vez";
-				cw.resultado32(e32,num,score,"btn-danger","btn-light","btn-light","btn-light","btn-light","btn-light",m);
-			}
-			
+			cw.comprobar32(e32,num,score,1);
 		});
 		$('#btn2').on('click',function(){
-			var m="";
-			if (soluciones[e32]==2){
-				m="¡Enhorabuena, has acertado!";
-				score++;
-				cw.resultado32(e32,num,score,"btn-light","btn-success","btn-light","btn-light","btn-light","btn-light",m);
-			}else{
-				m="Ohhh, has fallado, intentalo otra vez";
-				cw.resultado32(e32,num,score,"btn-light","btn-danger","btn-light","btn-light","btn-light","btn-light",m);
-			}
+			cw.comprobar32(e32,num,score,2);
 		});
 		$('#btn3').on('click',function(){
-			var m="";
-			if (soluciones[e32]==3){
-				m="¡Enhorabuena, has acertado!";
-				score++;
-				cw.resultado32(e32,num,score,"btn-light","btn-light","btn-success","btn-light","btn-light","btn-light",m);
-			}else{
-				m="Ohhh, has fallado, intentalo otra vez";
-				cw.resultado32(e32,num,score,"btn-light","btn-light","btn-danger","btn-light","btn-light","btn-light",m);
-			}
+			cw.comprobar32(e32,num,score,3);
 		});
-
 		$('#btn4').on('click',function(){
-			var m="";
-			if (soluciones[e32]==4){
-				m="¡Enhorabuena, has acertado!";
-				score++;
-				cw.resultado32(e32,num,score,"btn-light","btn-light","btn-light","btn-success","btn-light","btn-light",m);
-			}else{
-				m="Ohhh, has fallado, intentalo otra vez";
-				cw.resultado32(e32,num,score,"btn-light","btn-light","btn-light","btn-danger","btn-light","btn-light",m);
-			}
+			cw.comprobar32(e32,num,score,4);
 		});
 		$('#btn5').on('click',function(){
-			var m="";
-			if (soluciones[e32]==5){
-				m="¡Enhorabuena, has acertado!";
-				score++;
-				cw.resultado32(e32,num,score,"btn-light","btn-light","btn-light","btn-light","btn-success","btn-light",m);
-			}else{
-				m="Ohhh, has fallado, intentalo otra vez";
-				cw.resultado32(e32,num,score,"btn-light","btn-light","btn-light","btn-light","btn-danger","btn-light",m);
-			}
+			cw.comprobar32(e32,num,score,5);
 		});
 		$('#btn6').on('click',function(){
-			var m="";
-			if (soluciones[e32]==6){
-				m="¡Enhorabuena, has acertado!";
-				score++;
-				cw.resultado32(e32,num,score,"btn-light","btn-light","btn-light","btn-light","btn-light","btn-success",m);
-			}else{
-				m="Ohhh, has fallado, intentalo otra vez";
-				cw.resultado32(e32,num,score,"btn-light","btn-light","btn-light","btn-light","btn-light","btn-danger",m);
-			}
+			cw.comprobar32(e32,num,score,6);
 		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios3();
 		});
 	}
-	this.resultado32=function(e32,num,score,b1,b2,b3,b4,b5,b6,m){
+	this.comprobar32=function(e32,num,score,b){
+		var m="";
+		var soluciones=[5,4,1,5,2,6,3,2,4,3];
+		var l=["btn-light","btn-light","btn-light","btn-light","btn-light","btn-light"];
+		l[(soluciones[e32]-1)]="btn-success";
+		if (soluciones[e32]==b){
+				m="¡Enhorabuena, has acertado!";
+				score++;
+				for(var i=0;i<l.length;i++){
+					if(i==(b-1)){
+						l[i]="btn-success";
+					}
+				}
+				cw.resultado32(e32,num,score,l,m);
+		}
+		else{
+				m="Ohhh, has fallado, intentalo otra vez";
+
+				for(var j=0;j<l.length;j++){
+					
+					if(j==(b-1)){
+						l[j]="btn-danger";
+					}
+				}
+				cw.resultado32(e32,num,score,l,m);
+		}
+
+	}
+	this.resultado32=function(e32,num,score,b,m){
 		this.limpiar();
 		var cadena='<div id="r32">';
-		cadena=cadena +'<h1>Identificacion de números del 1 al 3</h1>';
+		cadena=cadena +'<h1>Identificacion de números del 1 al 6</h1>';
 		cadena=cadena +'<h2>'+m+'</h2>';
 		cadena=cadena +'<p></p>';
 		cadena=cadena +'<img src="cliente/images/32/'+e32+'.png" class="rounded" alt="Eniun">';
 		cadena=cadena +'<p></p>';
-		cadena=cadena+'<button type="button" id="btn1" class="btn '+b1+' btn-lg" style="margin: 50px"><img src="cliente/images/num/1.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn2" class="btn '+b2+' btn-lg" style="margin: 50px"><img src="cliente/images/num/2.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn3" class="btn '+b3+' btn-lg" style="margin: 50px"><img src="cliente/images/num/3.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn4" class="btn '+b4+' btn-lg" style="margin: 50px"><img src="cliente/images/num/4.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn5" class="btn '+b5+'btn-lg" style="margin: 50px"><img src="cliente/images/num/5.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn6" class="btn '+b6+' btn-lg" style="margin: 50px"><img src="cliente/images/num/6.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn1" class="btn '+b[0]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn2" class="btn '+b[1]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/2.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn3" class="btn '+b[2]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/3.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn4" class="btn '+b[3]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/4.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn5" class="btn '+b[4]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/5.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn6" class="btn '+b[5]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/6.png"></img></button>';
 		cadena=cadena +'<p></p>';
 		cadena=cadena+'<button type="button" id="btnS" class="btn btn-success btn-lg"><i class="fas fa-angle-double-right"></i> Siguiente</button>';		
 		cadena=cadena +'<p></p>';
@@ -498,178 +474,110 @@ function ControlWeb($){
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
 		$('#btn1').on('click',function(){
-			if (soluciones[e41]==1){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e41+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,41);
-			}else{
-				cw.ejercicio41((e41%10),num,score);
-			}
-			
+			cw.comprobar41(e41,num,score,1);
 		});
 		$('#btn2').on('click',function(){
-			if (soluciones[e41]==2){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e41+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,41);
-			}else{
-				cw.ejercicio41((e41%10),num,score);
-			}
-			
+			cw.comprobar41(e41,num,score,2);
 		});
 		$('#btn3').on('click',function(){
-			if (soluciones[e41]==3){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e41+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,41);
-			}else{
-				cw.ejercicio41((e41%10),num,score);
-			}
-			
+			cw.comprobar41(e41,num,score,3);
 		});
 		$('#btn4').on('click',function(){
-			if (soluciones[e41]==4){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e41+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,41);
-			}else{
-				cw.ejercicio41((e41%10),num,score);
-			}
-			
+			cw.comprobar41(e41,num,score,4);
 		});
 		$('#btn5').on('click',function(){
-			if (soluciones[e41]==5){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e41+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,41);
-			}else{
-				cw.ejercicio41((e41%10),num,score);
-			}
-			
+			cw.comprobar41(e41,num,score,5);
 		});
-		$('#btn6').on('click',function(){
-			if (soluciones[e41]==6){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e41+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,41);
-			}else{
-				cw.ejercicio41((e41%10),num,score);
-			}
-			
+		$('#btn6').on('click',function(){	
+			cw.comprobar41(e41,num,score,6);
 		});
 		$('#btn7').on('click',function(){
-			if (soluciones[e41]==7){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e41+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,41);
-			}else{
-				cw.ejercicio41((e41%10),num,score);
-			}
-			
+			cw.comprobar41(e41,num,score,7);
 		});
 		$('#btn8').on('click',function(){
-			if (soluciones[e41]==8){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e41+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,41);
-			}else{
-				cw.ejercicio41((e41%10),num,score);
-			}
-			
+			cw.comprobar41(e41,num,score,8);
 		});
 		$('#btn9').on('click',function(){
-			if (soluciones[e41]==9){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e41+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,41);
-			}else{
-				cw.ejercicio41((e41%10),num,score);
-			}
-			
+			cw.comprobar41(e41,num,score,9);
 		});
 		$('#btn10').on('click',function(){
-			if (soluciones[e41]==10){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e41+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,41);
-			}else{
-				cw.ejercicio41((e41%10),num,score);
-			}
-			
+			cw.comprobar41(e41,num,score,10);
 		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios4();
 		});
+	}
+	this.comprobar41=function(e41,num,score,b){
+		var m="";
+		var soluciones=[5,4,8,6,3,10,7,9,1,2];
+		var l=["btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light"];
+		l[(soluciones[e41]-1)]="btn-success";
+		if (soluciones[e41]==b){
+				m="¡Enhorabuena, has acertado!";
+				score++;
+				for(var i=0;i<l.length;i++){
+					if(i==(b-1)){
+						l[i]="btn-success";
+					}
+				}
+				cw.resultado41(e41,num,score,l,m);
+		}
+		else{
+				m="Ohhh, has fallado, intentalo otra vez";
+
+				for(var j=0;j<l.length;j++){
+					
+					if(j==(b-1)){
+						l[j]="btn-danger";
+					}
+				}
+				cw.resultado41(e41,num,score,l,m);
+		}
+
+	}
+	this.resultado41=function(e41,num,score,b,m){
+		this.limpiar();
+		var cadena='<div id="r41">';
+		cadena=cadena +'<h1>Recta numérica</h1>';
+		cadena=cadena +'<h2>'+m+'</h2>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<img src="cliente/images/41/'+e41+'.png" class="rounded" alt="Eniun">';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btn1" class="btn '+b[0]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn2" class="btn '+b[1]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/2.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn3" class="btn '+b[2]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/3.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn4" class="btn '+b[3]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/4.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn5" class="btn '+b[4]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/5.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btn6" class="btn '+b[5]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/6.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn7" class="btn '+b[6]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/7.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn8" class="btn '+b[7]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/8.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn9" class="btn '+b[8]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/9.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn10" class="btn '+b[9]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/10.png"></img></button>'
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnS" class="btn btn-success btn-lg"><i class="fas fa-angle-double-right"></i> Siguiente</button>';		
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		
+		
+		$('#ejercicios').append(cadena);
+		$('#btnS').on('click',function(){
+			e41+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,41);
+			}else{
+				cw.ejercicio41((e41%10),num,score);
+			}
+		});
+
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios4();
+		});
+
+
 	}
 	this.ejercicio42=function(e42,num,score){
 		this.limpiar();
@@ -696,178 +604,109 @@ function ControlWeb($){
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
 		$('#btn1').on('click',function(){
-			if (soluciones[e42]==1){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e42+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,42);
-			}else{
-				cw.ejercicio42((e42%10),num,score);
-			}
-			
+			cw.comprobar42(e42,num,score,1);
 		});
 		$('#btn2').on('click',function(){
-			if (soluciones[e42]==2){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e42+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,42);
-			}else{
-				cw.ejercicio42((e42%10),num,score);
-			}
-			
+			cw.comprobar42(e42,num,score,2);
 		});
 		$('#btn3').on('click',function(){
-			if (soluciones[e42]==3){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e42+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,42);
-			}else{
-				cw.ejercicio42((e42%10),num,score);
-			}
-			
+			cw.comprobar42(e42,num,score,3);
 		});
 		$('#btn4').on('click',function(){
-			if (soluciones[e42]==4){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e42+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,42);
-			}else{
-				cw.ejercicio42((e42%10),num,score);
-			}
-			
+			cw.comprobar42(e42,num,score,4);
 		});
 		$('#btn5').on('click',function(){
-			if (soluciones[e42]==5){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e42+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,42);
-			}else{
-				cw.ejercicio42((e42%10),num,score);
-			}
-			
+			cw.comprobar42(e42,num,score,5);	
 		});
 		$('#btn6').on('click',function(){
-			if (soluciones[e42]==6){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e42+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,42);
-			}else{
-				cw.ejercicio42((e42%10),num,score);
-			}
-			
+			cw.comprobar42(e42,num,score,6);
 		});
 		$('#btn7').on('click',function(){
-			if (soluciones[e42]==7){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e42+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,42);
-			}else{
-				cw.ejercicio42((e42%10),num,score);
-			}
-			
+			cw.comprobar42(e42,num,score,7);
 		});
 		$('#btn8').on('click',function(){
-			if (soluciones[e42]==8){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e42+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,42);
-			}else{
-				cw.ejercicio42((e42%10),num,score);
-			}
-			
+			cw.comprobar42(e42,num,score,8);
 		});
 		$('#btn9').on('click',function(){
-			if (soluciones[e42]==9){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e42+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,42);
-			}else{
-				cw.ejercicio42((e42%10),num,score);
-			}
-			
+			cw.comprobar42(e42,num,score,9);
 		});
 		$('#btn10').on('click',function(){
-			if (soluciones[e42]==10){
-				console.log("!Enhorabuena, has acertado¡");
-				score++;
-			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
-			}
-
-			e42+=1;
-			num+=1;
-			if(num ==11){
-				cw.mostrarResultados(score,4,42);
-			}else{
-				cw.ejercicio42((e42%10),num,score);
-			}
-			
+			cw.comprobar42(e42,num,score,10);
 		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios4();
 		});
+	}
+	this.comprobar42=function(e42,num,score,b){
+		var m="";
+		var soluciones=[5,1,8,3,1,10,4,2,9,7];
+		var l=["btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light"];
+		l[(soluciones[e42]-1)]="btn-success";
+		if (soluciones[e42]==b){
+				m="¡Enhorabuena, has acertado!";
+				score++;
+				for(var i=0;i<l.length;i++){
+					if(i==(b-1)){
+						l[i]="btn-success";
+					}
+				}
+				cw.resultado42(e42,num,score,l,m);
+		}
+		else{
+				m="Ohhh, has fallado, intentalo otra vez";
+
+				for(var j=0;j<l.length;j++){
+					
+					if(j==(b-1)){
+						l[j]="btn-danger";
+					}
+				}
+				cw.resultado42(e42,num,score,l,m);
+		}
+
+	}
+	this.resultado42=function(e42,num,score,b,m){
+		this.limpiar();
+		var cadena='<div id="r42">';
+		cadena=cadena +'<h1>Amigos del 10</h1>';
+		cadena=cadena +'<h2>'+m+'</h2>';
+		cadena=cadena +'<img src="cliente/images/42/'+e42+'.png" class="rounded" alt="Eniun">';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btn1" class="btn '+b[0]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn2" class="btn '+b[1]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/2.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn3" class="btn '+b[2]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/3.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn4" class="btn '+b[3]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/4.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn5" class="btn '+b[4]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/5.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btn6" class="btn '+b[5]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/6.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn7" class="btn '+b[6]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/7.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn8" class="btn '+b[7]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/8.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn9" class="btn '+b[8]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/9.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn10" class="btn '+b[9]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/10.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnS" class="btn btn-success btn-lg"><i class="fas fa-angle-double-right"></i> Siguiente</button>';		
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		
+		
+		$('#ejercicios').append(cadena);
+		$('#btnS').on('click',function(){
+			e42+=1;
+			num+=1;
+			if(num ==11){
+				cw.mostrarResultados(score,4,42);
+			}else{
+				cw.ejercicio42((e42%10),num,score);
+			}
+		});
+
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios4();
+		});
+
+
 	}
 	this.mostrarEjercicios5=function(){
 		this.limpiar();
@@ -896,6 +735,7 @@ function ControlWeb($){
 	}
 	this.ejercicio51=function(e51,num,score,count){
 		this.limpiar();
+		var m="";
 		var soluciones=[5,7,9,2,6,4,10,3,8,6];
 		var cadena='<div id="mostrar51">';
 		cadena=cadena +'<h1>Suma con objetos</h1>';
@@ -918,23 +758,51 @@ function ControlWeb($){
 		});
 		$('#btn1').on('click',function(){
 			if (soluciones[e51]== (count+1)){
-				console.log("!Enhorabuena, has acertado¡");
+				m="¡Enhorabuena, has acertado!";
 				score++;
+				cw.resultado51(e51,num,score,count,"btn-success",m);
 			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
+				m="Ohhh, has fallado, intentalo otra vez";
+				cw.resultado51(e51,num,score,count,"btn-danger",m);
 			}
-
+		});
+	}
+	this.resultado51=function(e51,num,score,count,b,m){
+		this.limpiar();
+		var cadena='<div id="r51">';
+		cadena=cadena +'<h1>Suma con objetos</h1>';
+		cadena=cadena +'<h3>'+m+'<h3>';
+		cadena=cadena +'<img src="cliente/images/51/'+e51+'.png" class="rounded" alt="Eniun"style="margin: 20px">';
+		cadena=cadena +'<img src="cliente/images/equal.png" class="rounded" alt="Eniun">';
+		cadena=cadena+'<button type="button" id="btnDedos" class="btn '+b+' btn-lg"><img src="cliente/images/manos/'+count+'.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnS" class="btn btn-success btn-lg"><i class="fas fa-angle-double-right"></i> Siguiente</button>';		
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		
+		
+		$('#ejercicios').append(cadena);
+		$('#btnS').on('click',function(){
 			e51+=1;
 			num+=1;
 			if(num ==11){
 				cw.mostrarResultados(score,5,51);
 			}else{
-				cw.ejercicio51((e51%10),num,score,count);
+				cw.ejercicio51((e51%10),num,score,0);
 			}
 		});
+
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios5();
+		});
+
+
 	}
 	this.ejercicio52=function(e52 ,num,score,count){
 		this.limpiar();
+		var m="";
 		var soluciones=[2,4,1,6,3,5,3,9,1,4];
 		var cadena='<div id="mostrar52">';
 		cadena=cadena +'<h1>Resta con objetos</h1>';
@@ -957,20 +825,48 @@ function ControlWeb($){
 		});
 		$('#btn1').on('click',function(){
 			if (soluciones[e52]== (count+1)){
-				console.log("!Enhorabuena, has acertado¡");
+				m="¡Enhorabuena, has acertado!";
 				score++;
+				cw.resultado52(e52,num,score,count,"btn-success",m);
 			}else{
-				console.log("Ohhh, has fallado, intentalo otra vez");
+				m="Ohhh, has fallado, intentalo otra vez";
+				cw.resultado52(e52,num,score,count,"btn-danger",m);
 			}
 
+		});
+	}
+	this.resultado52=function(e52,num,score,count,b,m){
+		this.limpiar();
+		var cadena='<div id="r52">';
+		cadena=cadena +'<h1>Resta con objetos</h1>';
+		cadena=cadena +'<h3>'+m+'<h3>';
+		cadena=cadena +'<img src="cliente/images/52/'+e52+'.png" class="rounded" alt="Eniun"style="margin: 20px">';
+		cadena=cadena +'<img src="cliente/images/equal.png" class="rounded" alt="Eniun">';
+		cadena=cadena+'<button type="button" id="btnDedos" class="btn '+b+' btn-lg"><img src="cliente/images/manos/'+count+'.png"></img></button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnS" class="btn btn-success btn-lg"><i class="fas fa-angle-double-right"></i> Siguiente</button>';		
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		
+		
+		$('#ejercicios').append(cadena);
+		$('#btnS').on('click',function(){
 			e52+=1;
 			num+=1;
 			if(num ==11){
 				cw.mostrarResultados(score,5,52);
 			}else{
-				cw.ejercicio52((e52%10),num,score,count);
+				cw.ejercicio52((e52%10),num,score,0);
 			}
 		});
+
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios5();
+		});
+
+
 	}
 	this.mostrarEjercicios1=function(){
 		this.limpiar();
@@ -1072,6 +968,10 @@ function ControlWeb($){
 		$('#mostrarR').remove();
 		$('#r31').remove();
 		$('#r32').remove();
+		$('#r41').remove();
+		$('#r42').remove();
+		$('#r51').remove();
+		$('#r52').remove();
 	}
 
 }

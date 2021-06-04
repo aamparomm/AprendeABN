@@ -18,7 +18,10 @@ function ABN(){
 	//y el número máximo de alumnos por clase es de 40
 	this.comprobarlimites=function(num){
 		return num<=40 && num>=1;
-	}
+	} 
+
+	//Función que devuelve una lista con la informacion de las clases que hayan sido creadas
+	//Por cada una de las clases se retornarña el nombre de la clases, su profesor y el número máximo de alumnos
 	this.listarClases=function(){
 		var lista=[];
 		for(i in this.clases){
@@ -48,6 +51,7 @@ function ABN(){
 
 	}
 
+	//Función que permite entrar en una de las clases que ya hayan sido creadas
 	this.entrarClase=function(nclase){
 		var res=-1;
 		if (this.clases[nclase]){
@@ -79,6 +83,7 @@ function Clase(nclase, profesor,num, ABN){
 		
 		return lista;
 	}
+	 //Función que  añade un alumno a la clase
 	this.agregarAlumno=function(nombre,apellido,curso){
 		let n=nombre;
 		this.alumnos[n]=new Alumno(nombre,apellido,curso);
@@ -90,10 +95,13 @@ function Clase(nclase, profesor,num, ABN){
 		return {"clase":this.nombre,"nombre":nombre,"apellidos":apellidos,"curso":curso};
 
 	}
+
+	//Comprueba el número máximo de alumnos que puede haber en la clase
 	this.comprobarMaximo=function(){
 		return this.numAlumnos()<this.numMax;
 
 	}
+	//Función que devuelve el número de alumnos que se encuentra en la clase
 	this.numAlumnos=function(){
 		return Object.keys(this.alumnos).length;
 	}

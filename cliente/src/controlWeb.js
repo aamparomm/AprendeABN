@@ -1,5 +1,6 @@
 function ControlWeb($){
-	
+
+	//Interfaz de inicio don de se da la opción la creación o la búsqueda de clase.
 	this.mostrarInicio=function(){
 		this.limpiar();
 		var cadena='<div id="mostrarI">';
@@ -19,6 +20,8 @@ function ControlWeb($){
 		});
 
 	}
+
+	//Función necesaria para mostrar la lista de clases que han sido creadas y poder entrar en una de ellas
 	this.listarClases=function(lista){
 		this.limpiar();
 		var cadena='<div id="mostrarLC">';
@@ -49,6 +52,9 @@ function ControlWeb($){
 			cw.mostrarInicio();
 		});
 	}
+
+	//Función necesaria para recoger los valores que permitirán que se cree una nueva clase
+	//Es la interfaz principal para la creación de clase : nombre, profesor, y num participantes
 	this.mostrarCrearClase=function(){
 		this.limpiar();
 		var cadena='<div id="mostrarCC">';
@@ -81,6 +87,9 @@ function ControlWeb($){
 		});
 
 	}
+
+	//Función que  que muestra el boton necesario para acceder a la interfaz de registro de el alumno
+	//es parte de la interfaz de la información sobre la clase
 	this.mostrarClase=function(){
 		this.limpiar();
 		var cadena='<div id="mostrarC">';
@@ -95,6 +104,7 @@ function ControlWeb($){
 		});	
 	}
 
+	//Interfaz que muestra el a elegir para registrar al alumno
 	this.mostrarIcono=function(){
 		var cadena='<div id="mostrarIcono">';
 		cadena =cadena+ '<div class="form-group">';
@@ -115,6 +125,7 @@ function ControlWeb($){
 		});
 	}
 
+	//Interfaz necesaria para registrar toda la información sobre el alumno
 	this.registrarAlumno=function(){
 		this.limpiar();
 		var cadena='<div id="registrarA">';
@@ -157,6 +168,8 @@ function ControlWeb($){
 		});
 
 	}
+
+	//Interfaz donde se listan todos los alumnos de una misma clase 
 	this.listarAlumnos=function(lista){
 		var cadena='<div id="mostrarLA">';
 		cadena=cadena +'<h1>'+lista[0].clase+'</h1>';
@@ -187,6 +200,9 @@ function ControlWeb($){
 			cw.mostrarEjercicios(curso);
 		});
 	}
+
+	//Interfaz necesaria para acceder a las distintas interfaces dependiendo de el curso en el que
+	//se haya registrado al alumno, para ello se pasara por parámetro el curso del alumno
 	this.mostrarEjercicios=function(curso){
 		if(curso==3){
 			cw.mostrarEjercicios3();
@@ -198,6 +214,8 @@ function ControlWeb($){
 			cw.mostrarEjercicios1();
 		}
 	}
+
+	//Interfaz donde se muestran los ejercicios que pueden realizar los niños de 3 años
 	this.mostrarEjercicios3=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar3">';
@@ -223,6 +241,9 @@ function ControlWeb($){
 			cw.ejercicio32(0,1,0);
 		});
 	}
+	// Interfaz de  el primer ejercicio de identificación de números del 1 al tres para niños de 3 años
+	//en este caso será necesario introducir por parámetro el número de ejercicio en el que nos encontramos
+	//el número de la imagen que queremos mostrar y la puntuación.
 	this.ejercicio31=function(e31,num,score){
 		this.limpiar();
 		var cadena='<div id="mostrar31">';
@@ -252,11 +273,12 @@ function ControlWeb($){
 			cw.mostrarEjercicios3();
 		});
 	}
+	//Función para comprobar que la opción elegida corresponde con la solucíon al 1º ejercicio para niños de 3 años
 	this.comprobar31=function(e31,num,score,b){
 		var m="";
 		let soluciones=[3,2,1,3,3,1,2,1,3,2];
 		let lights=["btn-light","btn-light","btn-light"];
-		l[(soluciones[e31]-1)]="btn-success";
+		lights[(soluciones[e31]-1)]="btn-success";
 		if (soluciones[e31]==b){
 				m="¡Enhorabuena, has acertado!";
 				score++;
@@ -278,6 +300,7 @@ function ControlWeb($){
 		}
 
 	}
+	//Interfaz para mostrar la retroalimentación del ejercicio 1 para tres años
 	this.resultado31=function(e31,num,score,b,m){
 		this.limpiar();
 		var cadena='<div id="r31">';
@@ -311,6 +334,7 @@ function ControlWeb($){
 
 
 	}
+	// Interfaz del segundo ejercicio para niños de 3 años de identificación de números del 1 al 6
 	this.ejercicio32=function(e32,num,score){
 		this.limpiar();
 		var soluciones=[5,4,1,5,2,6,3,2,4,3];
@@ -352,6 +376,7 @@ function ControlWeb($){
 			cw.mostrarEjercicios3();
 		});
 	}
+	//Función para comprobar que la opción elegida corresponde con la solucíon del 2 ejercicio para niños de 3 años
 	this.comprobar32=function(e32,num,score,b){
 		var m="";
 		var soluciones=[5,4,1,5,2,6,3,2,4,3];
@@ -380,6 +405,7 @@ function ControlWeb($){
 		}
 
 	}
+	//Interfaz para mostrar la retroalimentación del ejercicio 2º para tres años
 	this.resultado32=function(e32,num,score,b,m){
 		this.limpiar();
 		var cadena='<div id="r32">';
@@ -416,6 +442,7 @@ function ControlWeb($){
 
 
 	}
+	//Interfaz para mostrar los distintos ejercicios de 4 años que se pueden realizar.
 	this.mostrarEjercicios4=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar4">';
@@ -441,6 +468,7 @@ function ControlWeb($){
 		});
 
 	}
+	// Interfaz del primer ejercicio para niños de 4 años de recta numérica
 	this.ejercicio41=function(e41,num,score){
 		this.limpiar();
 		var inicio=[3,5,10,1,2,7,6,4,9,8];
@@ -507,6 +535,7 @@ function ControlWeb($){
 			cw.mostrarEjercicios4();
 		});
 	}
+	//Función para comprobar que la opción elegida corresponde con la solucíon al 1º ejercicio para niños de 4 años
 	this.comprobar41=function(e41,num,score,b){
 		var m="";
 		var soluciones=[5,4,8,6,3,10,7,9,1,2];
@@ -535,6 +564,7 @@ function ControlWeb($){
 		}
 
 	}
+	//Interfaz para mostrar la retroalimentación del ejercicio 1º para niños de 4 años
 	this.resultado41=function(e41,num,score,b,m){
 		this.limpiar();
 		var cadena='<div id="r41">';
@@ -579,6 +609,7 @@ function ControlWeb($){
 
 
 	}
+	// Interfaz del segundo ejercicio para niños de 4 años de amigos del 10
 	this.ejercicio42=function(e42,num,score){
 		this.limpiar();
 		var numeros=[5,9,2,7,9,0,6,8,1,3];
@@ -637,6 +668,7 @@ function ControlWeb($){
 			cw.mostrarEjercicios4();
 		});
 	}
+	//Función para comprobar que la opción elegida corresponde con la solucíon al 2º ejercicio para niños de 4 años
 	this.comprobar42=function(e42,num,score,b){
 		var m="";
 		var soluciones=[5,1,8,3,1,10,4,2,9,7];
@@ -665,6 +697,8 @@ function ControlWeb($){
 		}
 
 	}
+
+	//Interfaz para mostrar la retroalimentación del ejercicio 2º para niños cuatro años
 	this.resultado42=function(e42,num,score,b,m){
 		this.limpiar();
 		var cadena='<div id="r42">';
@@ -708,6 +742,7 @@ function ControlWeb($){
 
 
 	}
+	//Interfaz para mostrar los distintos ejercicios de 5 años que se pueden realizar.
 	this.mostrarEjercicios5=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar5">';
@@ -733,6 +768,7 @@ function ControlWeb($){
 		});
 
 	}
+	// Interfaz del primer ejercicio para niños de 5 años de suma con objetos
 	this.ejercicio51=function(e51,num,score,count){
 		this.limpiar();
 		var m="";
@@ -767,6 +803,7 @@ function ControlWeb($){
 			}
 		});
 	}
+	//Interfaz para mostrar la retroalimentación del ejercicio 1º para niños de cinco años
 	this.resultado51=function(e51,num,score,count,b,m){
 		this.limpiar();
 		var cadena='<div id="r51">';
@@ -800,6 +837,7 @@ function ControlWeb($){
 
 
 	}
+	// Interfaz del segundo ejercicio para niños de 5 años de resta con objetos
 	this.ejercicio52=function(e52 ,num,score,count){
 		this.limpiar();
 		var m="";
@@ -835,6 +873,8 @@ function ControlWeb($){
 
 		});
 	}
+
+	//Interfaz para mostrar la retroalimentación del ejercicio 2º para niños de cinco años
 	this.resultado52=function(e52,num,score,count,b,m){
 		this.limpiar();
 		var cadena='<div id="r52">';
@@ -868,6 +908,8 @@ function ControlWeb($){
 
 
 	}
+
+	//Interfaz para elegir que ejercicios de primero se quieren realizar
 	this.mostrarEjercicios1=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar1">';
@@ -888,7 +930,9 @@ function ControlWeb($){
 		});
 
 	}
-
+	
+	//Función para mostrar los resultados obtenidos por el alumno
+	//dependiendo de la puntuación obtenida se mostrará una interfaz u otra
 	this.mostrarResultados=function(scores,curso,e){
 		this.limpiar();
 		var cadena='<div id="mostrarR">';
@@ -947,6 +991,7 @@ function ControlWeb($){
 
 
 	}
+	//Función necesaria para que no se muestren ninguna de las interfaces implementadas anteriormente
 	this.limpiar=function(){
 		$('#mostrarCC').remove();
 		$('#mostrarLC').remove();

@@ -924,9 +924,129 @@ function ControlWeb($){
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
 
+		$('#btn11').on('click',function(){
+			cw.mostrar11(0);
+		});
+		$('#btn12').on('click',function(){
+			cw.mostrar12(0);
+		});
+
 		$('#btnAtras').on('click',function(){
 			ws.listarAlumnos();
 			cw.mostrarClase();
+		});
+
+	}
+
+	//Metodo realizado para mostrar la interfaz principal de la suma con el método ABN
+	this.mostrar11=function(e11){
+		this.limpiar();
+		var m="";
+		var sumando1=[14,15,8,0,0,0,0,0,0,0];
+		var sumando2=[16,2,3,0,0,0,0,0,0,0];
+		var opcion1=[4,2,3,0,0,0,0,0,0,0];
+		var opcion2=[10,0,0,0,0,0,0,0,0,0];
+		var opcion3=[0,0,0,0,0,0,0,0,0,0];
+		var cadena='<div id="mostrar11">';
+		cadena=cadena +'<h1>Suma ABN</h1>';
+		cadena=cadena +'<h4>'+(e11+1)+'/10 Pulsa las casillas y seleccinona la opción correcta</h4>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<table class="table">';
+		cadena=cadena +'<thead>';
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td> Suma</td>';
+		cadena=cadena +'<td>'+sumando1[e11]+'</td>';
+		cadena=cadena +'<td>'+sumando2[e11]+'</td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'</thead>';
+		cadena=cadena +'<tbody>';
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td>'+opcion1[e11]+'</td>';
+		cadena=cadena +'<td><button type="button" id="btn11" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td><button type="button" id="btn12" class="btn btn-lg"></button></td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'<tr class="table-info">';
+		cadena=cadena +'<td >'+opcion2[e11]+'</td>';
+		cadena=cadena +'<td><button type="button" id="btn21" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td><button type="button" id="btn22" class="btn btn-lg"></button></td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td>'+opcion3[e11]+'</td>';
+		cadena=cadena +'<td><button type="button" id="btn31" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td><button type="button" id="btn32" class="btn btn-lg"></button></td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'</tbody>';
+		cadena=cadena +'</table>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnHecho" class="btn btn-success btn-lg "><i class="fas fa-angle-double-right"></i>Siguiente</button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#tablas').append(cadena);
+		
+		$('#btnHecho').on('click',function(){
+			//comprobar11();
+			e11++;
+			cw.mostrar11(e11);
+		});
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios1();
+		});
+
+	}
+	//Método realizado para mostrar la interfaz principal de la resta con el método ABN 
+	this.mostrar12=function(e12){
+		this.limpiar();
+		var m="";
+		var minuendo=[14,25,8,0,0,0,0,0,0,0];
+		var sustraendo=[6,13,3,0,0,0,0,0,0,0];
+		var opcion1=[4,2,3,3,0,0,0,0,0,0];
+		var opcion2=[2,10,0,0,0,0,0,0,0,0];
+		var opcion3=[0,0,0,0,0,0,0,0,0,0];
+		var cadena='<div id="mostrar12">';
+		cadena=cadena +'<h1>Resta ABN</h1>';
+		cadena=cadena +'<h4>'+(e12+1)+'/10 Pulsa las casillas y seleccinona la opción correcta</h4>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<table class="table table-lg">';
+		cadena=cadena +'<thead>';
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td> Suma</td>';
+		cadena=cadena +'<td>'+minuendo[e12]+'</td>';
+		cadena=cadena +'<td>'+sustraendo[e12]+'</td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'</thead>';
+		cadena=cadena +'<tbody>';
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td>'+opcion1[e12]+'</td>';
+		cadena=cadena +'<td><button type="button" id="btn11" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td><button type="button" id="btn12" class="btn btn-lg"></button></td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'<tr class="table-info">';
+		cadena=cadena +'<td >'+opcion2[e12]+'</td>';
+		cadena=cadena +'<td><button type="button" id="btn21" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td><button type="button" id="btn22" class="btn btn-lg"></button></td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td>'+opcion3[e12]+'</td>';
+		cadena=cadena +'<td><button type="button" id="btn31" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td><button type="button" id="btn32" class="btn btn-lg"></button></td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'</tbody>';
+		cadena=cadena +'</table>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnHecho" class="btn btn-success btn-lg "><i class="fas fa-angle-double-right"></i>Siguiente</button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#tablas').append(cadena);
+		
+		$('#btnHecho').on('click',function(){
+			//comprobar11();
+			e12++;
+			cw.mostrar12(e12);
+		});
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios1();
 		});
 
 	}
@@ -982,9 +1102,9 @@ function ControlWeb($){
 			}else if(e==52){
 				cw.ejercicio52(0,1,0,0);
 			}else if(e==11){
-				cw.ejercicio11();
+				cw.ejercicio11(0);
 			}else if(e=12){
-				cw.ejercicio12();
+				cw.ejercicio12(0);
 			}
 			
 		});
@@ -1010,6 +1130,8 @@ function ControlWeb($){
 		$('#mostrar51').remove();
 		$('#mostrar52').remove();
 		$('#mostrar1').remove();
+		$('#mostrar11').remove();
+		$('#mostrar12').remove();
 		$('#mostrarR').remove();
 		$('#r31').remove();
 		$('#r32').remove();

@@ -51,7 +51,7 @@ function ClienteWS(){
 			cw.listarAlumnos(lista);
 		});
 		this.socket.on("alumnoRegistrado",function(lista){
-			console.log(lista);
+			//console.log(lista);
 			ws.listarAlumnos();
 			cw.mostrarClase();
 			

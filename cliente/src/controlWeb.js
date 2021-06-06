@@ -172,33 +172,35 @@ function ControlWeb($){
 	//Interfaz donde se listan todos los alumnos de una misma clase 
 	this.listarAlumnos=function(lista){
 		var cadena='<div id="mostrarLA">';
-		cadena=cadena +'<h1>'+lista[0].clase+'</h1>';
-		cadena =cadena+ '<div class="list-group">';
-		cadena=cadena +'<label for ="Clases">Alumnos:</label>';
+		if(lista[0]!=undefined){
+			cadena=cadena +'<h1>'+lista[0].clase+'</h1>';
+			cadena =cadena+ '<div class="list-group">';
+			cadena=cadena +'<label for ="Clases">Alumnos:</label>';
 		
-		for(var i=0 ; i<lista.length;i++){
-			cadena =cadena+ '<a href="#" value="'+lista[i].curso+'" class="list-group-item">'+lista[i].nombre+' '+lista[i].apellidos+'<span class="badge"> Curso: '+lista[i].curso+'º</span></a>';
+			for(var i=0 ; i<lista.length;i++){
+				cadena =cadena+ '<a href="#" value="'+lista[i].curso+'" class="list-group-item">'+lista[i].nombre+' '+lista[i].apellidos+'<span class="badge"> Curso: '+lista[i].curso+'º</span></a>';
+			}	
+			cadena =cadena+ '</div>';
+			cadena=cadena+'<button type="button" id="btnComenzar" class="btn btn-success btn-lg"><i class="fas fa-play"></i> Comenzar</button>';
+			cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+			cadena =cadena+ '</div>';
+			$('#listarClases').append(cadena);
+
+			var StoreValue = []; //Declare array
+			$(".list-group a").click(function(){
+				StoreValue = []; //clear array
+				StoreValue.push($(this).attr("value")); // add text to array
+			});
+
+			$('#btnAtras').on('click',function(){
+				cw.mostrarInicio();
+			});
+
+			$('#btnComenzar').on('click',function(){
+				var curso=StoreValue[0];
+				cw.mostrarEjercicios(curso);
+			});
 		}
-		cadena =cadena+ '</div>';
-		cadena=cadena+'<button type="button" id="btnComenzar" class="btn btn-success btn-lg"><i class="fas fa-play"></i> Comenzar</button>';
-		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
-		cadena =cadena+ '</div>';
-		$('#listarClases').append(cadena);
-
-		var StoreValue = []; //Declare array
-		$(".list-group a").click(function(){
-			StoreValue = []; //clear array
-			StoreValue.push($(this).attr("value")); // add text to array
-		});
-
-		$('#btnAtras').on('click',function(){
-			cw.mostrarInicio();
-		});
-
-		$('#btnComenzar').on('click',function(){
-			var curso=StoreValue[0];
-			cw.mostrarEjercicios(curso);
-		});
 	}
 
 	//Interfaz necesaria para acceder a las distintas interfaces dependiendo de el curso en el que
@@ -912,6 +914,8 @@ function ControlWeb($){
 	//Interfaz para elegir que ejercicios de primero se quieren realizar
 	this.mostrarEjercicios1=function(){
 		this.limpiar();
+		var btn=["btn-light","btn-light","btn-light","btn-light"];
+		var btn2=["x","x","x","x"];
 		var cadena='<div id="mostrar1">';
 		cadena=cadena +'<h1>EJERCICIOS DE 1º PRIMARIA</h1>';
 		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/suma.png"></img></button>';
@@ -925,10 +929,10 @@ function ControlWeb($){
 		$('#ejercicios').append(cadena);
 
 		$('#btn11').on('click',function(){
-			cw.mostrar11(0);
+			cw.ejercicio11(0,0,btn,btn2);
 		});
 		$('#btn12').on('click',function(){
-			cw.mostrar12(0);
+			cw.ejercicio12(0,0,btn,btn2);
 		});
 
 		$('#btnAtras').on('click',function(){
@@ -939,14 +943,28 @@ function ControlWeb($){
 	}
 
 	//Metodo realizado para mostrar la interfaz principal de la suma con el método ABN
-	this.mostrar11=function(e11){
+	this.ejercicio11=function(e11,score,btn,btn2){
 		this.limpiar();
 		var m="";
-		var sumando1=[14,15,8,0,0,0,0,0,0,0];
-		var sumando2=[16,2,3,0,0,0,0,0,0,0];
-		var opcion1=[4,2,3,0,0,0,0,0,0,0];
-		var opcion2=[10,0,0,0,0,0,0,0,0,0];
-		var opcion3=[0,0,0,0,0,0,0,0,0,0];
+		var sumando1=[16,15,8,21,4,13,8,15,9,17];
+		var sumando2=[14,7,3,14,3,7,6,6,2,7];
+		var opcion1=[4,5,2,4,3,7,2,5,1,3];
+		var opcion2=[10,2,1,10,0,0,4,1,1,4];
+		
+		var s1=[];
+		var s2=[];
+		var s3=[];
+		var s4=[];
+		for(var i=0;i<sumando1.length;i++){
+			s1[i]=sumando1[i]+opcion1[i];
+			s2[i]=sumando2[i]-opcion1[i];
+			s3[i]=s1[i]+opcion2[i];
+			s4[i]=s2[i]-opcion2[i];
+		}
+		console.log(s1);
+		console.log(s2);
+		console.log(s3);
+		console.log(s4);
 		var cadena='<div id="mostrar11">';
 		cadena=cadena +'<h1>Suma ABN</h1>';
 		cadena=cadena +'<h4>'+(e11+1)+'/10 Pulsa las casillas y seleccinona la opción correcta</h4>';
@@ -962,17 +980,17 @@ function ControlWeb($){
 		cadena=cadena +'<tbody>';
 		cadena=cadena +'<tr>';
 		cadena=cadena +'<td>'+opcion1[e11]+'</td>';
-		cadena=cadena +'<td><button type="button" id="btn11" class="btn btn-lg"></button></td>';
-		cadena=cadena +'<td><button type="button" id="btn12" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td><button type="button" id="btn11" class="btn '+btn[0]+' btn-lg">'+btn2[0]+'</button></td>';
+		cadena=cadena +'<td><button type="button" id="btn12" class="btn '+btn[1]+' btn-lg">'+btn2[1]+'</button></td>';
 		cadena=cadena +'</tr>';
 		cadena=cadena +'<tr class="table-info">';
 		cadena=cadena +'<td >'+opcion2[e11]+'</td>';
-		cadena=cadena +'<td><button type="button" id="btn21" class="btn btn-lg"></button></td>';
-		cadena=cadena +'<td><button type="button" id="btn22" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td><button type="button" id="btn21" class="btn '+btn[2]+' btn-lg">'+btn2[2]+'</button></td>';
+		cadena=cadena +'<td><button type="button" id="btn22" class="btn '+btn[3]+' btn-lg">'+btn2[3]+'</button></td>';
 		cadena=cadena +'</tr>';
 		cadena=cadena +'<tr>';
-		cadena=cadena +'<td>'+opcion3[e11]+'</td>';
-		cadena=cadena +'<td><button type="button" id="btn31" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td></td>';
+		cadena=cadena +'<td><button type="button" id="btn31" class="btn  btn-lg"></button></td>';
 		cadena=cadena +'<td><button type="button" id="btn32" class="btn btn-lg"></button></td>';
 		cadena=cadena +'</tr>';
 		cadena=cadena +'</tbody>';
@@ -983,26 +1001,89 @@ function ControlWeb($){
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena =cadena+ '</div>';
 		$('#tablas').append(cadena);
+
+		$('#btn11').on('click',function(){
+			cw.modal(0,s1[e11],score,e11,btn,btn2);
+		});
+		$('#btn12').on('click',function(){
+			cw.modal(1,s2[e11],score,e11,btn,btn2);
+		});
+		$('#btn21').on('click',function(){
+			cw.modal(2,s3[e11],score,e11,btn,btn2);
+		});
+		$('#btn22').on('click',function(){
+			cw.modal(3,s4[e11],score,e11,btn,btn2);
+		});
 		
 		$('#btnHecho').on('click',function(){
-			//comprobar11();
 			e11++;
-			cw.mostrar11(e11);
+			if(e11==10){
+				cw.mostrarResultados((score/4),1,11);
+			}else{
+				btn=["btn-light","btn-light","btn-light","btn-light"];
+				btn2=["x","x","x","x"];
+				cw.ejercicio11((e11%10),score,btn,btn2);
+			}
+			
 		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios1();
 		});
 
 	}
+	//Método para mostrar los distintos modales que hay en el 
+	this.modal=function(n,solucion,score,e11,btn,btn2){
+		cw.limpiarModal();
+		lista=[];
+		for(var j=0; j<4;j++){
+			lista[j]=solucion+j;
+		}
+		var cadena='<div id="modal"><h4>Elige la opción corecta para esa casilla</h4>';		
+		cadena =cadena+'<div class="input-group">';
+	  	for(var i=0;i<lista.length;i++){
+	  		cadena=cadena+'<div><input type="radio" class="form-check-input" name="optradio" value="'+lista[i]+'"> '+lista[i]+'</div>';
+	  	}
+		cadena=cadena+'</div>';
+		$('#contenidoModal').append(cadena);
+		$('#contenidoModal').append('<button type="button" id="opcion" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i> Hecho</button>');
+		$('#modalGeneral').modal("show");
+		
+		var num=undefined;
+		$('.input-group input').on('change', function() {
+		   num=$('input[name=optradio]:checked', '.input-group').val(); 
+		});
+		$('#opcion').click(function(){
+			btn2[n]=solucion;
+			if(num==solucion){
+				score++;
+				btn[n]="btn-success";
+				cw.ejercicio11(e11,score,btn,btn2);
+			}else{
+				btn[n]="btn-danger";
+				cw.ejercicio11(e11,score,btn,btn2);
+			}
+		});
+
+	}
+
 	//Método realizado para mostrar la interfaz principal de la resta con el método ABN 
-	this.mostrar12=function(e12){
+	this.ejercicio12=function(e12,score,btn,btn2){
 		this.limpiar();
 		var m="";
-		var minuendo=[14,25,8,0,0,0,0,0,0,0];
-		var sustraendo=[6,13,3,0,0,0,0,0,0,0];
-		var opcion1=[4,2,3,3,0,0,0,0,0,0];
-		var opcion2=[2,10,0,0,0,0,0,0,0,0];
-		var opcion3=[0,0,0,0,0,0,0,0,0,0];
+		var minuendo=[14,25,8,37,12,8,24,17,10,13];
+		var sustraendo=[6,13,3,21,6,4,6,8,3,8];
+		var opcion1=[4,3,3,1,2,2,4,7,3,3];
+		var opcion2=[2,10,0,20,4,2,2,1,0,5];
+		var s1=[];
+		var s2=[];
+		var s3=[];
+		var s4=[];
+		for(var i=0;i<minuendo.length;i++){
+			s1[i]=minuendo[i]-opcion1[i];
+			s2[i]=sustraendo[i]-opcion1[i];
+			s3[i]=s1[i]-opcion2[i];
+			s4[i]=s2[i]-opcion2[i];
+		}
 		var cadena='<div id="mostrar12">';
 		cadena=cadena +'<h1>Resta ABN</h1>';
 		cadena=cadena +'<h4>'+(e12+1)+'/10 Pulsa las casillas y seleccinona la opción correcta</h4>';
@@ -1010,7 +1091,7 @@ function ControlWeb($){
 		cadena=cadena +'<table class="table table-lg">';
 		cadena=cadena +'<thead>';
 		cadena=cadena +'<tr>';
-		cadena=cadena +'<td> Suma</td>';
+		cadena=cadena +'<td>Resta</td>';
 		cadena=cadena +'<td>'+minuendo[e12]+'</td>';
 		cadena=cadena +'<td>'+sustraendo[e12]+'</td>';
 		cadena=cadena +'</tr>';
@@ -1018,16 +1099,16 @@ function ControlWeb($){
 		cadena=cadena +'<tbody>';
 		cadena=cadena +'<tr>';
 		cadena=cadena +'<td>'+opcion1[e12]+'</td>';
-		cadena=cadena +'<td><button type="button" id="btn11" class="btn btn-lg"></button></td>';
-		cadena=cadena +'<td><button type="button" id="btn12" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td><button type="button" id="btn11" class="btn '+btn[0]+' btn-lg">'+btn2[0]+'</button></td>';
+		cadena=cadena +'<td><button type="button" id="btn12" class="btn '+btn[1]+' btn-lg">'+btn2[1]+'</button></td>';
 		cadena=cadena +'</tr>';
 		cadena=cadena +'<tr class="table-info">';
 		cadena=cadena +'<td >'+opcion2[e12]+'</td>';
-		cadena=cadena +'<td><button type="button" id="btn21" class="btn btn-lg"></button></td>';
-		cadena=cadena +'<td><button type="button" id="btn22" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td><button type="button" id="btn21" class="btn '+btn[2]+' btn-lg">'+btn2[2]+'</button></td>';
+		cadena=cadena +'<td><button type="button" id="btn22" class="btn '+btn[3]+' btn-lg">'+btn2[3]+'</button></td>';
 		cadena=cadena +'</tr>';
 		cadena=cadena +'<tr>';
-		cadena=cadena +'<td>'+opcion3[e12]+'</td>';
+		cadena=cadena +'<td></td>';
 		cadena=cadena +'<td><button type="button" id="btn31" class="btn btn-lg"></button></td>';
 		cadena=cadena +'<td><button type="button" id="btn32" class="btn btn-lg"></button></td>';
 		cadena=cadena +'</tr>';
@@ -1039,14 +1120,65 @@ function ControlWeb($){
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena =cadena+ '</div>';
 		$('#tablas').append(cadena);
-		
+
+		$('#btn11').on('click',function(){
+			cw.modal1(0,s1[e12],score,e12,btn,btn2);
+		});
+		$('#btn12').on('click',function(){
+			cw.modal1(1,s2[e12],score,e12,btn,btn2);
+		});
+		$('#btn21').on('click',function(){
+			cw.modal1(2,s3[e12],score,e12,btn,btn2);
+		});
+		$('#btn22').on('click',function(){
+			cw.modal1(3,s4[e12],score,e12,btn,btn2);
+		});
 		$('#btnHecho').on('click',function(){
-			//comprobar11();
 			e12++;
-			cw.mostrar12(e12);
+			if(e12==10){
+				cw.mostrarResultados((score/4),1,12);
+			}else{
+				btn=["btn-light","btn-light","btn-light","btn-light"];
+				btn2=["x","x","x","x"];
+				cw.ejercicio12((e12%10),score,btn,btn2);
+			}
 		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios1();
+		});
+
+	}
+	//Método para mostrar los distintos modales que hay en el 
+	this.modal1=function(n,solucion,score,e12,btn,btn2){
+		cw.limpiarModal();
+		lista=[];
+		for(var j=0; j<4;j++){
+			lista[j]=solucion+j;
+		}
+		var cadena='<div id="modal1"><h4>Elige la opción corecta para esa casilla</h4>';		
+		cadena =cadena+'<div class="input-group">';
+	  	for(var i=0;i<lista.length;i++){
+	  		cadena=cadena+'<div><input type="radio" class="form-check-input" name="optradio" value="'+lista[i]+'"> '+lista[i]+'</div>';
+	  	}
+		cadena=cadena+'</div>';
+		$('#contenidoModal').append(cadena);
+		$('#contenidoModal').append('<button type="button" id="op" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i> Hecho</button>');
+		$('#modalGeneral').modal("show");
+		
+		var num=undefined;
+		$('.input-group input').on('change', function() {
+		   num=$('input[name=optradio]:checked', '.input-group').val(); 
+		});
+		$('#op').click(function(){
+			btn2[n]=solucion;
+			if(num==solucion){
+				score++;
+				btn[n]="btn-success";
+				cw.ejercicio12(e12,score,btn,btn2);
+			}else{
+				btn[n]="btn-danger";
+				cw.ejercicio12(e12,score,btn,btn2);
+			}
 		});
 
 	}
@@ -1055,6 +1187,8 @@ function ControlWeb($){
 	//dependiendo de la puntuación obtenida se mostrará una interfaz u otra
 	this.mostrarResultados=function(scores,curso,e){
 		this.limpiar();
+		btn=["btn-light","btn-light","btn-light","btn-light"];
+		btn2=["x","x","x","x"];
 		var cadena='<div id="mostrarR">';
 		cadena=cadena +'<h1>RESULTADOS</h1>';
 		cadena=cadena +'<p></p>';
@@ -1102,14 +1236,21 @@ function ControlWeb($){
 			}else if(e==52){
 				cw.ejercicio52(0,1,0,0);
 			}else if(e==11){
-				cw.ejercicio11(0);
+				cw.ejercicio11(0,0,btn,btn2);
 			}else if(e=12){
-				cw.ejercicio12(0);
+				cw.ejercicio12(0,0,btn,btn2);
 			}
 			
 		});
 
 
+	}
+	//Función para limpiar todos los modales que vayan apareciendo
+	this.limpiarModal=function(){
+		$('#modal1').remove();
+		$('#modal').remove();
+		$('#opcion').remove();
+		$('#op').remove();					
 	}
 	//Función necesaria para que no se muestren ninguna de las interfaces implementadas anteriormente
 	this.limpiar=function(){
@@ -1140,5 +1281,7 @@ function ControlWeb($){
 		$('#r51').remove();
 		$('#r52').remove();
 	}
+
+	
 
 }

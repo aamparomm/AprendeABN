@@ -162,7 +162,7 @@ function ControlWeb($){
 			cadena =cadena+ '<div class="list-group">';
 			cadena=cadena +'<label for ="Clases">Alumnos:</label>';
 			for(var i=0 ; i<lista.length;i++){
-				cadena =cadena+ '<a href="#" value="'+lista[i].curso+'" class="list-group-item"> <img src="cliente/images/avatar/'+lista[i].icono+'.png" width="50" height="50"></img>	'+lista[i].nombre+' '+lista[i].apellidos+' <span class="badge" > Curso: '+lista[i].curso+'º</span></a>';
+				cadena =cadena+ '<a style= "font-size: x-large;" href="#" value="'+lista[i].curso+'" class="list-group-item"> <img src="cliente/images/avatar/'+lista[i].icono+'.png" width="50" height="50"></img>	'+lista[i].nombre+' '+lista[i].apellidos+' <span style= "font-size: large;" class="badge" > Curso: '+lista[i].curso+'º</span></a>';
 			}	
 			cadena =cadena+ '</div>';
 			cadena=cadena+'<button type="button" id="btnComenzar" class="btn btn-success btn-lg"><i class="fas fa-play"></i> Comenzar</button>';
@@ -913,7 +913,7 @@ function ControlWeb($){
 		$('#ejercicios').append(cadena);
 
 		$('#btn11').on('click',function(){
-			cw.ejercicio11(0,0,btn,btn2);
+			cw.ejercicio111(0,0,btn,btn2);
 		});
 		$('#btn12').on('click',function(){
 			cw.ejercicio12(0,0,btn,btn2);
@@ -924,6 +924,167 @@ function ControlWeb($){
 			cw.mostrarClase();
 		});
 
+	}
+	this.ejercicio111=function(e11,score,btn,btn2){
+		this.limpiar();
+		var m="";
+		var sumando1=[16,15,8,21,4,13,8,15,9,17];
+		var sumando2=[14,7,3,14,3,7,6,6,2,7];
+		var opcion1=[4,5,2,4,3,7,2,5,1,3];
+		var opcion2=[10,2,1,10,0,0,4,1,1,4];
+		
+		var s1=[];
+		var s2=[];
+		var s3=[];
+		var s4=[];
+		for(var i=0;i<sumando1.length;i++){
+			s1[i]=sumando1[i]+opcion1[i];
+			s2[i]=sumando2[i]-opcion1[i];
+			s3[i]=sumando1[i]+opcion1[i]+opcion2[i];
+			s4[i]=s2[i]-opcion2[i];
+		}
+		var cadena='<div id="mostrar11">';
+		cadena=cadena +'<h1>Suma ABN</h1>';
+		cadena=cadena +'<h4>'+(e11+1)+'/10 Pulsa las casillas y seleccinona la opción correcta</h4>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena +'<table class="table">';
+		cadena=cadena +'<thead>';
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td> Suma</td>';
+		cadena=cadena +'<td>'+sumando1[e11]+'</td>';
+		cadena=cadena +'<td>'+sumando2[e11]+'</td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'</thead>';
+		cadena=cadena +'<tbody>';
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td>'+opcion1[e11]+'</td>';
+		cadena=cadena +'<td>';
+		cadena = cadena + '<div class="dropdown">' ;
+		cadena=cadena+'<button id="btnS1" type="button" class="btn '+btn[0]+' dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >'+btn2[0]+'</button>';
+		cadena=cadena +'<div class="dropdown-menu" id="s1" role="menu">';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+s1[e11]+'"">'+s1[e11]+'</a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+s1[(e11+2)%10]+'"">'+s1[(e11+2)%10]+'</a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+s1[(e11-4)%10]+'"">'+s1[(e11+4)%10]+'</a>';
+		cadena=cadena+'</td>';
+		cadena=cadena +'<td>';
+		cadena = cadena + '<div class="dropdown" >' ;
+		cadena=cadena+'<button id="btnS2" type="button btn-info" class="btn '+btn[1]+' dropdown-toggle" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">'+btn2[1]+'</button>';
+		cadena=cadena +'<div class="dropdown-menu" id="s2" role="menu">';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+s2[e11]+'"">'+s2[e11]+'</a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+s2[(e11+2)%10]+'"">'+s2[(e11+2)%10]+'</a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+s2[(e11-4)%10]+'"">'+s2[(e11+4)%10]+'</a>';
+		cadena=cadena+'</td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'<tr class="table-info">';
+		cadena=cadena +'<td >'+opcion2[e11]+'</td>';
+		cadena=cadena +'<td>';
+		cadena = cadena + '<div class="dropdown" >' ;
+		cadena=cadena+'<button id="btnS3" type="button btn-info" class="btn '+btn[2]+' dropdown-toggle" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">'+btn2[2]+'</button>';
+		cadena=cadena +'<div class="dropdown-menu" id="s3" role="menu">';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+s3[e11]+'"">'+s3[e11]+'</a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+s3[(e11+2)%10]+'"">'+s3[(e11+2)%10]+'</a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+s3[(e11-4)%10]+'"">'+s3[(e11+4)%10]+'</a>';
+		cadena=cadena+'</td>';		
+		cadena=cadena +'<td>';
+		cadena = cadena + '<div class="dropdown" >' ;
+		cadena=cadena+'<button type="button btn-info" class="btn '+btn[3]+' dropdown-toggle" data-toggle="dropdown" id="btnS4" aria-haspopup="true" aria-expanded="false" >'+btn2[3]+'</button>';
+		cadena=cadena +'<div class="dropdown-menu" id="s4" role="menu" >';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+s4[e11]+'"">'+s4[e11]+'</a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="1">1</a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="2">2</a>';
+		cadena=cadena+'<p></p>';
+		cadena=cadena+'</td>';			
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td></td>';
+		cadena=cadena +'<td></td>';
+		cadena=cadena +'<td></td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'</tbody>';
+		cadena=cadena +'</table>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnHecho" class="btn btn-success btn-lg "><i class="fas fa-angle-double-right"></i>Siguiente</button>';
+		cadena=cadena +'<p></p>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena =cadena+ '</div>';
+		$('#tablas').append(cadena);
+
+		var StoreValue = []; //Declare array
+		$(".dropdown-menu a").click(function(){
+			StoreValue = []; //clear array
+			StoreValue.push($(this).attr("value")); // add text to array
+		});
+
+		$('#s1 a').click(function () {
+			btn2[0]=s1[e11];
+			var num =StoreValue[0];
+			if(num==s1[e11]){
+				score++;
+				btn[0]="btn-success";
+				cw.ejercicio111(e11,score,btn,btn2);
+			}else{
+				btn[0]="btn-danger";
+				cw.ejercicio111(e11,score,btn,btn2);
+			}
+		});
+		$('#s2 a').click(function () {
+			btn2[1]=s2[e11];
+			var num =StoreValue[0];
+			if(num==s2[e11]){
+				score++;
+				btn[1]="btn-success";
+				cw.ejercicio111(e11,score,btn,btn2);
+			}else{
+				btn[1]="btn-danger";
+				cw.ejercicio111(e11,score,btn,btn2);
+			}
+		});
+		$('#s3 a').click(function () {
+			btn2[2]=s3[e11];
+			var num =StoreValue[0];
+			if(num==s3[e11]){
+				score++;
+				btn[2]="btn-success";
+				cw.ejercicio111(e11,score,btn,btn2);
+			}else{
+				btn[2]="btn-danger";
+				cw.ejercicio111(e11,score,btn,btn2);
+			}
+		});
+		$('#s4 a').click(function () {
+			btn2[3]=s4[e11];
+			var num =StoreValue[0];
+			if(num==s4[e11]){
+				score++;
+				btn[3]="btn-success";
+				cw.ejercicio111(e11,score,btn,btn2);
+			}else{
+				btn[3]="btn-danger";
+				cw.ejercicio111(e11,score,btn,btn2);
+			}
+		});
+
+		$('#btnHecho').on('click',function(){
+			e11++;
+			if(e11==10){
+				cw.mostrarResultados((score/4),1,11);
+			}else{
+				btn=["btn-light","btn-light","btn-light","btn-light"];
+				btn2=["x","x","x","x"];
+				cw.ejercicio111((e11%10),score,btn,btn2);
+			}
+			
+		});
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios1();
+		});
 	}
 
 	//Metodo realizado para mostrar la interfaz principal de la suma con el método ABN

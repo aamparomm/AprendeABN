@@ -36,12 +36,12 @@ function ABN(){
 
 	//Se registra a el alumno en la lista de alumnos de la claseque tiene como identificador su nombre
 	// se crea una lista para poder leer los datos de los alumnos que se encuentran en la clase determinada
-	this.registrarAlumno=function(nombre, apellido, curso,nclase){
+	this.registrarAlumno=function(nombre, apellido, curso,nclase,icono){
 		var lista=[];
 		var alumno=[]
 		var clase=this.clases[nclase];
 		if(clase!=undefined && clase.comprobarMaximo()){
-			alumno=clase.agregarAlumno(nombre,apellido,curso);
+			alumno=clase.agregarAlumno(nombre,apellido,curso,icono);
 			console.log(alumno);	
 		}else{
 			console.log("No se puede registrar en la clase: clase ya definida o el cupo de la clase esta completo");
@@ -78,21 +78,23 @@ function Clase(nclase, profesor,num, ABN){
 			var nombre= alumno.nombre;
 			var apellido= alumno.apellido;
 			var curso=alumno.curso;
-			lista.push({"nombre":nombre,"apellidos":apellido,"curso":curso,"clase":this.nombre});
+			var icono=alumno.icono;
+			lista.push({"nombre":nombre,"apellidos":apellido,"curso":curso,"clase":this.nombre,"icono": icono});
 		}
 		
 		return lista;
 	}
 	 //Función que  añade un alumno a la clase
-	this.agregarAlumno=function(nombre,apellido,curso){
+	this.agregarAlumno=function(nombre,apellido,curso,icono){
 		let n=nombre;
-		this.alumnos[n]=new Alumno(nombre,apellido,curso);
+		this.alumnos[n]=new Alumno(nombre,apellido,curso,icono);
 		this.alumnos[n].clase=this;
 		var a=this.alumnos[nombre];
 		var nombre=a.nombre;
 		var apellidos=a.apellido;
 		var curso=a.curso;
-		return {"clase":this.nombre,"nombre":nombre,"apellidos":apellidos,"curso":curso};
+		var icono = a.icono;
+		return {"clase":this.nombre,"nombre":nombre,"apellidos":apellidos,"curso":curso,"id_Icono":icono};
 
 	}
 
@@ -118,10 +120,11 @@ function Profesor(nombre,clase){
 }
 
 //Clase que incluye todas las funciones y atributos que ha de tener el ALumno
-function Alumno(nombre, apellido, curso){
+function Alumno(nombre, apellido, curso,idIcono){
 	this.nombre=nombre;
 	this.apellido=apellido;
 	this.curso=curso;
+	this.icono=idIcono;
 	this.clase;
 
 }

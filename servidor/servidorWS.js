@@ -25,8 +25,8 @@ function ServidorWS(){
                 var lista=app.listarClases();            
                 cli.enviarRemitente(socket,"mostrarLista",lista);
             });
-            socket.on('registrarAlumno', function(nombre,apellido,curso,clase) {
-                var lista=app.registrarAlumno(nombre,apellido,curso,clase);
+            socket.on('registrarAlumno', function(nombre,apellido,curso,clase,icono) {
+                var lista=app.registrarAlumno(nombre,apellido,curso,clase,icono);
                 console.log('El alumno: '+nombre+" del curso: "+ curso+" ha sido registrado en la clase"+clase);           
                 cli.enviarRemitente(socket,"alumnoRegistrado",lista);
             });

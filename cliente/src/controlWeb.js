@@ -99,34 +99,12 @@ function ControlWeb($){
 		cadena=cadena +'</div>';
 		$('#registro').append(cadena);
 		$('#btnRegistrarAlumno').on('click',function(){
-			cw.registrarAlumno();
-			cw.mostrarIcono();
+			cw.registrarAlumno(0);
 		});	
 	}
 
-	//Interfaz que muestra el a elegir para registrar al alumno
-	this.mostrarIcono=function(){
-		var cadena='<div id="mostrarIcono">';
-		cadena =cadena+ '<div class="form-group">';
-		cadena=cadena +'<label for ="icon">Icono: </label>';
-		cadena=cadena +'</div>';
-		cadena=cadena +'<button type="button" id="btnIcono" class="btn btn-light dropdown-toggle"data-toggle="dropdown"><img src="cliente/images/tigre.png"></img></button>';
-		cadena=cadena +'<div class="dropdown-menu" id="list">';
-		cadena=cadena +'<a class="dropdown-item" href="#"><img src="cliente/images/tigre.png"></img></a>';
-		cadena=cadena +'<a class="dropdown-item" href="#"><img src="cliente/images/oso.png"></img></a>';
-		cadena=cadena +'<a class="dropdown-item" href="#"><img src="cliente/images/koala.png"></img></a>';
-		cadena=cadena +'<a class="dropdown-item" href="#"><img src="cliente/images/elefante.png"></img></a>';
-		cadena=cadena +'</div>';
-		//cadena=cadena+'<img src="cliente/images/tigre.png">';
-		cadena=cadena +'</div>';
-		cadena=cadena +'</div>';
-		$('#iconoR').append(cadena);
-		$('#btnIcono').on('click',function(){
-		});
-	}
-
 	//Interfaz necesaria para registrar toda la información sobre el alumno
-	this.registrarAlumno=function(){
+	this.registrarAlumno=function(num){
 		this.limpiar();
 		var cadena='<div id="registrarA">';
 		cadena =cadena+ '<div class="form-group">';
@@ -147,20 +125,27 @@ function ControlWeb($){
 		cadena=cadena +'<option value="1"> 1º Primaria</option>';
 		cadena=cadena +'</select>';
 		cadena=cadena +'</div>';
+      	//cadena=cadena +'<button id="btnIcono" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"><img src="cliente/images/avatar/'+num+'.png" ></img></button>';
 		cadena=cadena+'<button type="button" id="btnRegistrarA" class="btn btn-success btn-lg"> <i class="fas fa-user-plus"></i> Registrar alumno</button>';
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena=cadena +'</div>';
+		var cadena2 = '<div id="mostrarIcono" style="margin-bottom: 25px;"><h3>Icono:</h3>';
+      	cadena2=cadena2 +'<button id="btnIcono" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"><img src="cliente/images/avatar/'+num+'.png" width="100" height="100"></img></button>';
+		cadena2=cadena2 +'</div>';
 		$('#registroA').append(cadena);
-
+		$('#iconoR').append(cadena2);
 		$('#btnRegistrarA').on('click',function(){
 
 			var nalumno=$('#nalumno').val();
 			var apellido=$('#apellido').val();
 			var curso=$('#curso').val();
-			console.log(curso);
 			if(nalumno!=""){
-				ws.registrarAlumno(nalumno,apellido,curso);
+				ws.registrarAlumno(nalumno,apellido,curso,num);
 			}
+		});
+		$('#btnIcono').on('click',function(){
+			num++;
+			cw.registrarAlumno(num%12);
 		});
 		$('#btnAtras').on('click',function(){
 			ws.listarAlumnos();
@@ -176,9 +161,8 @@ function ControlWeb($){
 			cadena=cadena +'<h1>'+lista[0].clase+'</h1>';
 			cadena =cadena+ '<div class="list-group">';
 			cadena=cadena +'<label for ="Clases">Alumnos:</label>';
-		
 			for(var i=0 ; i<lista.length;i++){
-				cadena =cadena+ '<a href="#" value="'+lista[i].curso+'" class="list-group-item">'+lista[i].nombre+' '+lista[i].apellidos+'<span class="badge"> Curso: '+lista[i].curso+'º</span></a>';
+				cadena =cadena+ '<a href="#" value="'+lista[i].curso+'" class="list-group-item"> <img src="cliente/images/avatar/'+lista[i].icono+'.png" width="50" height="50"></img>	'+lista[i].nombre+' '+lista[i].apellidos+' <span class="badge" > Curso: '+lista[i].curso+'º</span></a>';
 			}	
 			cadena =cadena+ '</div>';
 			cadena=cadena+'<button type="button" id="btnComenzar" class="btn btn-success btn-lg"><i class="fas fa-play"></i> Comenzar</button>';
@@ -990,8 +974,8 @@ function ControlWeb($){
 		cadena=cadena +'</tr>';
 		cadena=cadena +'<tr>';
 		cadena=cadena +'<td></td>';
-		cadena=cadena +'<td><button type="button" id="btn31" class="btn  btn-lg"></button></td>';
-		cadena=cadena +'<td><button type="button" id="btn32" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td></td>';
+		cadena=cadena +'<td></td>';
 		cadena=cadena +'</tr>';
 		cadena=cadena +'</tbody>';
 		cadena=cadena +'</table>';
@@ -1109,8 +1093,8 @@ function ControlWeb($){
 		cadena=cadena +'</tr>';
 		cadena=cadena +'<tr>';
 		cadena=cadena +'<td></td>';
-		cadena=cadena +'<td><button type="button" id="btn31" class="btn btn-lg"></button></td>';
-		cadena=cadena +'<td><button type="button" id="btn32" class="btn btn-lg"></button></td>';
+		cadena=cadena +'<td></td>';
+		cadena=cadena +'<td></td>';
 		cadena=cadena +'</tr>';
 		cadena=cadena +'</tbody>';
 		cadena=cadena +'</table>';

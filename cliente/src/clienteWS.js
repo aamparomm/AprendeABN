@@ -14,9 +14,9 @@ function ClienteWS(){
 	this.listaClases=function(){
 		this.socket.emit("listarClases");
 	}
-	this.registrarAlumno=function(nombre,apellido,curso){
+	this.registrarAlumno=function(nombre,apellido,curso,icono){
 		console.log(this.nclase);
-		this.socket.emit("registrarAlumno",nombre,apellido,curso,this.nclase);
+		this.socket.emit("registrarAlumno",nombre,apellido,curso,this.nclase,icono);
 
 	}
 	this.listarAlumnos=function(){

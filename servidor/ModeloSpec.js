@@ -56,7 +56,7 @@ describe("Aplicación AprendeABN", function() {
 		});
 
 		it("Registro del alumno en la clase", function(){
-			abn.registrarAlumno(anombre,aapellido,3,nc);
+			abn.registrarAlumno(anombre,aapellido,3,nc,1);
 			var clase=abn.clases[nc];
 			var alumno=clase.alumnos[anombre];
 			expect(Object.keys(clase.alumnos).length).toEqual(1);
@@ -67,7 +67,7 @@ describe("Aplicación AprendeABN", function() {
 		});
 
 		it("Comprobación de los límites del registro", function(){
-			abn.registrarAlumno(anombre,aapellido,3,nc);
+			abn.registrarAlumno(anombre,aapellido,3,nc,1);
 			var clase=abn.clases[nc];
 			var alumno=clase.alumnos[anombre];
 			expect(Object.keys(clase.alumnos).length).toEqual(1);
@@ -76,7 +76,7 @@ describe("Aplicación AprendeABN", function() {
 			expect(alumno.curso).toEqual(3);
 			expect(alumno.clase).toEqual(clase);
 
-			abn.registrarAlumno("Ana","Lopez",3,nc);
+			abn.registrarAlumno("Ana","Lopez",3,nc,2);
 			var alumno1=clase.alumnos["Ana"];
 			expect(Object.keys(clase.alumnos).length).toEqual(2);
 			expect(alumno1.nombre).toEqual("Ana");
@@ -84,7 +84,7 @@ describe("Aplicación AprendeABN", function() {
 			expect(alumno1.curso).toEqual(3);
 			expect(alumno1.clase).toEqual(clase);
 
-			abn.registrarAlumno("Lucía","Arias",3,nc);
+			abn.registrarAlumno("Lucía","Arias",3,nc,3);
 			var alumno2=clase.alumnos["Lucía"];
 			expect(Object.keys(clase.alumnos).length).toEqual(3);
 			expect(alumno2.nombre).toEqual("Lucía");
@@ -92,7 +92,7 @@ describe("Aplicación AprendeABN", function() {
 			expect(alumno2.curso).toEqual(3);
 			expect(alumno2.clase).toEqual(clase);
 			
-			abn.registrarAlumno("Juan","Lucas",3,nc);
+			abn.registrarAlumno("Juan","Lucas",3,nc,4);
 			var alumno3=clase.alumnos["Juan"];
 			expect(Object.keys(clase.alumnos).length).toEqual(3);
 			expect(alumno3).toBe(undefined);

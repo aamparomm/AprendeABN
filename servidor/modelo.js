@@ -28,8 +28,9 @@ function ABN(){
 			var clase=this.clases[i];
 			var nombre=clase.nombre;
 			var profesor=clase.profesor;
+			var a=clase.numAlumnos();
 			var num=clase.numMax;
-			lista.push({"clase":nombre,"profesor":profesor,"participantes": num});
+			lista.push({"clase":nombre,"profesor":profesor,"participantes": num,"alumnos":a});
 		}
 		return lista;
 	}
@@ -105,7 +106,8 @@ function Clase(nclase, profesor,num, ABN){
 	}
 	//Función que devuelve el número de alumnos que se encuentra en la clase
 	this.numAlumnos=function(){
-		return Object.keys(this.alumnos).length;
+		var a=Object.keys(this.alumnos).length;
+		return a;
 	}
 }
 

@@ -160,26 +160,27 @@ function ControlWeb($){
 		cadena=cadena +'</div>';
 		$('#registro').append(cadena);
 		$('#btnRegistrarAlumno').on('click',function(){
-			cw.registrarAlumno(0);
+			var lista=["Nombre","Apellido","","Curso"];
+			cw.registrarAlumno(0,lista);
 		});	
 	}
 
 	//Interfaz necesaria para registrar toda la información sobre el alumno
-	this.registrarAlumno=function(num){
+	this.registrarAlumno=function(num,lista){
 		this.limpiar();
 		var cadena='<div id="registrarA">';
 		cadena =cadena+ '<div class="form-group">';
 		cadena=cadena +'<label for ="nalumno">Nombre del alumno:</label>';
-		cadena=cadena +'<input type="text" class="form-control" size="50" id="nalumno" placeholder="Escribe el nombre del alumno">';
+		cadena=cadena +'<input type="text" class="form-control" size="50" id="nalumno" value="'+lista[0]+'" placeholder='+lista[0]+'>';
 		cadena=cadena +'</div>';
 		cadena =cadena+'<div class="form-group">';
 		cadena=cadena +'<label for ="apellido">Apellido del alumno:</label>';
-		cadena=cadena +'<input type="text" class="form-control" size="50" id="apellido" placeholder="Escribe el apellido de el alumno">';
+		cadena=cadena +'<input type="text" class="form-control" size="50" id="apellido" value="'+lista[1]+'" placeholder='+lista[1]+'>';
 		cadena=cadena +'</div>';
 		cadena =cadena+'<div class="form-group">';
 		cadena=cadena +'<label for ="c">Curso: </label>';
 		cadena=cadena +'<select class="form-control" id="curso" name="curso">';
-		cadena=cadena +'<option value=""> Elige el curso del alumno </option>';
+		cadena=cadena +'<option value="'+lista[2]+'"> '+lista[2]+' '+lista[3]+'</option>';
 		cadena=cadena +'<option value="3"> 3 Años </option>';
 		cadena=cadena +'<option value="4"> 4 Años </option>';
 		cadena=cadena +'<option value="5"> 5 Años </option>';
@@ -206,7 +207,18 @@ function ControlWeb($){
 		});
 		$('#btnIcono').on('click',function(){
 			num++;
-			cw.registrarAlumno(num%12);
+			var lista=[];
+			lista[0]=$('#nalumno').val();
+			lista[1]=$('#apellido').val();
+			lista[2]=$('#curso').val();
+			if (lista[2]==1){
+				lista[3]="Primaria";
+			}else if(lista[2]==3 ||lista[2]==4 ||lista[2]==5){
+				lista[3]="Años";
+			}else{
+				lista[3]="Curso";
+			}
+			cw.registrarAlumno(num%12,lista);
 		});
 		$('#btnAtras').on('click',function(){
 			ws.listarAlumnos();

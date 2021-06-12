@@ -26,6 +26,9 @@ function ClienteWS(){
 		this.nclase=nclase;
 		this.socket.emit("entrarClase",nclase);
 	}
+	this.mostrarEjercicios=function(curso){
+		this.socket.emit("mostrarEjercicios",curso);
+	}
 	this.lanzarSocketSrv=function(){
 		var cli=this;
 		this.socket.on('connect',function(){
@@ -59,6 +62,18 @@ function ClienteWS(){
 		this.socket.on("entrarClase",function(){
 			ws.listarAlumnos();
 			cw.mostrarClase();
+		});
+		this.socket.on("mostrar3",function(){
+			cw.mostrarEjercicios3();
+		});
+		this.socket.on("mostrar4",function(){
+			cw.mostrarEjercicios4();
+		});
+		this.socket.on("mostrar5",function(){
+			cw.mostrarEjercicios5();
+		});
+		this.socket.on("mostrar1",function(){
+			cw.mostrarEjercicios1();
 		});
 		
 	}

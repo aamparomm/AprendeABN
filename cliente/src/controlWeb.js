@@ -28,7 +28,7 @@ function ControlWeb($){
 		
 		cadena =cadena+ '<div class="list-group">';
 		cadena=cadena+'<div class="input-group">';
-		cadena=cadena+'<input type="text" class="form-control" placeholder="Search" id="search">';
+		cadena=cadena+'<input type="text" class="form-control" placeholder="Busca aqui tu clase (sensible a mayusculas y minisculas)" id="search">';
 		cadena=cadena+'<div class="input-group-btn">';
 		cadena=cadena+'<button class="btn btn-default" type="submit" id="btnSearch">';
 		cadena=cadena+'<i class="fas fa-search"></i></button></div></div>';
@@ -69,7 +69,7 @@ function ControlWeb($){
 		
 		cadena =cadena+ '<div class="list-group">';
 		cadena=cadena+'<div class="input-group">';
-		cadena=cadena+'<input type="text" class="form-control" placeholder="Search" id="search">';
+		cadena=cadena+'<input type="text" class="form-control" placeholder="Busca aqui tu clase (sensible a mayusculas y minisculas)" id="search">';
 		cadena=cadena+'<div class="input-group-btn">';
 		cadena=cadena+'<button class="btn btn-default" type="submit" id="btnSearch">';
 		cadena=cadena+'<i class="fas fa-search"></i></button></div></div>';
@@ -77,7 +77,7 @@ function ControlWeb($){
 		cadena=cadena +'<label for ="Clases">Clases:</label>';
 		
 		for(var i=0 ; i<lista.length;i++){
-			if(lista[i].clase == search){
+			if(lista[i].clase.includes(search)){
 				cadena =cadena+ '<a style= "font-size:large;" href="#" value="'+lista[i].clase+'" class="list-group-item">'+lista[i].clase+'<span class="badge"> '+lista[i].alumnos+'/'+lista[i].participantes+'</span></a>';
 			}
 		}
@@ -101,7 +101,7 @@ function ControlWeb($){
 			cw.mostrarInicio();
 		});
 		$('#btnSearch').on('click',function(){
-			var search=$('#nsearch').val();
+			var search=$('#search').val();
 			cw.search(lista,search);
 		});
 
@@ -112,6 +112,8 @@ function ControlWeb($){
 	this.mostrarCrearClase=function(){
 		this.limpiar();
 		var cadena='<div id="mostrarCC">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena +'<p></p>';
 		cadena =cadena+ '<div class="form-group">';
 		cadena=cadena +'<label for ="nclase">Nombre de la clase:</label>';
 		cadena=cadena +'<input type="text" class="form-control" size="50" id="nclase" placeholder="Escribe un nombre">';
@@ -122,7 +124,7 @@ function ControlWeb($){
 		cadena=cadena +'</div>';
 		cadena =cadena+'<div class="form-group">';
 		cadena=cadena +'<label for ="numero">Numero de participantes:</label>';
-		cadena=cadena +'<input type="number" class="form-control" size="50" id="numero" min="1" max="40" placeholder="Numero de alumnos de la clase (1-40)">';
+		cadena=cadena +'<input type="number" class="form-control" size="50" id="numero" min="1" max="12" placeholder="Numero de alumnos de la clase (1-12)">';
 		cadena=cadena +'</div>';
 		cadena=cadena+'<button type="button" id="btnCrearClase" class="btn btn-success btn-lg"><span class="fas fa-plus"></span> Crear Clase</button>';
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
@@ -135,6 +137,11 @@ function ControlWeb($){
 			if(nclase!=""){
 				ws.crearClase(nclase,profesor,numero);
 			}
+		});
+		$('#btnInfo').on('click',function(){
+			var msg="Para poder completar el registro de la clase con éxito será necesario rellenar todos los campos que se muestran.";
+			msg=msg+"No se podrá crear una clase con más de 12 alumnos y tampoco se creará la clase si ya exite una clase con dicho nombre.";
+			cw.mostrarModal(msg);
 		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarInicio();
@@ -236,14 +243,14 @@ function ControlWeb($){
 
 			$('#btnComenzar').on('click',function(){
 				var curso=StoreValue[0];
-				cw.mostrarEjercicios(curso);
+				ws.mostrarEjercicios(curso);
 			});
 		}
 	}
 
 	//Interfaz necesaria para acceder a las distintas interfaces dependiendo de el curso en el que
 	//se haya registrado al alumno, para ello se pasara por parámetro el curso del alumno
-	this.mostrarEjercicios=function(curso){
+	/*this.mostrarEjercicios=function(curso){
 		if(curso==3){
 			cw.mostrarEjercicios3();
 		}else if(curso==4){
@@ -253,7 +260,7 @@ function ControlWeb($){
 		}else if(curso==1){
 			cw.mostrarEjercicios1();
 		}
-	}
+	}*/
 
 	//Interfaz donde se muestran los ejercicios que pueden realizar los niños de 3 años
 	this.mostrarEjercicios3=function(){
@@ -288,7 +295,7 @@ function ControlWeb($){
 		this.limpiar();
 		var cadena='<div id="mostrar31">';
 		cadena=cadena +'<h1>Identificacion de números del 1 al 3</h1>';
-		cadena=cadena +'<h3>'+num+'/10 Seleccione el número de objetos de la imagen</h3>';
+		cadena=cadena +'<h3>'+(e31+1)+'/10 Seleccione el número de objetos de la imagen</h3>';
 		cadena=cadena +'<img src="cliente/images/31/'+e31+'.png" class="rounded" alt="Eniun">';
 		cadena=cadena +'<p></p>';
 		cadena=cadena+'<button type="button" id="btn1" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/1.png"></img></button>';
@@ -307,6 +314,7 @@ function ControlWeb($){
 			
 		});
 		$('#btn3').on('click',function(){
+			//ws.comprobar31(e31,score,btn);
 			cw.comprobar31(e31,num,score,3);
 		});
 		$('#btnAtras').on('click',function(){
@@ -320,7 +328,7 @@ function ControlWeb($){
 		let lights=["btn-light","btn-light","btn-light"];
 		lights[(soluciones[e31]-1)]="btn-success";
 		if (soluciones[e31]==b){
-				m="¡Enhorabuena, has acertado!";
+				m="¡Enhorabuena, has acertado!<i class='far fa-laugh-beam'></i>";
 				score++;
 				for(var i=0;i<lights.length;i++){
 					if(i==(b-1)){
@@ -329,7 +337,7 @@ function ControlWeb($){
 				}
 				cw.resultado31(e31,num,score,lights,m);}
 		else{
-				m="Ohhh, has fallado, intentalo otra vez";
+				m="Ohhh, has fallado, intentalo otra vez <i class='far fa-frown'></i>";
 
 				for(var j=0;j<lights.length;j++){
 					if(j==(b-1)){
@@ -1609,13 +1617,21 @@ function ControlWeb($){
 
 
 	}
+	this.mostrarModal=function(msg){
+		this.limpiarModal();	
+		var cadena="<p id='info'></h2>"+msg+'</h2></p>';
+		//cadena=cadena+ '<button type="button" id="cerrar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+		$('#contenidoModal').append(cadena);
+		$('#modalGeneral').modal("show");
+
+	}
 	//Función para limpiar todos los modales que vayan apareciendo
-	/*this.limpiarModal=function(){
-		$('#modal1').remove();
+	this.limpiarModal=function(){
+		$('#info').remove();
 		$('#modal').remove();
 		$('#opcion').remove();
 		$('#op').remove();					
-	}*/
+	}
 	//Función necesaria para que no se muestren ninguna de las interfaces implementadas anteriormente
 	this.limpiar=function(){
 		$('#mostrarCC').remove();

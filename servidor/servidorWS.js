@@ -42,6 +42,18 @@ function ServidorWS(){
                 }
                 
             });
+            socket.on('mostrarEjercicios', function(curso) {
+                if(curso==3){
+                    cli.enviarRemitente(socket,"mostrar3");
+                }else if(curso==4){
+                    cli.enviarRemitente(socket,"mostrar4");
+                }else if(curso==5){
+                    cli.enviarRemitente(socket,"mostrar5");
+                }else if(curso==1){
+                    cli.enviarRemitente(socket,"mostrar1");
+                }            
+            });
+            
         });
     }
 }

@@ -51,6 +51,11 @@ function ABN(){
 		return lista;
 
 	}
+	this.eliminarAlumno=function(nclase,nombre){
+		var lista=[];
+		lista=this.clases[nclase].eliminarAlumno(nombre);
+		return lista;
+	}
 
 	//Función que permite entrar en una de las clases que ya hayan sido creadas
 	this.entrarClase=function(nclase){
@@ -109,6 +114,15 @@ function Clase(nclase, profesor,num, ABN){
 			a.ejercicios[1]=new Ejercicio(12);	
 		}
 		return {"clase":this.nombre,"nombre":nombre,"apellidos":apellidos,"curso":curso,"id_Icono":icono};
+	}
+
+	this.eliminarAlumno=function(nombre){
+		this.puedeEliminarAlumno(nombre);
+		return {"clase":this.nombre,"nombre":nombre};
+	}
+
+	this.puedeEliminarAlumno=function(nombre){
+		delete this.alumnos[nombre];
 	}
 
 	//Comprueba el número máximo de alumnos que puede haber en la clase

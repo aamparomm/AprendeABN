@@ -30,6 +30,11 @@ function ServidorWS(){
                 console.log('El alumno: '+nombre+" del curso: "+ curso+" ha sido registrado en la clase"+clase);           
                 cli.enviarRemitente(socket,"alumnoRegistrado",lista);
             });
+            socket.on('eliminarAlumno', function(nombre,nclase) {
+                var lista=app.eliminarAlumno(nclase,nombre);
+                console.log('El alumno: '+nombre+"ha sido eliminado de la clase"+nclase);           
+                cli.enviarRemitente(socket,"alumnoEliminado",lista);
+            });
             socket.on('listarAlumnos', function(nclase) {
                 var lista=app.clases[nclase].listarAlumnos();            
                 cli.enviarRemitente(socket,"mostrarAlumnos",lista);

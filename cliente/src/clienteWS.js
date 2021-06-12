@@ -19,6 +19,9 @@ function ClienteWS(){
 		this.socket.emit("registrarAlumno",nombre,apellido,curso,this.nclase,icono);
 
 	}
+	this.eliminarAlumno=function(nombre){
+		this.socket.emit("eliminarAlumno",nombre,this.nclase);
+	}
 	this.listarAlumnos=function(){
 		this.socket.emit("listarAlumnos",this.nclase);
 	}
@@ -58,6 +61,11 @@ function ClienteWS(){
 			ws.listarAlumnos();
 			cw.mostrarClase();
 			
+		});
+		this.socket.on("alumnoEliminado",function(lista){
+			console.log(lista);
+			ws.listarAlumnos();
+			cw.mostrarClase();	
 		});
 		this.socket.on("entrarClase",function(){
 			ws.listarAlumnos();

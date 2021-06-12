@@ -113,17 +113,16 @@ function ControlWeb($){
 		this.limpiar();
 		var cadena='<div id="mostrarCC">';
 		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
-		cadena=cadena +'<p></p>';
 		cadena =cadena+ '<div class="form-group">';
-		cadena=cadena +'<label for ="nclase">Nombre de la clase:</label>';
+		cadena=cadena +'<label class="pull-left" for ="nclase">Nombre de la clase:</label>';
 		cadena=cadena +'<input type="text" class="form-control" size="50" id="nclase" placeholder="Escribe un nombre">';
 		cadena=cadena +'</div>';
 		cadena =cadena+'<div class="form-group">';
-		cadena=cadena +'<label for ="profesor">Nombre del profesor:</label>';
+		cadena=cadena +'<label class="pull-left"  for ="profesor">Nombre del profesor:</label>';
 		cadena=cadena +'<input type="text" class="form-control" size="50" id="profesor" placeholder="Escribe el nombe del profesor de la clase">';
 		cadena=cadena +'</div>';
 		cadena =cadena+'<div class="form-group">';
-		cadena=cadena +'<label for ="numero">Numero de participantes:</label>';
+		cadena=cadena +'<label class="pull-left"  for ="numero">Numero de participantes:</label>';
 		cadena=cadena +'<input type="number" class="form-control" size="50" id="numero" min="1" max="12" placeholder="Numero de alumnos de la clase (1-12)">';
 		cadena=cadena +'</div>';
 		cadena=cadena+'<button type="button" id="btnCrearClase" class="btn btn-success btn-lg"><span class="fas fa-plus"></span> Crear Clase</button>';
@@ -154,13 +153,11 @@ function ControlWeb($){
 	this.mostrarClase=function(){
 		this.limpiar();
 		var cadena='<div id="mostrarC">';
-		cadena =cadena+ '<div class="form-group">';
 		cadena=cadena+'<button type="button" id="btnRegistrarAlumno" class="btn btn-primary btn-lg"><i class="fas fa-user-plus"></i> Registrar alumno</button>';
-		cadena =cadena+ '</div>';
 		cadena=cadena +'</div>';
 		$('#registro').append(cadena);
 		$('#btnRegistrarAlumno').on('click',function(){
-			var lista=["Nombre","Apellido","","Curso"];
+			var lista=["","","","Curso"];
 			cw.registrarAlumno(0,lista);
 		});	
 	}
@@ -213,7 +210,7 @@ function ControlWeb($){
 			lista[2]=$('#curso').val();
 			if (lista[2]==1){
 				lista[3]="Primaria";
-			}else if(lista[2]==3 ||lista[2]==4 ||lista[2]==5){
+			}else if(lista[2]==3 ||lista[2]==4||lista[2]==5){
 				lista[3]="Años";
 			}else{
 				lista[3]="Curso";
@@ -235,28 +232,43 @@ function ControlWeb($){
 			cadena =cadena+ '<div class="list-group" >';
 			cadena=cadena +'<label for ="Clases">Alumnos:</label>';
 			for(var i=0 ; i<lista.length;i++){
-				cadena =cadena+ '<a style= "font-size: x-large;text-align:center;" href="#" value="'+lista[i].curso+'" class="list-group-item"> <img src="cliente/images/avatar/'+lista[i].icono+'.png" width="50" height="50" align="left" ></img><p></p>'+lista[i].nombre+' '+lista[i].apellidos+'<span style= "font-size: large;"class="badge" > Curso: '+lista[i].curso+'º</span></a>';
+				cadena =cadena+ '<a style= "font-size: x-large;text-align:center;" href="#" id="'+lista[i].nombre+'" value="'+lista[i].curso+'" class="list-group-item"> <img src="cliente/images/avatar/'+lista[i].icono+'.png" width="50" height="50" align="left" ></img><p></p>'+lista[i].nombre+' '+lista[i].apellidos+'<span style= "font-size: large;"class="badge" > Curso: '+lista[i].curso+'º</span></a>';
 			}	
 			cadena =cadena+ '</div>';
-			cadena=cadena+'<button type="button" id="btnComenzar" class="btn btn-success btn-lg"><i class="fas fa-play"></i> Comenzar</button>';
+			cadena=cadena+'<button type="button" id="btnComenzar" class="btn btn-success btn-lg" style="margin: 50px"><i class="fas fa-play"></i> Comenzar</button>';
+			cadena=cadena+'<button type="button" id="btnEliminar" class="btn btn-danger btn-lg" style="margin: 50px"><i class="fas fa-times"></i>Eliminar</button><p></p>';
 			cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 			cadena =cadena+ '</div>';
 			$('#listarClases').append(cadena);
 
-			var StoreValue = []; //Declare array
+			var StoreValue = [];
 			$(".list-group a").click(function(){
 				StoreValue = []; //clear array
-				StoreValue.push($(this).attr("value")); // add text to array
+				StoreValue.push($(this).attr("value"));
+				StoreValue.push($(this).attr("id"));
 			});
 
 			$('#btnAtras').on('click',function(){
 				cw.mostrarInicio();
+			});
+			$('#btnEliminar').on('click',function(){
+				var nombre=StoreValue[1];
+				ws.eliminarAlumno(nombre);
 			});
 
 			$('#btnComenzar').on('click',function(){
 				var curso=StoreValue[0];
 				ws.mostrarEjercicios(curso);
 			});
+		}else{
+			cadena=cadena+'<p style="margin: 50px"></p>';
+			cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+			cadena =cadena+ '</div>';
+			$('#listarClases').append(cadena);
+			$('#btnAtras').on('click',function(){
+				cw.mostrarInicio();
+			});
+
 		}
 	}
 
@@ -1631,7 +1643,7 @@ function ControlWeb($){
 	}
 	this.mostrarModal=function(msg){
 		this.limpiarModal();	
-		var cadena="<p id='info'></h2>"+msg+'</h2></p>';
+		var cadena='<p style="font-family: "Segoe IU", sans-serif;">'+msg+'</p>';
 		//cadena=cadena+ '<button type="button" id="cerrar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
 		$('#contenidoModal').append(cadena);
 		$('#modalGeneral').modal("show");
@@ -1678,7 +1690,5 @@ function ControlWeb($){
 	this.getRandomArbitrary=function(min, max) {
 		return Math.floor(Math.random() * (max - min) + min);
 	}
-
-	
 
 }

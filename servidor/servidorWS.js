@@ -17,9 +17,14 @@ function ServidorWS(){
         io.on('connection',function(socket){
             socket.on('crearClase', function(nclase,profesor,numParticipantes) {
                 var nclase=app.crearClase(nclase,profesor,numParticipantes); 
-                console.log('El profesor: '+profesor+" ha creado una clase llamada: "+ nclase+" de "+numParticipantes+" participantes");
-                socket.join(nclase);              
-                cli.enviarRemitente(socket,"claseCreada",{"nclase":nclase,"profesor":profesor,"participantes":numParticipantes});
+                if(nclase!=undefined){
+                    console.log('El profesor: '+profesor+" ha creado una clase llamada: "+ nclase+" de "+numParticipantes+" participantes");
+                    socket.join(nclase);              
+                    cli.enviarRemitente(socket,"claseCreada",{"nclase":nclase,"profesor":profesor,"participantes":numParticipantes});
+                }else{
+                    cli.enviarRemitente(socket,"claseCreada",{"nclase":nclase});
+                }
+                
             });
             socket.on('listarClases', function() {
                 var lista=app.listarClases();            
@@ -43,7 +48,7 @@ function ServidorWS(){
                 var res=app.entrarClase(nclase);
                 console.log(res);
                 if(res!=-1){
-                    cli.enviarRemitente(socket,"entrarClase");
+                    cli.enviarRemitente(socket,"entrarClase",res);
                 }
                 
             });

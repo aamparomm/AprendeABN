@@ -42,10 +42,12 @@ function ClienteWS(){
 			console.log(data);
 			if(data.nclase!=undefined){
 				cli.profesor=true;
+				cw.limpiar();
 				cw.mostrarClase(data.nclase);
 				ws.listarAlumnos();
 			}else{
 				console.log("La clase no se ha creado correctamente: es indefinida");
+				cw.mostrarModal(" No se puede crear la clase ya que: <p>1.Ya existe una clase con ese nombre</p><p>2.No ha rellenado todos los campos</p>");
 			}
 		});
 		this.socket.on("mostrarLista",function(lista){
@@ -58,18 +60,26 @@ function ClienteWS(){
 		});
 		this.socket.on("alumnoRegistrado",function(lista){
 			//console.log(lista);
-			ws.listarAlumnos();
-			cw.mostrarClase();
-			
+			if(lista!=undefined){
+				cw.limpiar();
+				ws.listarAlumnos();
+				cw.mostrarClase();
+			}else{
+				cw.limpiar();
+				ws.listarAlumnos();
+			}	
 		});
 		this.socket.on("alumnoEliminado",function(lista){
-			console.log(lista);
+			cw.limpiar();
 			ws.listarAlumnos();
 			cw.mostrarClase();	
 		});
-		this.socket.on("entrarClase",function(){
+		this.socket.on("entrarClase",function(res){
+			cw.limpiar();
 			ws.listarAlumnos();
-			cw.mostrarClase();
+			if(res!=1){
+				cw.mostrarClase();
+			}
 		});
 		this.socket.on("mostrar3",function(){
 			cw.mostrarEjercicios3();

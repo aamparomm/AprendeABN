@@ -8,6 +8,8 @@ function ABN(){
 			if(!this.clases[nclase]){
 				this.clases[nclase]=new Clase(nclase,profesor,numParticipantes,this);
 				profesor.clase=this.clases[nclase];
+			}else{
+				return undefined;
 			}
 		return nclase;	
 		}
@@ -43,7 +45,10 @@ function ABN(){
 		var clase=this.clases[nclase];
 		if(clase!=undefined && clase.comprobarMaximo()){
 			alumno=clase.agregarAlumno(nombre,apellido,curso,icono);
-			console.log(alumno);	
+			console.log(alumno);
+			if(clase.igualMaximo()){
+				return undefined;
+			}	
 		}else{
 			console.log("No se puede registrar en la clase: clase ya definida o el cupo de la clase esta completo");
 		}
@@ -61,7 +66,10 @@ function ABN(){
 	this.entrarClase=function(nclase){
 		var res=-1;
 		if (this.clases[nclase]){
-			res = 0;	
+			res = 0;
+			if(this.clases[nclase].numMax==this.clases[nclase].numAlumnos()){
+				res=1;
+			}	
 		}
 		return res;
 	}
@@ -128,6 +136,11 @@ function Clase(nclase, profesor,num, ABN){
 	//Comprueba el número máximo de alumnos que puede haber en la clase
 	this.comprobarMaximo=function(){
 		return this.numAlumnos()<this.numMax;
+
+	}
+	//Comprueba si el número actual de alumnos es igual al número máximo de alumnos
+	this.igualMaximo=function(){
+		return this.numAlumnos()==this.numMax;
 
 	}
 	//Función que devuelve el número de alumnos que se encuentra en la clase

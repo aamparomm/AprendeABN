@@ -151,7 +151,6 @@ function ControlWeb($){
 	//Función que  que muestra el boton necesario para acceder a la interfaz de registro de el alumno
 	//es parte de la interfaz de la información sobre la clase
 	this.mostrarClase=function(){
-		this.limpiar();
 		var cadena='<div id="mostrarC">';
 		cadena=cadena+'<button type="button" id="btnRegistrarAlumno" class="btn btn-primary btn-lg"><i class="fas fa-user-plus"></i> Registrar alumno</button>';
 		cadena=cadena +'</div>';
@@ -218,6 +217,7 @@ function ControlWeb($){
 			cw.registrarAlumno(num%12,lista);
 		});
 		$('#btnAtras').on('click',function(){
+			cw.limpiar();
 			ws.listarAlumnos();
 			cw.mostrarClase();
 		});
@@ -236,7 +236,7 @@ function ControlWeb($){
 			}	
 			cadena =cadena+ '</div>';
 			cadena=cadena+'<button type="button" id="btnComenzar" class="btn btn-success btn-lg" style="margin: 50px"><i class="fas fa-play"></i> Comenzar</button>';
-			cadena=cadena+'<button type="button" id="btnEliminar" class="btn btn-danger btn-lg" style="margin: 50px"><i class="fas fa-times"></i>Eliminar</button><p></p>';
+			cadena=cadena+'<button type="button" id="btnEliminar" class="btn btn-danger btn-lg" style="margin: 50px"><i class="fas fa-times"></i> Eliminar</button><p></p>';
 			cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 			cadena =cadena+ '</div>';
 			$('#listarClases').append(cadena);
@@ -302,6 +302,7 @@ function ControlWeb($){
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
 		$('#btnAtras').on('click',function(){
+			cw.limpiar();
 			ws.listarAlumnos();
 			cw.mostrarClase();
 		});
@@ -352,7 +353,7 @@ function ControlWeb($){
 		let lights=["btn-light","btn-light","btn-light"];
 		lights[(soluciones[e31]-1)]="btn-success";
 		if (soluciones[e31]==b){
-				m="¡Enhorabuena, has acertado!<i class='far fa-laugh-beam'></i>";
+				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
 				for(var i=0;i<lights.length;i++){
 					if(i==(b-1)){
@@ -361,7 +362,7 @@ function ControlWeb($){
 				}
 				cw.resultado31(e31,num,score,lights,m);}
 		else{
-				m="Ohhh, has fallado, intentalo otra vez <i class='far fa-frown'></i>";
+				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
 
 				for(var j=0;j<lights.length;j++){
 					if(j==(b-1)){
@@ -455,7 +456,7 @@ function ControlWeb($){
 		var l=["btn-light","btn-light","btn-light","btn-light","btn-light","btn-light"];
 		l[(soluciones[e32]-1)]="btn-success";
 		if (soluciones[e32]==b){
-				m="¡Enhorabuena, has acertado!";
+				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
 				for(var i=0;i<l.length;i++){
 					if(i==(b-1)){
@@ -465,7 +466,7 @@ function ControlWeb($){
 				cw.resultado32(e32,num,score,l,m);
 		}
 		else{
-				m="Ohhh, has fallado, intentalo otra vez";
+				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
 
 				for(var j=0;j<l.length;j++){
 					
@@ -529,6 +530,7 @@ function ControlWeb($){
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
 		$('#btnAtras').on('click',function(){
+			cw.limpiar();
 			ws.listarAlumnos();
 			cw.mostrarClase();
 		});
@@ -614,7 +616,7 @@ function ControlWeb($){
 		var l=["btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light"];
 		l[(soluciones[e41]-1)]="btn-success";
 		if (soluciones[e41]==b){
-				m="¡Enhorabuena, has acertado!";
+				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
 				for(var i=0;i<l.length;i++){
 					if(i==(b-1)){
@@ -624,7 +626,7 @@ function ControlWeb($){
 				cw.resultado41(e41,num,score,l,m);
 		}
 		else{
-				m="Ohhh, has fallado, intentalo otra vez";
+				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
 
 				for(var j=0;j<l.length;j++){
 					
@@ -747,7 +749,7 @@ function ControlWeb($){
 		var l=["btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light"];
 		l[(soluciones[e42]-1)]="btn-success";
 		if (soluciones[e42]==b){
-				m="¡Enhorabuena, has acertado!";
+				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
 				for(var i=0;i<l.length;i++){
 					if(i==(b-1)){
@@ -757,7 +759,7 @@ function ControlWeb($){
 				cw.resultado42(e42,num,score,l,m);
 		}
 		else{
-				m="Ohhh, has fallado, intentalo otra vez";
+				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
 
 				for(var j=0;j<l.length;j++){
 					
@@ -829,6 +831,7 @@ function ControlWeb($){
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
 		$('#btnAtras').on('click',function(){
+			cw.limpiar();
 			ws.listarAlumnos();
 			cw.mostrarClase();
 		});
@@ -866,11 +869,11 @@ function ControlWeb($){
 		});
 		$('#btn1').on('click',function(){
 			if (soluciones[e51]== (count+1)){
-				m="¡Enhorabuena, has acertado!";
+				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
 				cw.resultado51(e51,num,score,count,"btn-success",m);
 			}else{
-				m="Ohhh, has fallado, intentalo otra vez";
+				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
 				cw.resultado51(e51,num,score,count,"btn-danger",m);
 			}
 		});
@@ -935,11 +938,11 @@ function ControlWeb($){
 		});
 		$('#btn1').on('click',function(){
 			if (soluciones[e52]== (count+1)){
-				m="¡Enhorabuena, has acertado!";
+				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
 				cw.resultado52(e52,num,score,count,"btn-success",m);
 			}else{
-				m="Ohhh, has fallado, intentalo otra vez";
+				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
 				cw.resultado52(e52,num,score,count,"btn-danger",m);
 			}
 
@@ -1006,6 +1009,7 @@ function ControlWeb($){
 		});
 
 		$('#btnAtras').on('click',function(){
+			cw.limpiar();
 			ws.listarAlumnos();
 			cw.mostrarClase();
 		});
@@ -1643,7 +1647,7 @@ function ControlWeb($){
 	}
 	this.mostrarModal=function(msg){
 		this.limpiarModal();	
-		var cadena='<p style="font-family: "Segoe IU", sans-serif;">'+msg+'</p>';
+		var cadena="<p id='info'>"+msg+'</p>';
 		//cadena=cadena+ '<button type="button" id="cerrar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
 		$('#contenidoModal').append(cadena);
 		$('#modalGeneral').modal("show");
@@ -1653,8 +1657,8 @@ function ControlWeb($){
 	this.limpiarModal=function(){
 		$('#info').remove();
 		$('#modal').remove();
-		$('#opcion').remove();
-		$('#op').remove();					
+		//$('#opcion').remove();
+		//$('#op').remove();					
 	}
 	//Función necesaria para que no se muestren ninguna de las interfaces implementadas anteriormente
 	this.limpiar=function(){

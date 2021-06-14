@@ -109,6 +109,9 @@ function Clase(nclase, profesor,num, ABN){
 			var icono=alumno.icono;
 			lista.push({"nombre":nombre,"apellidos":apellido,"curso":curso,"clase":this.nombre,"icono": icono});
 		}
+		if (Object.keys(lista).length==0){
+			lista.push({"nclase":this.nombre});
+		}
 		
 		return lista;
 	}

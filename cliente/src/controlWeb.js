@@ -134,9 +134,10 @@ function ControlWeb($){
 			var nclase=$('#nclase').val();
 			var profesor=$('#profesor').val();
 			var numero=$('#numero').val();
-			if(nclase!=""){
+			if(nclase!="" && profesor!="" && numero!=""){
 				ws.crearClase(nclase,profesor,numero);
 			}
+				
 		});
 		$('#btnEliminarClase').on('click',function(){
 			var nclase=$('#nclase').val();
@@ -246,7 +247,7 @@ function ControlWeb($){
 	//Interfaz donde se listan todos los alumnos de una misma clase 
 	this.listarAlumnos=function(lista){
 		var cadena='<div id="mostrarLA">';
-		if(lista[0]!=undefined){
+		if(lista[0].nombre!=undefined){
 			cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 			cadena=cadena +'<h1>'+lista[0].clase+'</h1>';
 			cadena =cadena+ '<div class="list-group" >';
@@ -292,7 +293,11 @@ function ControlWeb($){
 			cw.mostrarModal(msg);
 		});
 		}else{
-			cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm "><i class="fas fa-question-circle"></i></button>';
+			cadena=cadena+'<h1><button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button> </h1>';
+			cadena=cadena +'<h1>'+lista[0].nclase+'</h1>';
+			cadena =cadena+ '<div class="list-group" >';
+			cadena=cadena +'<label for ="Clases">Alumnos:</label>';
+			cadena =cadena+ '</div>';
 			cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 			cadena =cadena+ '</div>';
 			$('#listarClases').append(cadena);
@@ -1826,5 +1831,14 @@ function ControlWeb($){
 	this.getRandomArbitrary=function(min, max) {
 		return Math.floor(Math.random() * (max - min) + min);
 	}
+
+	/*this.getRandomArray=function(){
+		var lista=[];
+		for(var i =0;i<10;i++){
+			lista[i]=cw.getRandomArbitrary(0,10);
+		}
+
+		return lista;
+	}*/
 
 }

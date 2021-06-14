@@ -66,7 +66,7 @@ function ClienteWS(){
 				cw.mostrarClase();
 			}else{
 				cw.limpiar();
-				ws.listarAlumnos();
+				ws.listarAlumnos();	
 			}	
 		});
 		this.socket.on("alumnoEliminado",function(lista){

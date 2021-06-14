@@ -25,7 +25,6 @@ function ControlWeb($){
 	this.listarClases=function(lista){
 		this.limpiar();
 		var cadena='<div id="mostrarLC">';
-		
 		cadena =cadena+ '<div class="list-group">';
 		cadena=cadena+'<div class="input-group">';
 		cadena=cadena+'<input type="text" class="form-control" placeholder="Busca aqui tu clase (sensible a mayusculas y minisculas)" id="search">';
@@ -165,16 +164,17 @@ function ControlWeb($){
 	this.registrarAlumno=function(num,lista){
 		this.limpiar();
 		var cadena='<div id="registrarA">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena =cadena+ '<div class="form-group">';
-		cadena=cadena +'<label for ="nalumno">Nombre del alumno:</label>';
+		cadena=cadena +'<label class="pull-left" for ="nalumno">Nombre del alumno:</label>';
 		cadena=cadena +'<input type="text" class="form-control" size="50" id="nalumno" value="'+lista[0]+'" placeholder='+lista[0]+'>';
 		cadena=cadena +'</div>';
 		cadena =cadena+'<div class="form-group">';
-		cadena=cadena +'<label for ="apellido">Apellido del alumno:</label>';
+		cadena=cadena +'<label class="pull-left" for ="apellido">Apellido del alumno:</label>';
 		cadena=cadena +'<input type="text" class="form-control" size="50" id="apellido" value="'+lista[1]+'" placeholder='+lista[1]+'>';
 		cadena=cadena +'</div>';
 		cadena =cadena+'<div class="form-group">';
-		cadena=cadena +'<label for ="c">Curso: </label>';
+		cadena=cadena +'<label class="pull-left" for ="c">Curso: </label>';
 		cadena=cadena +'<select class="form-control" id="curso" name="curso">';
 		cadena=cadena +'<option value="'+lista[2]+'"> '+lista[2]+' '+lista[3]+'</option>';
 		cadena=cadena +'<option value="3"> 3 Años </option>';
@@ -208,7 +208,7 @@ function ControlWeb($){
 			lista[1]=$('#apellido').val();
 			lista[2]=$('#curso').val();
 			if (lista[2]==1){
-				lista[3]="Primaria";
+				lista[3]="º Primaria";
 			}else if(lista[2]==3 ||lista[2]==4||lista[2]==5){
 				lista[3]="Años";
 			}else{
@@ -221,6 +221,14 @@ function ControlWeb($){
 			ws.listarAlumnos();
 			cw.mostrarClase();
 		});
+		$('#btnInfo').on('click',function(){
+			var msg="Para poder completar el registro del alumno con éxito será necesario rellenar todos los campos que se muestran.";
+			msg=msg+"<img src='cliente/images/help/8.png' width='700' height='350'></img><p></p>";
+			msg=msg+"Para cambiar el avatar del alumno simplemente hay que clicar sobre dicho icono";
+			msg=msg+"<img src='cliente/images/help/9.png' width='700' height='350'></img><p></p>";
+			msg=msg+"Si se repite el nombre de los alumnos, se editará el alumno con dicho nombre";
+			cw.mostrarModal(msg);
+		});
 
 	}
 
@@ -228,6 +236,7 @@ function ControlWeb($){
 	this.listarAlumnos=function(lista){
 		var cadena='<div id="mostrarLA">';
 		if(lista[0]!=undefined){
+			cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 			cadena=cadena +'<h1>'+lista[0].clase+'</h1>';
 			cadena =cadena+ '<div class="list-group" >';
 			cadena=cadena +'<label for ="Clases">Alumnos:</label>';
@@ -260,14 +269,33 @@ function ControlWeb($){
 				var curso=StoreValue[0];
 				ws.mostrarEjercicios(curso);
 			});
+
+			$('#btnInfo').on('click',function(){
+			cw.limpiarModal();
+			var msg="Para poder registrar a un alumno simplemente pulse en el botón de 'Registrar alumno.'";
+			msg=msg+"<img src='cliente/images/help/1.png'width='700' height='350'></img><p></p>";
+			msg=msg+"Para comenzar con las actividades de un alumno seleccione a uno de los alumnos de la lista y pulse 'Comenzar'";
+			msg=msg+"<img src='cliente/images/help/2.png' width='700' height='350'></img><p></p>";
+			msg=msg+"Para eliminar a uno de los alumnos de la clase seleccione a uno de los alumnos de la lista y pulse 'Eliminar'";
+			msg=msg+"<img src='cliente/images/help/3.png' width='700' height='350'></img><p></p>";
+			cw.mostrarModal(msg);
+		});
 		}else{
-			cadena=cadena+'<p style="margin: 50px"></p>';
+			cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 			cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 			cadena =cadena+ '</div>';
 			$('#listarClases').append(cadena);
 			$('#btnAtras').on('click',function(){
 				cw.mostrarInicio();
 			});
+
+			$('#btnInfo').on('click',function(){
+			cw.limpiarModal();
+			var msg="Para poder registrar a un alumno simplemente pulse en el botón de 'Registrar alumno'.";
+			msg=msg+"<img src='cliente/images/help/0.png' width='700' height='350'></img><p></p>";
+			msg=msg+"Para volver al inicio pulse en el boton azul con la flecha";
+			cw.mostrarModal(msg);
+		});
 
 		}
 	}
@@ -290,6 +318,7 @@ function ControlWeb($){
 	this.mostrarEjercicios3=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar3">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>EJERCICIOS DE 3 AÑOS</h1>';
 		cadena=cadena +'<h3>Identificación de números</h3>';
 		cadena=cadena+'<button type="button" id="btn31" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/1.png"></img></button>';
@@ -312,6 +341,11 @@ function ControlWeb($){
 		$('#btn32').on('click',function(){
 			cw.ejercicio32(0,1,0);
 		});
+		$('#btnInfo').on('click',function(){
+			var msg="Para poder realizar uno de los ejercicios seleccione una de las imagenes que aparecen";
+			msg=msg+"<img src='cliente/images/help/4.png' width='700' height='350' ></img>";
+			cw.mostrarModal(msg);
+		});
 	}
 	// Interfaz de  el primer ejercicio de identificación de números del 1 al tres para niños de 3 años
 	//en este caso será necesario introducir por parámetro el número de ejercicio en el que nos encontramos
@@ -319,6 +353,7 @@ function ControlWeb($){
 	this.ejercicio31=function(e31,num,score){
 		this.limpiar();
 		var cadena='<div id="mostrar31">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Identificacion de números del 1 al 3</h1>';
 		cadena=cadena +'<h3>'+(e31+1)+'/10 Seleccione el número de objetos de la imagen</h3>';
 		cadena=cadena +'<img src="cliente/images/31/'+e31+'.png" class="rounded" alt="Eniun">';
@@ -344,6 +379,13 @@ function ControlWeb($){
 		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios3();
+		});
+		$('#btnInfo').on('click',function(){
+			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
+			msg=msg+"<img src='cliente/images/help/10.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<img src='cliente/images/help/11.png' width='700' height='350' ></img><p></p>";
+			cw.mostrarModal(msg);
 		});
 	}
 	//Función para comprobar que la opción elegida corresponde con la solucíon al 1º ejercicio para niños de 3 años
@@ -412,6 +454,7 @@ function ControlWeb($){
 		this.limpiar();
 		var soluciones=[5,4,1,5,2,6,3,2,4,3];
 		var cadena='<div id="mostrar32">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Identificacion de números del 1 al 6</h1>';
 		cadena=cadena +'<h3>'+num+'/10 Seleccione el número de objetos de la imagen</h3>';
 		cadena=cadena +'<img src="cliente/images/32/'+e32+'.png" class="rounded" alt="Eniun">';
@@ -447,6 +490,13 @@ function ControlWeb($){
 		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios3();
+		});
+		$('#btnInfo').on('click',function(){
+			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
+			msg=msg+"<img src='cliente/images/help/12.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<img src='cliente/images/help/13.png' width='700' height='350' ></img><p></p>";
+			cw.mostrarModal(msg);
 		});
 	}
 	//Función para comprobar que la opción elegida corresponde con la solucíon del 2 ejercicio para niños de 3 años
@@ -519,6 +569,7 @@ function ControlWeb($){
 	this.mostrarEjercicios4=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar4">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>EJERCICIOS DE 4 AÑOS</h1>';
 		cadena=cadena+'<button type="button" id="btn41" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/recta.png"></img></button>';
 		cadena=cadena+'<button type="button" id="btn42" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/arcoiris.png"></img></button>';
@@ -540,6 +591,11 @@ function ControlWeb($){
 		$('#btn42').on('click',function(){
 			cw.ejercicio42(0,1,0);
 		});
+		$('#btnInfo').on('click',function(){
+			var msg="Para poder realizar uno de los ejercicios seleccione una de las imagenes que aparecen";
+			msg=msg+"<img src='cliente/images/help/5.png' width='700' height='350' ></img>";
+			cw.mostrarModal(msg);
+		});
 
 	}
 	// Interfaz del primer ejercicio para niños de 4 años de recta numérica
@@ -549,6 +605,7 @@ function ControlWeb($){
 		var desplazamiento=[2,-1,-2,5,1,3,1,5,-8,-6];
 		var soluciones=[5,4,8,6,3,10,7,9,1,2];
 		var cadena='<div id="mostrar41">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Recta numérica</h1>';
 		cadena=cadena +'<h3>'+num+'/10 ¿A qué número llegamos si nos encontramos en el número '+inicio[e41]+' y nos desplazamos '+desplazamiento[e41]+' casillas?</h3>';
 		cadena=cadena +'<p></p>';
@@ -607,6 +664,13 @@ function ControlWeb($){
 		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios4();
+		});
+		$('#btnInfo').on('click',function(){
+			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
+			msg=msg+"<img src='cliente/images/help/14.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<img src='cliente/images/help/15.png' width='700' height='350' ></img><p></p>";
+			cw.mostrarModal(msg);
 		});
 	}
 	//Función para comprobar que la opción elegida corresponde con la solucíon al 1º ejercicio para niños de 4 años
@@ -689,6 +753,7 @@ function ControlWeb($){
 		var numeros=[5,9,2,7,9,0,6,8,1,3];
 		var soluciones=[5,1,8,3,1,10,4,2,9,7];
 		var cadena='<div id="mostrar42">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Amigos del 10</h1>';
 		cadena=cadena +'<h3>'+num+'/10 ¿cuál es el amigo del '+numeros[e42]+'?</h3>';
 		cadena=cadena +'<img src="cliente/images/42/'+e42+'.png" class="rounded" alt="Eniun">';
@@ -820,6 +885,7 @@ function ControlWeb($){
 	this.mostrarEjercicios5=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar5">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>EJERCICIOS DE 5 AÑOS</h1>';
 		cadena=cadena+'<button type="button" id="btn51" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/s5.png"></img></button>';
 		cadena=cadena+'<button type="button" id="btn52" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/r5.png"></img></button>';
@@ -841,6 +907,11 @@ function ControlWeb($){
 		$('#btn52').on('click',function(){
 			cw.ejercicio52(0,1,0,0);
 		});
+		$('#btnInfo').on('click',function(){
+			var msg="Para poder realizar uno de los ejercicios seleccione una de las imagenes que aparecen";
+			msg=msg+"<img src='cliente/images/help/6.png' width='700' height='350' ></img>";
+			cw.mostrarModal(msg);
+		});
 
 	}
 	// Interfaz del primer ejercicio para niños de 5 años de suma con objetos
@@ -849,6 +920,7 @@ function ControlWeb($){
 		var m="";
 		var soluciones=[5,7,9,2,6,4,10,3,8,6];
 		var cadena='<div id="mostrar51">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Suma con objetos</h1>';
 		cadena=cadena +'<h3>'+num+'/10 Pulsa la casilla hasta que aparezca el número que de solución a la suma</h3>';
 		cadena=cadena +'<img src="cliente/images/51/'+e51+'.png" class="rounded" alt="Eniun"style="margin: 20px">';
@@ -918,6 +990,7 @@ function ControlWeb($){
 		var m="";
 		var soluciones=[2,4,1,6,3,5,3,9,1,4];
 		var cadena='<div id="mostrar52">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Resta con objetos</h1>';
 		cadena=cadena +'<h3>'+num+'/10 Pulsa la casilla hasta que aparezca el número que de solución a la resta</h3>';
 		cadena=cadena +'<img src="cliente/images/52/'+e52+'.png" class="rounded" alt="Eniun">';
@@ -990,6 +1063,7 @@ function ControlWeb($){
 		var btn=["btn-info","btn-info","btn-info","btn-info"];
 		var btn2=["Elige","Elige","Elige","Elige"];
 		var cadena='<div id="mostrar1">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>EJERCICIOS DE 1º PRIMARIA</h1>';
 		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/suma.png"></img></button>';
 		cadena=cadena+'<button type="button" id="btn12" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/resta.png"></img></button>';
@@ -1012,6 +1086,11 @@ function ControlWeb($){
 			cw.limpiar();
 			ws.listarAlumnos();
 			cw.mostrarClase();
+		});
+		$('#btnInfo').on('click',function(){
+			var msg="Para poder realizar uno de los ejercicios seleccione una de las imagenes que aparecen";
+			msg=msg+"<img src='cliente/images/help/7.png' width='700' height='350' ></img>";
+			cw.mostrarModal(msg);
 		});
 
 	}
@@ -1042,6 +1121,7 @@ function ControlWeb($){
 			s4[i]=s2[i]-opcion2[i];
 		}
 		var cadena='<div id="mostrar11">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Suma ABN</h1>';
 		cadena=cadena +'<h3>'+(e11+1)+'/10 Pulsa las casillas y seleccinona la opción correcta</h3>';
 		cadena=cadena +'<p></p>';
@@ -1204,7 +1284,8 @@ function ControlWeb($){
 			s4[i]=s2[i]-opcion2[i];
 		}
 		var cadena='<div id="mostrar11">';
-		cadena=cadena +'<h1>Suma ABN</h1>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena +'<h1>Resta ABN</h1>';
 		cadena=cadena +'<h3>'+(e12+1)+'/10 Pulsa las casillas y seleccinona la opción correcta</h3>';
 		cadena=cadena +'<p></p>';
 		cadena=cadena +'<table class="table table-bordered">';
@@ -1647,7 +1728,7 @@ function ControlWeb($){
 	}
 	this.mostrarModal=function(msg){
 		this.limpiarModal();	
-		var cadena="<p id='info'>"+msg+'</p>';
+		var cadena="<div id='info'><p>"+msg+"</p> </div>";
 		//cadena=cadena+ '<button type="button" id="cerrar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
 		$('#contenidoModal').append(cadena);
 		$('#modalGeneral').modal("show");

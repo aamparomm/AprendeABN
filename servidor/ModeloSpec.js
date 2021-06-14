@@ -84,18 +84,31 @@ describe("Aplicación AprendeABN", function() {
 			expect(alumno1.curso).toEqual(3);
 			expect(alumno1.clase).toEqual(clase);
 
-			abn.registrarAlumno("Lucía","Arias",3,nc,3);
+			abn.registrarAlumno("Lucía","Arias",4,nc,3);
 			var alumno2=clase.alumnos["Lucía"];
 			expect(Object.keys(clase.alumnos).length).toEqual(3);
 			expect(alumno2.nombre).toEqual("Lucía");
 			expect(alumno2.apellido).toEqual("Arias");
-			expect(alumno2.curso).toEqual(3);
+			expect(alumno2.curso).toEqual(4);
 			expect(alumno2.clase).toEqual(clase);
 			
-			abn.registrarAlumno("Juan","Lucas",3,nc,4);
+			abn.registrarAlumno("Juan","Lucas",5,nc,4);
 			var alumno3=clase.alumnos["Juan"];
 			expect(Object.keys(clase.alumnos).length).toEqual(3);
 			expect(alumno3).toBe(undefined);
+		});
+		it("Eliminación del alumno de la clase", function(){
+			abn.registrarAlumno(anombre,aapellido,3,nc,1);
+			var clase=abn.clases[nc];
+			var alumno=clase.alumnos[anombre];
+			expect(Object.keys(clase.alumnos).length).toEqual(1);
+			expect(alumno.nombre).toEqual(anombre);
+			expect(alumno.apellido).toEqual(aapellido);
+			expect(alumno.curso).toEqual(3);
+			expect(alumno.clase).toEqual(clase);
+			abn.eliminarAlumno(nc,anombre);
+			expect(Object.keys(clase.alumnos).length).toEqual(0);
+
 		});
 
 	});

@@ -7,7 +7,8 @@ function ControlWeb($){
 		cadena=cadena +'<h1>¡Bienvenid@ a Aprende ABN!</h1>';
 		cadena=cadena +'<h3>Para comenzar cree una clase</h3>';
 		cadena=cadena +'<h3>Si ya ha creado una pulse "Buscar Clase"</h3>';
-		cadena=cadena+'<button type="button" id="btnCrearClase" class="btn btn-success  btn-lg"><i class="fas fa-plus"></i> Crear Clase</button>';
+		cadena=cadena + '<h3>Para eliminar una clase ya creada pulse "Crear/Eliminar Clase"</h3>';
+		cadena=cadena+'<button type="button" id="btnCrearClase" class="btn btn-success  btn-lg"><i class="fas fa-plus"></i> Crear/Eliminar Clase</button>';
 		cadena=cadena +'<h4></h4>';
 		cadena=cadena+'<button type="button" id="btnBuscarClase" class="btn btn-danger btn-lg"><i class="fas fa-search"></i> Buscar clase</button>';
 		cadena=cadena +'</div>';
@@ -124,8 +125,9 @@ function ControlWeb($){
 		cadena=cadena +'<label class="pull-left"  for ="numero">Numero de participantes:</label>';
 		cadena=cadena +'<input type="number" class="form-control" size="50" id="numero" min="1" max="12" placeholder="Numero de alumnos de la clase (1-12)">';
 		cadena=cadena +'</div>';
-		cadena=cadena+'<button type="button" id="btnCrearClase" class="btn btn-success btn-lg"><span class="fas fa-plus"></span> Crear Clase</button>';
-		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena=cadena+'<button type="button" id="btnCrearClase" class="btn btn-success btn-lg" style="margin: 20px"><span class="fas fa-plus"></span> Crear Clase</button>';
+		cadena=cadena+'<button type="button" id="btnEliminarClase" class="btn btn-danger btn-lg" style="margin: 20px"><i class="fas fa-times"></i> Eliminar Clase</button>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right" style="margin: 20px"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena=cadena +'</div>';
 		$('#crearClase').append(cadena);
 		$('#btnCrearClase').on('click',function(){
@@ -136,9 +138,18 @@ function ControlWeb($){
 				ws.crearClase(nclase,profesor,numero);
 			}
 		});
+		$('#btnEliminarClase').on('click',function(){
+			var nclase=$('#nclase').val();
+			if(nclase!=""){
+				ws.eliminarClase(nclase);
+			}
+		});
 		$('#btnInfo').on('click',function(){
 			var msg="Para poder completar el registro de la clase con éxito será necesario rellenar todos los campos que se muestran.";
 			msg=msg+"No se podrá crear una clase con más de 12 alumnos y tampoco se creará la clase si ya exite una clase con dicho nombre.";
+			msg=msg+"<img src='cliente/images/help/28.png' width='700' height='350'></img><p></p>";
+			msg=msg+"Para eliminar una de las clases simplemente hay que introducir el nombre exacto de la clase y despues clicar en eliminar";
+			msg=msg+"<img src='cliente/images/help/29.png' width='700' height='350'></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 		$('#btnAtras').on('click',function(){
@@ -281,7 +292,7 @@ function ControlWeb($){
 			cw.mostrarModal(msg);
 		});
 		}else{
-			cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+			cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm "><i class="fas fa-question-circle"></i></button>';
 			cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 			cadena =cadena+ '</div>';
 			$('#listarClases').append(cadena);
@@ -806,6 +817,13 @@ function ControlWeb($){
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios4();
 		});
+		$('#btnInfo').on('click',function(){
+			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
+			msg=msg+"<img src='cliente/images/help/26.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<img src='cliente/images/help/27.png' width='700' height='350' ></img><p></p>";
+			cw.mostrarModal(msg);
+		});
 	}
 	//Función para comprobar que la opción elegida corresponde con la solucíon al 2º ejercicio para niños de 4 años
 	this.comprobar42=function(e42,num,score,b){
@@ -949,6 +967,13 @@ function ControlWeb($){
 				cw.resultado51(e51,num,score,count,"btn-danger",m);
 			}
 		});
+		$('#btnInfo').on('click',function(){
+			var msg="Pulse en la imagen de la mano hasta encontrar la solucion correcta despues clique en 'Hecho'";
+			msg=msg+"<img src='cliente/images/help/16.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<img src='cliente/images/help/17.png' width='700' height='350' ></img><p></p>";
+			cw.mostrarModal(msg);
+		});
 	}
 	//Interfaz para mostrar la retroalimentación del ejercicio 1º para niños de cinco años
 	this.resultado51=function(e51,num,score,count,b,m){
@@ -1019,6 +1044,13 @@ function ControlWeb($){
 				cw.resultado52(e52,num,score,count,"btn-danger",m);
 			}
 
+		});
+		$('#btnInfo').on('click',function(){
+			var msg="Pulse en la imagen de la mano hasta encontrar la solucion correcta despues clique en 'Hecho'";
+			msg=msg+"<img src='cliente/images/help/18.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<img src='cliente/images/help/19.png' width='700' height='350' ></img><p></p>";
+			cw.mostrarModal(msg);
 		});
 	}
 
@@ -1258,6 +1290,15 @@ function ControlWeb($){
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios1();
 		});
+		$('#btnInfo').on('click',function(){
+			var msg="Pulse en los distintos botones de 'Elegir'";
+			msg=msg+"<img src='cliente/images/help/20.png' width='700' height='400' ></img><p></p>";
+			msg=msg+"Seleccione uno de las opciones que se le proporcionan";
+			msg=msg+"<img src='cliente/images/help/21.png' width='700' height='400' ></img><p></p>";
+			msg=msg+"Para continuar con el siguiente ejercicio pulse 'Siguiente'";
+			msg=msg+"<img src='cliente/images/help/22.png' width='700' height='400' ></img><p></p>";
+			cw.mostrarModal(msg);
+		});
 	}
 	this.ejercicio12=function(e12,score,btn,btn2){
 		this.limpiar();
@@ -1420,6 +1461,16 @@ function ControlWeb($){
 		});
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios1();
+		});
+
+		$('#btnInfo').on('click',function(){
+			var msg="Pulse en los distintos botones de 'Elegir'";
+			msg=msg+"<img src='cliente/images/help/23.png' width='700' height='400' ></img><p></p>";
+			msg=msg+"Seleccione uno de las opciones que se le proporcionan";
+			msg=msg+"<img src='cliente/images/help/24.png' width='700' height='400' ></img><p></p>";
+			msg=msg+"Para continuar con el siguiente ejercicio pulse 'Siguiente'";
+			msg=msg+"<img src='cliente/images/help/25.png' width='700' height='400' ></img><p></p>";
+			cw.mostrarModal(msg);
 		});
 	}
 

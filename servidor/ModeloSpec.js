@@ -44,6 +44,13 @@ describe("Aplicación AprendeABN", function() {
 			expect(Object.keys(clase.alumnos).length).toEqual(0);
 		});
 
+		it("Comprobación eliminar clase",function(){
+			abn.eliminarClase(nc);
+			expect(Object.keys(abn.clases).length).toEqual(0);
+			var clase=abn.clases[nc];
+			expect(clase).toBe(undefined);
+		});
+
 		it("Comprobación entrar a clase",function(){
 			abn.entrarClase(nc);
 			var clase=abn.clases[nc];

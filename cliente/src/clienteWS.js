@@ -11,6 +11,9 @@ function ClienteWS(){
 		this.nclase=nclase;
 		this.socket.emit("crearClase",nclase,profesor,numParticipantes);
 	}
+	this.eliminarClase=function(nclase){
+		this.socket.emit("eliminarClase",nclase);
+	}
 	this.listaClases=function(){
 		this.socket.emit("listarClases");
 	}
@@ -49,6 +52,10 @@ function ClienteWS(){
 				console.log("La clase no se ha creado correctamente: es indefinida");
 				cw.mostrarModal(" No se puede crear la clase ya que: <p>1.Ya existe una clase con ese nombre</p><p>2.No ha rellenado todos los campos</p>");
 			}
+		});
+		this.socket.on("claseEliminada",function(data){
+			cw.mostrarInicio();
+			cw.mostrarModal(" Clase "+nclase+" eliminada");
 		});
 		this.socket.on("mostrarLista",function(lista){
 			console.log(lista);

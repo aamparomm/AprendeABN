@@ -15,6 +15,19 @@ function ABN(){
 		}
 
 	}
+	//Funcion para eliminar clases introduciendo su numbre
+	this.eliminarClase=function(nclase){
+		if(this.clases[nclase]){
+			this.puedeEliminarClase(nclase);
+			return nclase;
+		}else{
+			return undefined;
+		}
+	}
+
+	this.puedeEliminarClase=function(nclase){
+		delete this.clases[nclase];
+	}
 	//Se comprueban los límites de alumnos para la creación de clases
 	//En este caso, el número mínimo de alumnos que pueden estar en una clase es 1,
 	//y el número máximo de alumnos por clase es de 40
@@ -56,6 +69,7 @@ function ABN(){
 		return lista;
 
 	}
+	//Método necesaria para poder eliminar a los alumnos de una determinada clase
 	this.eliminarAlumno=function(nclase,nombre){
 		var lista=[];
 		lista=this.clases[nclase].eliminarAlumno(nombre);

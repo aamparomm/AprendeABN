@@ -26,6 +26,14 @@ function ServidorWS(){
                 }
                 
             });
+            socket.on('eliminarClase', function(nclase) {
+                var nclase=app.eliminarClase(nclase); 
+                if(nclase!=undefined){
+                    console.log("Se ha eliminado la clase "+nclase+"");              
+                    cli.enviarRemitente(socket,"claseEliminada",nclase);
+                }
+                
+            });
             socket.on('listarClases', function() {
                 var lista=app.listarClases();            
                 cli.enviarRemitente(socket,"mostrarLista",lista);

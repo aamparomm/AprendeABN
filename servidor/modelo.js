@@ -15,7 +15,7 @@ function ABN(){
 		}
 
 	}
-	//Funcion para eliminar clases introduciendo su numbre
+	//Funcion para eliminar clases introduciendo su nombre
 	this.eliminarClase=function(nclase){
 		if(this.clases[nclase]){
 			this.puedeEliminarClase(nclase);
@@ -125,19 +125,6 @@ function Clase(nclase, profesor,num, ABN){
 		var apellidos=a.apellido;
 		var curso=a.curso;
 		var icono = a.icono;
-		if(curso==3){
-			a.ejercicios[0]=new Ejercicio(31);
-			a.ejercicios[1]=new Ejercicio(32);
-		}else if(curso==4){
-			a.ejercicios[0]=new Ejercicio(41);
-			a.ejercicios[1]=new Ejercicio(42);
-		}else if(curso==5){
-			a.ejercicios[0]=new Ejercicio(51);
-			a.ejercicios[1]=new Ejercicio(52);
-		}else if(curso==1){
-			a.ejercicios[0]=new Ejercicio(11);
-			a.ejercicios[1]=new Ejercicio(12);	
-		}
 		return {"clase":this.nombre,"nombre":nombre,"apellidos":apellidos,"curso":curso,"id_Icono":icono};
 	}
 
@@ -184,16 +171,9 @@ function Alumno(nombre, apellido, curso,idIcono){
 	this.curso=curso;
 	this.icono=idIcono;
 	this.clase;
-	this.ejercicios={};
 
 }
 
-function Ejercicio(num){
-	this.num=num;
-	this.comprobar31=function(){
-
-	}
-}
 module.exports.ABN=ABN;
 module.exports.Profesor=Profesor;
 module.exports.Alumno=Alumno;

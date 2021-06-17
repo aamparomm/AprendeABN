@@ -274,7 +274,9 @@ function ControlWeb($){
 			});
 			$('#btnEliminar').on('click',function(){
 				var nombre=StoreValue[1];
-				ws.eliminarAlumno(nombre);
+				cw.limpiarModal();
+				cw.confirmacion(nombre);
+				//ws.eliminarAlumno(nombre);
 			});
 
 			$('#btnComenzar').on('click',function(){
@@ -1568,6 +1570,7 @@ function ControlWeb($){
 //		});
 
 //	}
+
 	//Método para mostrar los distintos modales que hay en el 
 //	this.modal=function(n,solucion,score,e11,btn,btn2){
 //		cw.limpiarModal();
@@ -1757,7 +1760,7 @@ function ControlWeb($){
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
 		$('#btnAtras').on('click',function(){
-			cw.mostrarEjercicios(curso);
+			ws.mostrarEjercicios(curso);
 		});
 		$('#btnRepetir').on('click',function(){
 			if(e==31){
@@ -1782,6 +1785,7 @@ function ControlWeb($){
 
 
 	}
+	//Función para mostrar un mensaje dentro de un modal
 	this.mostrarModal=function(msg){
 		this.limpiarModal();	
 		var cadena="<div id='info'><p>"+msg+"</p> </div>";
@@ -1790,9 +1794,29 @@ function ControlWeb($){
 		$('#modalGeneral').modal("show");
 
 	}
+	//funcion para mostrar dentro de un modal si se quiere o no eliminar a un alumno.
+	this.confirmacion=function(nombre){
+		this.limpiarModal();
+		var cadena="<div id='confirmacion'><h4>¿Estas seguro de que quieres eliminar al alumno '"+nombre+"'?</h4>";
+		cadena=cadena+ '<button type="button" id="btnSi" class="btn btn-success" style="margin: 20px"><i class="fas fa-check"></i> Si</button>';
+		cadena=cadena+ '<button type="button" id="btnNo" class="btn btn-danger" style="margin: 20px"><i class="fas fa-times"></i> No</button>';
+		cadena=cadena +'</div>';
+		$('#contenidoModal').append(cadena);
+		$('#modalGeneral').modal("show");
+		$('#btnSi').on('click',function(){
+			cw.limpiarModal();
+			ws.eliminarAlumno(nombre);
+			cw.mostrarModal("<h4>El alumno '"+nombre+"' ha sido eliminado correctamente<h4>");
+		});
+		$('#btnNo').on('click',function(){
+			cw.limpiarModal();
+			cw.mostrarModal("<h4>No se ha eliminado ningún alumno<h4>");
+		});
+	}
 	//Función para limpiar todos los modales que vayan apareciendo
 	this.limpiarModal=function(){
 		$('#info').remove();
+		$('#confirmacion').remove();
 		$('#modal').remove();
 		//$('#opcion').remove();
 		//$('#op').remove();					

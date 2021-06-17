@@ -1,7 +1,9 @@
 function ClienteWS(){
 	this.socket=undefined;
 	this.nclase=undefined;
-	this.profesor=false;
+	this.nombre=undefined;
+	this.apellido=undefined;
+	this.curso=undefined;
 
 	this.ini=function(){
 		this.socket=io.connect();
@@ -19,6 +21,8 @@ function ClienteWS(){
 	}
 	this.registrarAlumno=function(nombre,apellido,curso,icono){
 		console.log(this.nclase);
+		this.nombre=nombre;
+		this.apellido=apellido;
 		this.socket.emit("registrarAlumno",nombre,apellido,curso,this.nclase,icono);
 
 	}
@@ -33,6 +37,7 @@ function ClienteWS(){
 		this.socket.emit("entrarClase",nclase);
 	}
 	this.mostrarEjercicios=function(curso){
+		this.curso=curso;
 		this.socket.emit("mostrarEjercicios",curso);
 	}
 	this.lanzarSocketSrv=function(){
@@ -44,7 +49,6 @@ function ClienteWS(){
 			cli.nclase=data.nclase;
 			console.log(data);
 			if(data.nclase!=undefined){
-				cli.profesor=true;
 				cw.limpiar();
 				cw.mostrarClase(data.nclase);
 				ws.listarAlumnos();

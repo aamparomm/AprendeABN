@@ -1,13 +1,30 @@
 body{
-	background-image:url("../images/clase.jpg");
-	background-repeat: no-repeat;
-	background-position: 0px 190px;
-	background-size: 100%;
+	color:black;
+	background-image:url("../images/bc.jpg"); 
 }
+/*#r31,#r32,#r41,#r42,#r51,#r52*/ /*#mostrar3,#mostrar31,#mostrar32,#mostrar4,*/
+/*#mostrar41,#mostrar42,#mostrar5,#mostrar51,#mostrar52,#mostrar1,#mostrar11,#mostrar12*/
+#mostrarI,#mostrarCC,#mostrarLC,#mostrarLA,#registrarA,#mostrarsearch,#mostrar31,#mostrar32,#mostrar41,#mostrar42,
+#mostrar11,#mostrar12,#mostrar51,#mostrar52,#r31,#r32,#r41,#r42,#r51,#r52{
+	background-color: white; 
+	border: 3px solid #28A69B;
+	border-radius: 2em;
+	margin:10px;
+	padding: 50px;
+	background: cover;
+}
+
+#mostrar3,#mostrar4,#mostrar5,#mostrar1{
+	background-color: white; 
+	width: 100%;
+	border-radius: 2em;
+}
+
 .jumbotron {
-  background-color: #1a5276; /* Azul */
+  background-color: #28A69B;  /* Azul #1ABC9C;*/
   color: #ffffff;
   font-weight: bold;
+  height: 200px;
 }
 
 .btn-info{
@@ -17,6 +34,24 @@ body{
 	width: 100%;
 	height: 100%;
 	border-radius: 0px;
+}
+
+.btn-config{
+	background-color: #5F6A6A;
+	border-color:#5F6A6A;
+	color:white;
+}
+
+.btn-blue{
+	background-color: #28A69B;
+	border-color: #28A69B;
+	color:white;
+}
+
+.btn-blue:hover{
+	color:#F7F9F9;
+	background-color: #1ABC9C;;
+	border-color: #1ABC9C;;
 }
 
 label, input,select,option{
@@ -37,9 +72,9 @@ h1, h2, h3,h4 , h5 ,h6, label,table,button, p, a, input, select, option{
 	font-family:cursive;
 }
 
-#inicio{
+/*#inicio{
 	background: white;
-}
+}*/
 
 table{
 	width: 100%;

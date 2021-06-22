@@ -1,5 +1,54 @@
 function ControlWeb($){
 
+	var acierto=new Audio('/cliente/images/audio/acierto.mp3');
+	var fallo=new Audio('/cliente/images/audio/fallo.mp3');
+	var musica=new Audio('/cliente/images/audio/musica.mp3');
+	var ms=0;
+
+	//Sirve para mostrar alguna configuración de la pantalla
+	//<i class="fas fa-play"></i> / <i class="fas fa-pause"></i>
+	this.configuracion=function(){
+		var cadena='<div id="config">';
+		cadena = cadena + '<div class="dropdown">' ;
+		cadena=cadena+'<button id="btnConf" type="button" class="btn btn-config btn-lg dropdown-toggle" data-toggle="dropdown"><i class="fas fa-cog"></i></button>';
+		cadena=cadena +'<div class="dropdown-menu" id="conf" role="menu">';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="1"><h4 style="text-align:center;"><i class="fas fa-user-friends"></i> Sobre nosotros</h4></a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="2"><h4 style="text-align:center;"> <i class="fas fa-music"></i> Música </h4></a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="https://www.google.com/" value="3"><h4 style="text-align:center;"><i class="fas fa-question"></i> Ayuda</h4></a>';
+		cadena=cadena+'</td>';
+		$('#conf').append(cadena);
+
+		var StoreValue = []; //Declare array
+		$(".dropdown-menu a").click(function(){
+			StoreValue = []; //clear array
+			StoreValue.push($(this).attr("value")); // add text to array
+		});
+		$('#conf a').click(function () {
+			var num =StoreValue[0];
+			if(num==1){
+				msg="Aprende ABN es una pagina web creada y diseñada por Amparo Martínez.";
+				msg=msg+"<p>Esta aplicación fue implementada para dar soporte al método ABN en etapas tempranas de aprendizaje.";
+				msg=msg+" Así pues esta aplicación forma parte de un Trabajo de fin de Grado realizado durante el curso 2020/2021 en la UCLM.</p>"
+				cw.mostrarModal(msg);
+			}
+			if(num==2){
+				ms++;
+				if((ms%2)==1){
+					musica.loop=true;
+					musica.play();
+				}else{
+					musica.pause();
+				}
+				console.log(ms);	
+			}
+			if(num==3){
+				
+			}
+		});
+
+	}
 	//Interfaz de inicio don de se da la opción la creación o la búsqueda de clase.
 	this.mostrarInicio=function(){
 		this.limpiar();
@@ -8,9 +57,10 @@ function ControlWeb($){
 		cadena=cadena +'<h3>Para comenzar cree una clase</h3>';
 		cadena=cadena +'<h3>Si ya ha creado una pulse "Buscar Clase"</h3>';
 		cadena=cadena + '<h3>Para eliminar una clase ya creada pulse "Crear/Eliminar Clase"</h3>';
-		cadena=cadena+'<button type="button" id="btnCrearClase" class="btn btn-success  btn-lg"><i class="fas fa-plus"></i> Crear/Eliminar Clase</button>';
+		cadena=cadena+'<button type="button" id="btnCrearClase" class="btn btn-blue  btn-lg"><i class="fas fa-plus"></i> Crear/Eliminar Clase</button>';
 		cadena=cadena +'<h4></h4>';
 		cadena=cadena+'<button type="button" id="btnBuscarClase" class="btn btn-danger btn-lg"><i class="fas fa-search"></i> Buscar clase</button>';
+		cadena=cadena+'<br>';
 		cadena=cadena +'</div>';
 		$('#inicio').append(cadena);
 		$('#btnCrearClase').on('click',function(){
@@ -39,7 +89,7 @@ function ControlWeb($){
 			cadena =cadena+ '<a style= "font-size:large;" href="#" value="'+lista[i].clase+'" class="list-group-item">'+lista[i].clase+'<span class="badge"> '+lista[i].alumnos+'/'+lista[i].participantes+'</span></a>';
 		}
 		cadena =cadena+ '</div>';
-		cadena=cadena+'<button type="button" id="btnEntrarClase" class="btn btn-success btn-lg center-block"><i class="fas fa-house-user"></i> Entrar</button>';
+		cadena=cadena+'<button type="button" id="btnEntrarClase" class="btn btn-blue btn-lg center-block"><i class="fas fa-house-user"></i> Entrar</button>';
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena =cadena+ '</div>';
 		$('#listarClases').append(cadena);
@@ -196,7 +246,7 @@ function ControlWeb($){
 		cadena=cadena +'</select>';
 		cadena=cadena +'</div>';
       	//cadena=cadena +'<button id="btnIcono" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"><img src="cliente/images/avatar/'+num+'.png" ></img></button>';
-		cadena=cadena+'<button type="button" id="btnRegistrarA" class="btn btn-success btn-lg"> <i class="fas fa-user-plus"></i> Registrar alumno</button>';
+		cadena=cadena+'<button type="button" id="btnRegistrarA" class="btn btn-blue btn-lg"> <i class="fas fa-user-plus"></i> Registrar alumno</button>';
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena=cadena +'</div>';
 		var cadena2 = '<div id="mostrarIcono" style="margin-bottom: 25px;"><h3>Icono:</h3>';
@@ -425,6 +475,8 @@ function ControlWeb($){
 						lights[i]="btn-success";
 					}
 				}
+				
+				acierto.play();
 				cw.resultado31(e31,num,score,lights,m);}
 		else{
 				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
@@ -434,6 +486,8 @@ function ControlWeb($){
 						lights[j]="btn-danger";
 					}
 				}
+				
+				fallo.play();
 				cw.resultado31(e31,num,score,lights,m);
 		}
 
@@ -536,6 +590,7 @@ function ControlWeb($){
 						l[i]="btn-success";
 					}
 				}
+				acierto.play();
 				cw.resultado32(e32,num,score,l,m);
 		}
 		else{
@@ -547,6 +602,7 @@ function ControlWeb($){
 						l[j]="btn-danger";
 					}
 				}
+				acierto.fallo();
 				cw.resultado32(e32,num,score,l,m);
 		}
 
@@ -715,6 +771,7 @@ function ControlWeb($){
 						l[i]="btn-success";
 					}
 				}
+				acierto.play();
 				cw.resultado41(e41,num,score,l,m);
 		}
 		else{
@@ -726,6 +783,7 @@ function ControlWeb($){
 						l[j]="btn-danger";
 					}
 				}
+				fallo.play();
 				cw.resultado41(e41,num,score,l,m);
 		}
 
@@ -856,6 +914,7 @@ function ControlWeb($){
 						l[i]="btn-success";
 					}
 				}
+				acierto.play();
 				cw.resultado42(e42,num,score,l,m);
 		}
 		else{
@@ -867,6 +926,7 @@ function ControlWeb($){
 						l[j]="btn-danger";
 					}
 				}
+				fallo.play();
 				cw.resultado42(e42,num,score,l,m);
 		}
 
@@ -983,9 +1043,11 @@ function ControlWeb($){
 			if (soluciones[e51]== (count+1)){
 				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
+				acierto.play();
 				cw.resultado51(e51,num,score,count,"btn-success",m);
 			}else{
 				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
+				fallo.play();
 				cw.resultado51(e51,num,score,count,"btn-danger",m);
 			}
 		});
@@ -1060,9 +1122,11 @@ function ControlWeb($){
 			if (soluciones[e52]== (count+1)){
 				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
+				acierto.play();
 				cw.resultado52(e52,num,score,count,"btn-success",m);
 			}else{
 				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
+				fallo.play();
 				cw.resultado52(e52,num,score,count,"btn-danger",m);
 			}
 
@@ -1516,9 +1580,11 @@ function ControlWeb($){
 			if(num==s1[e11]){
 				score++;
 				btn[0]="btn-success";
+				acierto.play();
 				cw.ejercicio11(e11,score,btn,btn2,disable);
 			}else{
 				btn[0]="btn-danger";
+				fallo.play();
 				cw.ejercicio11(e11,score,btn,btn2,disable);
 			}
 		});
@@ -1529,9 +1595,11 @@ function ControlWeb($){
 			if(num==s2[e11]){
 				score++;
 				btn[1]="btn-success";
+				acierto.play();
 				cw.ejercicio11(e11,score,btn,btn2,disable);
 			}else{
 				btn[1]="btn-danger";
+				fallo.play();
 				cw.ejercicio11(e11,score,btn,btn2,disable);
 			}
 		});
@@ -1542,9 +1610,11 @@ function ControlWeb($){
 			if(num==s3[e11]){
 				score++;
 				btn[2]="btn-success";
+				acierto.play();
 				cw.ejercicio11(e11,score,btn,btn2,disable);
 			}else{
 				btn[2]="btn-danger";
+				fallo.play();
 				cw.ejercicio11(e11,score,btn,btn2,disable);
 			}
 		});
@@ -1556,9 +1626,11 @@ function ControlWeb($){
 			if(num==s4[e11]){
 				score++;
 				btn[3]="btn-success";
+				acierto.play();
 				cw.ejercicio11(e11,score,btn,btn2,disable);
 			}else{
 				btn[3]="btn-danger";
+				fallo.play();
 				cw.ejercicio11(e11,score,btn,btn2,disable);
 			}
 		});
@@ -1694,9 +1766,11 @@ function ControlWeb($){
 			if(num==s1[e12]){
 				score++;
 				btn[0]="btn-success";
+				acierto.play();
 				cw.ejercicio12(e12,score,btn,btn2,disable);
 			}else{
 				btn[0]="btn-danger";
+				fallo.play();
 				cw.ejercicio12(e12,score,btn,btn2,disable);
 			}
 		});
@@ -1707,9 +1781,11 @@ function ControlWeb($){
 			if(num==s2[e12]){
 				score++;
 				btn[1]="btn-success";
+				acierto.play();
 				cw.ejercicio12(e12,score,btn,btn2,disable);
 			}else{
 				btn[1]="btn-danger";
+				fallo.play();
 				cw.ejercicio12(e12,score,btn,btn2,disable);
 			}
 		});
@@ -1720,9 +1796,11 @@ function ControlWeb($){
 			if(num==s3[e12]){
 				score++;
 				btn[2]="btn-success";
+				acierto.play();
 				cw.ejercicio12(e12,score,btn,btn2,disable);
 			}else{
 				btn[2]="btn-danger";
+				fallo.play();
 				cw.ejercicio12(e12,score,btn,btn2,disable);
 			}
 		});
@@ -1734,9 +1812,11 @@ function ControlWeb($){
 			if(num==s4[e12]){
 				score++;
 				btn[3]="btn-success";
+				acierto.play();
 				cw.ejercicio12(e12,score,btn,btn2,disable);
 			}else{
 				btn[3]="btn-danger";
+				fallo.play();
 				cw.ejercicio12(e12,score,btn,btn2,disable);
 			}
 		});

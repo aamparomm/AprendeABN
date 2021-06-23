@@ -4,7 +4,8 @@ function ControlWeb($){
 	var fallo=new Audio('/cliente/images/audio/fallo.mp3');
 	var musica=new Audio('/cliente/images/audio/musica.mp3');
 	var ms=0;
-
+	var bien="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam fa-2x'></i>";
+	var mal="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown fa-2x'></i>";
 	//Sirve para mostrar alguna configuración de la pantalla
 	//<i class="fas fa-play"></i> / <i class="fas fa-pause"></i>
 	this.configuracion=function(){
@@ -12,11 +13,11 @@ function ControlWeb($){
 		cadena = cadena + '<div class="dropdown">' ;
 		cadena=cadena+'<button id="btnConf" type="button" class="btn btn-config btn-lg dropdown-toggle" data-toggle="dropdown"><i class="fas fa-cog"></i></button>';
 		cadena=cadena +'<div class="dropdown-menu" id="conf" role="menu">';
-		cadena = cadena + '<a class="dropdown-item" href="#" value="1"><h4 style="text-align:center;"><i class="fas fa-user-friends"></i> Sobre nosotros</h4></a>';
-		cadena=cadena+'<p></p>';
-		cadena = cadena + '<a class="dropdown-item" href="#" value="2"><h4 style="text-align:center;"> <i class="fas fa-music"></i> Música </h4></a>';
-		cadena=cadena+'<p></p>';
-		cadena = cadena + '<a class="dropdown-item" href="https://www.google.com/" value="3"><h4 style="text-align:center;"><i class="fas fa-question"></i> Ayuda</h4></a>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="1"><h4 style="text-align:center;"><i class="fas fa-user-friends"></i> Sobre nosotros </h4> </a>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="2"><h4 style="text-align:center;"> <i class="fas fa-music"></i> Música</h4> </a>';
+		//cadena = cadena + '<a class="dropdown-item  href="#" value="3"></button><h4 style="text-align:center;"> Fondo </h4> </a>';
+		cadena=cadena+'<div class="divider"></div>';
+		cadena = cadena + '<a class="dropdown-item" href="https://www.google.com/" value="4"><h4 style="text-align:center;"><i class="fas fa-question"></i> Ayuda</h4> </a>';
 		cadena=cadena+'</td>';
 		$('#conf').append(cadena);
 
@@ -43,12 +44,10 @@ function ControlWeb($){
 				}
 				console.log(ms);	
 			}
-			if(num==3){
-				
-			}
 		});
 
 	}
+
 	//Interfaz de inicio don de se da la opción la creación o la búsqueda de clase.
 	this.mostrarInicio=function(){
 		this.limpiar();
@@ -162,7 +161,7 @@ function ControlWeb($){
 	this.mostrarCrearClase=function(){
 		this.limpiar();
 		var cadena='<div id="mostrarCC">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena =cadena+ '<div class="form-group">';
 		cadena=cadena +'<label class="pull-left" for ="nclase">Nombre de la clase:</label>';
 		cadena=cadena +'<input type="text" class="form-control" size="50" id="nclase" placeholder="Escribe un nombre">';
@@ -192,14 +191,14 @@ function ControlWeb($){
 		$('#btnEliminarClase').on('click',function(){
 			var nclase=$('#nclase').val();
 			if(nclase!=""){
-				ws.eliminarClase(nclase);
+				cw.confirmacionClase(nclase);
 			}
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Para poder completar el registro de la clase con éxito será necesario rellenar todos los campos que se muestran.";
-			msg=msg+"No se podrá crear una clase con más de 12 alumnos y tampoco se creará la clase si ya exite una clase con dicho nombre.";
+			msg=msg+"<p>No se podrá crear una clase con más de 12 alumnos y tampoco se creará la clase si ya exite una clase con dicho nombre.</p>";
 			msg=msg+"<img src='cliente/images/help/28.png' width='700' height='350'></img><p></p>";
-			msg=msg+"Para eliminar una de las clases simplemente hay que introducir el nombre exacto de la clase y despues clicar en eliminar";
+			msg=msg+"<p>Para eliminar una de las clases simplemente hay que introducir el nombre exacto de la clase y despues clicar en eliminar</p>";
 			msg=msg+"<img src='cliente/images/help/29.png' width='700' height='350'></img><p></p>";
 			cw.mostrarModal(msg);
 		});
@@ -226,7 +225,7 @@ function ControlWeb($){
 	this.registrarAlumno=function(num,lista){
 		this.limpiar();
 		var cadena='<div id="registrarA">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena =cadena+ '<div class="form-group">';
 		cadena=cadena +'<label class="pull-left" for ="nalumno">Nombre del alumno:</label>';
 		cadena=cadena +'<input type="text" class="form-control" size="50" id="nalumno" value="'+lista[0]+'" placeholder='+lista[0]+'>';
@@ -249,8 +248,8 @@ function ControlWeb($){
 		cadena=cadena+'<button type="button" id="btnRegistrarA" class="btn btn-blue btn-lg"> <i class="fas fa-user-plus"></i> Registrar alumno</button>';
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena=cadena +'</div>';
-		var cadena2 = '<div id="mostrarIcono" style="margin-bottom: 25px;"><h3>Icono:</h3>';
-      	cadena2=cadena2 +'<button id="btnIcono" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"><img src="cliente/images/avatar/'+num+'.png" width="100" height="100"></img></button>';
+		var cadena2 = '<div id="mostrarIcono" style="margin-bottom: 25px;"><label>Icono:</label>';
+      	cadena2=cadena2 +'<button id="btnIcono"  type="button" class="btn btn-light btn-lg dropdown-toggle" data-toggle="dropdown"><img src="cliente/images/avatar/'+num+'.png" width="150" height="150"></img></button>';
 		cadena2=cadena2 +'</div>';
 		$('#registroA').append(cadena);
 		$('#iconoR').append(cadena2);
@@ -286,9 +285,9 @@ function ControlWeb($){
 		$('#btnInfo').on('click',function(){
 			var msg="Para poder completar el registro del alumno con éxito será necesario rellenar todos los campos que se muestran.";
 			msg=msg+"<img src='cliente/images/help/8.png' width='700' height='350'></img><p></p>";
-			msg=msg+"Para cambiar el avatar del alumno simplemente hay que clicar sobre dicho icono";
+			msg=msg+"<p>Para cambiar el avatar del alumno simplemente hay que clicar sobre dicho icono</p>";
 			msg=msg+"<img src='cliente/images/help/9.png' width='700' height='350'></img><p></p>";
-			msg=msg+"Si se repite el nombre de los alumnos, se editará el alumno con dicho nombre";
+			msg=msg+"<p>Si se repite el nombre de los alumnos, se editará el alumno con dicho nombre</p>";
 			cw.mostrarModal(msg);
 		});
 
@@ -298,7 +297,7 @@ function ControlWeb($){
 	this.listarAlumnos=function(lista){
 		var cadena='<div id="mostrarLA">';
 		if(lista[0].nombre!=undefined){
-			cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+			cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 			cadena=cadena +'<h1>'+lista[0].clase+'</h1>';
 			cadena =cadena+ '<div class="list-group" >';
 			cadena=cadena +'<label for ="Clases">Alumnos:</label>';
@@ -338,14 +337,14 @@ function ControlWeb($){
 			cw.limpiarModal();
 			var msg="Para poder registrar a un alumno simplemente pulse en el botón de 'Registrar alumno.'";
 			msg=msg+"<img src='cliente/images/help/1.png'width='700' height='350'></img><p></p>";
-			msg=msg+"Para comenzar con las actividades de un alumno seleccione a uno de los alumnos de la lista y pulse 'Comenzar'";
+			msg=msg+"<p>Para comenzar con las actividades de un alumno seleccione a uno de los alumnos de la lista y pulse 'Comenzar'</p>";
 			msg=msg+"<img src='cliente/images/help/2.png' width='700' height='350'></img><p></p>";
-			msg=msg+"Para eliminar a uno de los alumnos de la clase seleccione a uno de los alumnos de la lista y pulse 'Eliminar'";
+			msg=msg+"<p>Para eliminar a uno de los alumnos de la clase seleccione a uno de los alumnos de la lista y pulse 'Eliminar'</p>";
 			msg=msg+"<img src='cliente/images/help/3.png' width='700' height='350'></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 		}else{
-			cadena=cadena+'<h1><button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button> </h1>';
+			cadena=cadena+'<h1><button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button> </h1>';
 			cadena=cadena +'<h1>'+lista[0].nclase+'</h1>';
 			cadena =cadena+ '<div class="list-group" >';
 			cadena=cadena +'<label for ="Clases">Alumnos:</label>';
@@ -361,7 +360,7 @@ function ControlWeb($){
 			cw.limpiarModal();
 			var msg="Para poder registrar a un alumno simplemente pulse en el botón de 'Registrar alumno'.";
 			msg=msg+"<img src='cliente/images/help/0.png' width='700' height='350'></img><p></p>";
-			msg=msg+"Para volver al inicio pulse en el boton azul con la flecha";
+			msg=msg+"<p>Para volver al inicio pulse en el boton azul con la flecha</p>";
 			cw.mostrarModal(msg);
 		});
 
@@ -386,7 +385,7 @@ function ControlWeb($){
 	this.mostrarEjercicios3=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar3">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>EJERCICIOS DE 3 AÑOS</h1>';
 		cadena=cadena +'<h3>Identificación de números</h3>';
 		cadena=cadena+'<div class="form-group col-sm-12 col-md-6">';
@@ -426,7 +425,7 @@ function ControlWeb($){
 	this.ejercicio31=function(e31,num,score){
 		this.limpiar();
 		var cadena='<div id="mostrar31">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Identificacion de números del 1 al 3</h1>';
 		cadena=cadena +'<h3>'+(e31+1)+'/10 Seleccione el número de objetos de la imagen</h3>';
 		cadena=cadena +'<img src="cliente/images/31/'+e31+'.png" class="rounded" alt="Eniun">';
@@ -456,7 +455,7 @@ function ControlWeb($){
 		$('#btnInfo').on('click',function(){
 			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
 			msg=msg+"<img src='cliente/images/help/10.png' width='700' height='350' ></img><p></p>";
-			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
 			msg=msg+"<img src='cliente/images/help/11.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
@@ -468,7 +467,6 @@ function ControlWeb($){
 		let lights=["btn-light","btn-light","btn-light"];
 		lights[(soluciones[e31]-1)]="btn-success";
 		if (soluciones[e31]==b){
-				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
 				for(var i=0;i<lights.length;i++){
 					if(i==(b-1)){
@@ -477,10 +475,8 @@ function ControlWeb($){
 				}
 				
 				acierto.play();
-				cw.resultado31(e31,num,score,lights,m);}
+				cw.resultado31(e31,num,score,lights,bien);}
 		else{
-				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
-
 				for(var j=0;j<lights.length;j++){
 					if(j==(b-1)){
 						lights[j]="btn-danger";
@@ -488,7 +484,7 @@ function ControlWeb($){
 				}
 				
 				fallo.play();
-				cw.resultado31(e31,num,score,lights,m);
+				cw.resultado31(e31,num,score,lights,mal);
 		}
 
 	}
@@ -531,17 +527,17 @@ function ControlWeb($){
 		this.limpiar();
 		var soluciones=[5,4,1,5,2,6,3,2,4,3];
 		var cadena='<div id="mostrar32">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Identificacion de números del 1 al 6</h1>';
 		cadena=cadena +'<h3>'+num+'/10 Seleccione el número de objetos de la imagen</h3>';
 		cadena=cadena +'<img src="cliente/images/32/'+e32+'.png" class="rounded" alt="Eniun">';
 		cadena=cadena +'<p></p>';
-		cadena=cadena+'<button type="button" id="btn1" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/1.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn2" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/2.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn3" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/3.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn4" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/4.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn5" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/5.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn6" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/num/6.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn1" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn2" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/2.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn3" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/3.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn4" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/4.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn5" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/5.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn6" class="btn btn-light btn-lg" style="margin: 20px"><img src="cliente/images/num/6.png"></img></button>';
 		cadena=cadena +'<p></p>';
 		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
 		cadena =cadena+ '</div>';
@@ -571,7 +567,7 @@ function ControlWeb($){
 		$('#btnInfo').on('click',function(){
 			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
 			msg=msg+"<img src='cliente/images/help/12.png' width='700' height='350' ></img><p></p>";
-			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
 			msg=msg+"<img src='cliente/images/help/13.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
@@ -583,27 +579,14 @@ function ControlWeb($){
 		var l=["btn-light","btn-light","btn-light","btn-light","btn-light","btn-light"];
 		l[(soluciones[e32]-1)]="btn-success";
 		if (soluciones[e32]==b){
-				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
-				for(var i=0;i<l.length;i++){
-					if(i==(b-1)){
-						l[i]="btn-success";
-					}
-				}
+				l[b-1]="btn-success";
 				acierto.play();
-				cw.resultado32(e32,num,score,l,m);
-		}
-		else{
-				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
-
-				for(var j=0;j<l.length;j++){
-					
-					if(j==(b-1)){
-						l[j]="btn-danger";
-					}
-				}
-				acierto.fallo();
-				cw.resultado32(e32,num,score,l,m);
+				cw.resultado32(e32,num,score,l,bien);
+		}else{
+				l[b-1]="btn-danger";
+				fallo.play();
+				cw.resultado32(e32,num,score,l,mal);
 		}
 
 	}
@@ -616,12 +599,12 @@ function ControlWeb($){
 		cadena=cadena +'<p></p>';
 		cadena=cadena +'<img src="cliente/images/32/'+e32+'.png" class="rounded" alt="Eniun">';
 		cadena=cadena +'<p></p>';
-		cadena=cadena+'<button type="button" id="btn1" class="btn '+b[0]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/1.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn2" class="btn '+b[1]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/2.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn3" class="btn '+b[2]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/3.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn4" class="btn '+b[3]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/4.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn5" class="btn '+b[4]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/5.png"></img></button>';
-		cadena=cadena+'<button type="button" id="btn6" class="btn '+b[5]+' btn-lg" style="margin: 50px"><img src="cliente/images/num/6.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn1" class="btn '+b[0]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/1.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn2" class="btn '+b[1]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/2.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn3" class="btn '+b[2]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/3.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn4" class="btn '+b[3]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/4.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn5" class="btn '+b[4]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/5.png"></img></button>';
+		cadena=cadena+'<button type="button" id="btn6" class="btn '+b[5]+' btn-lg" style="margin: 20px"><img src="cliente/images/num/6.png"></img></button>';
 		cadena=cadena +'<p></p>';
 		cadena=cadena+'<button type="button" id="btnS" class="btn btn-success btn-lg"><i class="fas fa-angle-double-right"></i> Siguiente</button>';		
 		cadena=cadena +'<p></p>';
@@ -648,7 +631,7 @@ function ControlWeb($){
 	this.mostrarEjercicios4=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar4">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>EJERCICIOS DE 4 AÑOS</h1>';
 		cadena=cadena+'<div class="form-group col-sm-12 col-md-6">';
 		cadena=cadena+'<button type="button" id="btn41" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/recta.png"></img></button>';
@@ -689,7 +672,7 @@ function ControlWeb($){
 		var desplazamiento=[2,-1,-2,5,1,3,1,5,-8,-6];
 		var soluciones=[5,4,8,6,3,10,7,9,1,2];
 		var cadena='<div id="mostrar41">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Recta numérica</h1>';
 		cadena=cadena +'<h3>'+num+'/10 ¿A qué número llegamos si nos encontramos en el número '+inicio[e41]+' y nos desplazamos '+desplazamiento[e41]+' casillas?</h3>';
 		cadena=cadena +'<p></p>';
@@ -752,7 +735,7 @@ function ControlWeb($){
 		$('#btnInfo').on('click',function(){
 			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
 			msg=msg+"<img src='cliente/images/help/14.png' width='700' height='350' ></img><p></p>";
-			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
 			msg=msg+"<img src='cliente/images/help/15.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
@@ -764,7 +747,6 @@ function ControlWeb($){
 		var l=["btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light"];
 		l[(soluciones[e41]-1)]="btn-success";
 		if (soluciones[e41]==b){
-				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
 				for(var i=0;i<l.length;i++){
 					if(i==(b-1)){
@@ -772,11 +754,9 @@ function ControlWeb($){
 					}
 				}
 				acierto.play();
-				cw.resultado41(e41,num,score,l,m);
+				cw.resultado41(e41,num,score,l,bien);
 		}
 		else{
-				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
-
 				for(var j=0;j<l.length;j++){
 					
 					if(j==(b-1)){
@@ -784,7 +764,7 @@ function ControlWeb($){
 					}
 				}
 				fallo.play();
-				cw.resultado41(e41,num,score,l,m);
+				cw.resultado41(e41,num,score,l,mal);
 		}
 
 	}
@@ -839,7 +819,7 @@ function ControlWeb($){
 		var numeros=[5,9,2,7,9,0,6,8,1,3];
 		var soluciones=[5,1,8,3,1,10,4,2,9,7];
 		var cadena='<div id="mostrar42">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Amigos del 10</h1>';
 		cadena=cadena +'<h3>'+num+'/10 ¿cuál es el amigo del '+numeros[e42]+'?</h3>';
 		cadena=cadena +'<img src="cliente/images/42/'+e42+'.png" class="rounded" alt="Eniun">';
@@ -895,7 +875,7 @@ function ControlWeb($){
 		$('#btnInfo').on('click',function(){
 			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
 			msg=msg+"<img src='cliente/images/help/26.png' width='700' height='350' ></img><p></p>";
-			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
 			msg=msg+"<img src='cliente/images/help/27.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
@@ -907,7 +887,6 @@ function ControlWeb($){
 		var l=["btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light","btn-light"];
 		l[(soluciones[e42]-1)]="btn-success";
 		if (soluciones[e42]==b){
-				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
 				for(var i=0;i<l.length;i++){
 					if(i==(b-1)){
@@ -915,11 +894,9 @@ function ControlWeb($){
 					}
 				}
 				acierto.play();
-				cw.resultado42(e42,num,score,l,m);
+				cw.resultado42(e42,num,score,l,bien);
 		}
 		else{
-				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
-
 				for(var j=0;j<l.length;j++){
 					
 					if(j==(b-1)){
@@ -927,7 +904,7 @@ function ControlWeb($){
 					}
 				}
 				fallo.play();
-				cw.resultado42(e42,num,score,l,m);
+				cw.resultado42(e42,num,score,l,mal);
 		}
 
 	}
@@ -980,7 +957,7 @@ function ControlWeb($){
 	this.mostrarEjercicios5=function(){
 		this.limpiar();
 		var cadena='<div id="mostrar5">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>EJERCICIOS DE 5 AÑOS</h1>';
 		cadena =cadena+ '<div class="form-group col-sm-12 col-md-6">';
 		cadena=cadena+'<button type="button" id="btn51" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/s5.png"></img></button>';
@@ -1020,7 +997,7 @@ function ControlWeb($){
 		var m="";
 		var soluciones=[5,7,9,2,6,4,10,3,8,6];
 		var cadena='<div id="mostrar51">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Suma con objetos</h1>';
 		cadena=cadena +'<h3>'+num+'/10 Pulsa la casilla hasta que aparezca el número que de solución a la suma</h3>';
 		cadena=cadena +'<img src="cliente/images/51/'+e51+'.png" class="rounded" alt="Eniun"style="margin: 20px">';
@@ -1041,20 +1018,18 @@ function ControlWeb($){
 		});
 		$('#btn1').on('click',function(){
 			if (soluciones[e51]== (count+1)){
-				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
 				acierto.play();
-				cw.resultado51(e51,num,score,count,"btn-success",m);
+				cw.resultado51(e51,num,score,count,"btn-success",bien);
 			}else{
-				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
 				fallo.play();
-				cw.resultado51(e51,num,score,count,"btn-danger",m);
+				cw.resultado51(e51,num,score,count,"btn-danger",mal);
 			}
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Pulse en la imagen de la mano hasta encontrar la solucion correcta despues clique en 'Hecho'";
 			msg=msg+"<img src='cliente/images/help/16.png' width='700' height='350' ></img><p></p>";
-			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
 			msg=msg+"<img src='cliente/images/help/17.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
@@ -1064,7 +1039,7 @@ function ControlWeb($){
 		this.limpiar();
 		var cadena='<div id="r51">';
 		cadena=cadena +'<h1>Suma con objetos</h1>';
-		cadena=cadena +'<h3>'+m+'<h3>';
+		cadena=cadena +'<h2>'+m+'<h2>';
 		cadena=cadena +'<img src="cliente/images/51/'+e51+'.png" class="rounded" alt="Eniun"style="margin: 20px">';
 		cadena=cadena +'<img src="cliente/images/equal.png" class="rounded" alt="Eniun">';
 		cadena=cadena+'<button type="button" id="btnDedos" class="btn '+b+' btn-lg"><img src="cliente/images/manos/'+count+'.png"></img></button>';
@@ -1099,7 +1074,7 @@ function ControlWeb($){
 		var m="";
 		var soluciones=[2,4,1,6,3,5,3,9,1,4];
 		var cadena='<div id="mostrar52">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Resta con objetos</h1>';
 		cadena=cadena +'<h3>'+num+'/10 Pulsa la casilla hasta que aparezca el número que de solución a la resta</h3>';
 		cadena=cadena +'<img src="cliente/images/52/'+e52+'.png" class="rounded" alt="Eniun">';
@@ -1120,21 +1095,19 @@ function ControlWeb($){
 		});
 		$('#btn1').on('click',function(){
 			if (soluciones[e52]== (count+1)){
-				m="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam'></i>";
 				score++;
 				acierto.play();
-				cw.resultado52(e52,num,score,count,"btn-success",m);
+				cw.resultado52(e52,num,score,count,"btn-success",bien);
 			}else{
-				m="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown'></i>";
 				fallo.play();
-				cw.resultado52(e52,num,score,count,"btn-danger",m);
+				cw.resultado52(e52,num,score,count,"btn-danger",mal);
 			}
 
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Pulse en la imagen de la mano hasta encontrar la solucion correcta despues clique en 'Hecho'";
 			msg=msg+"<img src='cliente/images/help/18.png' width='700' height='350' ></img><p></p>";
-			msg=msg+"Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'";
+			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
 			msg=msg+"<img src='cliente/images/help/19.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
@@ -1145,7 +1118,7 @@ function ControlWeb($){
 		this.limpiar();
 		var cadena='<div id="r52">';
 		cadena=cadena +'<h1>Resta con objetos</h1>';
-		cadena=cadena +'<h3>'+m+'<h3>';
+		cadena=cadena +'<h2>'+m+'<h2>';
 		cadena=cadena +'<img src="cliente/images/52/'+e52+'.png" class="rounded" alt="Eniun"style="margin: 20px">';
 		cadena=cadena +'<img src="cliente/images/equal.png" class="rounded" alt="Eniun">';
 		cadena=cadena+'<button type="button" id="btnDedos" class="btn '+b+' btn-lg"><img src="cliente/images/manos/'+count+'.png"></img></button>';
@@ -1182,7 +1155,7 @@ function ControlWeb($){
 		var btn2=["Elige","Elige","Elige","Elige","Elige","Elige"];
 		var disable=["","","","","disabled"];
 		var cadena='<div id="mostrar1">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>EJERCICIOS DE 1º PRIMARIA</h1>';
 		cadena =cadena+ '<div class="form-group col-sm-12 col-md-6">';
 		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/suma.png"></img></button>';
@@ -1499,7 +1472,7 @@ function ControlWeb($){
 			s4[i]=s2[i]-opcion2[i];
 		}
 		var cadena='<div id="mostrar11">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Suma ABN</h1>';
 		cadena=cadena +'<h3>'+(e11+1)+'/10 Pulsa las casillas y seleccinona la opción correcta</h3>';
 		cadena=cadena +'<p></p>';
@@ -1640,7 +1613,7 @@ function ControlWeb($){
 			if(e11==10){
 				cw.mostrarResultados((score/4),1,11);
 			}else{
-				btn=["btn-info","btn-info","btn-info","btn-info"];
+				btn=["btn-info","btn-info","btn-info","btn-info","btn-info","btn-info"];
 				btn2=["Elige","Elige","Elige","Elige"];
 				disable=["","","","","disabled"];
 				cw.ejercicio11((e11%10),score,btn,btn2,disable);
@@ -1653,9 +1626,9 @@ function ControlWeb($){
 		$('#btnInfo').on('click',function(){
 			var msg="Pulse en los distintos botones de 'Elegir'";
 			msg=msg+"<img src='cliente/images/help/20.png' width='700' height='400' ></img><p></p>";
-			msg=msg+"Seleccione uno de las opciones que se le proporcionan";
+			msg=msg+"<p>Seleccione uno de las opciones que se le proporcionan</p>";
 			msg=msg+"<img src='cliente/images/help/21.png' width='700' height='400' ></img><p></p>";
-			msg=msg+"Para continuar con el siguiente ejercicio pulse 'Siguiente'";
+			msg=msg+"<p>Para continuar con el siguiente ejercicio pulse 'Siguiente'</p>";
 			msg=msg+"<img src='cliente/images/help/22.png' width='700' height='400' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
@@ -1685,7 +1658,7 @@ function ControlWeb($){
 			s4[i]=s2[i]-opcion2[i];
 		}
 		var cadena='<div id="mostrar12">';
-		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-sm pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>Resta ABN</h1>';
 		cadena=cadena +'<h3>'+(e12+1)+'/10 Pulsa las casillas y seleccinona la opción correcta</h3>';
 		cadena=cadena +'<p></p>';
@@ -1826,7 +1799,7 @@ function ControlWeb($){
 			if(e12==10){
 				cw.mostrarResultados((score/4),1,11);
 			}else{
-				btn=["btn-info","btn-info","btn-info","btn-info"];
+				btn=["btn-info","btn-info","btn-info","btn-info","btn-info","btn-info"];
 				btn2=["Elige","Elige","Elige","Elige"];
 				disable=["","","","","disabled"];
 				cw.ejercicio12((e12%10),score,btn,btn2,disable);
@@ -1840,9 +1813,9 @@ function ControlWeb($){
 		$('#btnInfo').on('click',function(){
 			var msg="Pulse en los distintos botones de 'Elegir'";
 			msg=msg+"<img src='cliente/images/help/23.png' width='700' height='400' ></img><p></p>";
-			msg=msg+"Seleccione uno de las opciones que se le proporcionan";
+			msg=msg+"<p>Seleccione uno de las opciones que se le proporcionan </p>";
 			msg=msg+"<img src='cliente/images/help/24.png' width='700' height='400' ></img><p></p>";
-			msg=msg+"Para continuar con el siguiente ejercicio pulse 'Siguiente'";
+			msg=msg+"<p>Para continuar con el siguiente ejercicio pulse 'Siguiente'</p>";
 			msg=msg+"<img src='cliente/images/help/25.png' width='700' height='400' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
@@ -2179,6 +2152,25 @@ function ControlWeb($){
 		$('#btnNo').on('click',function(){
 			cw.limpiarModal();
 			cw.mostrarModal("<h4>No se ha eliminado ningún alumno<h4>");
+		});
+	}
+	//funcion para mostrar dentro de un modal si se quiere o no eliminar una clase.
+	this.confirmacionClase=function(clase){
+		this.limpiarModal();
+		var cadena="<div id='confirmacion'><h4>¿Estas seguro de que quieres eliminar la clase '"+clase+"'?</h4>";
+		cadena=cadena+ '<button type="button" id="btnSi" class="btn btn-success" style="margin: 20px"><i class="fas fa-check"></i> Si</button>';
+		cadena=cadena+ '<button type="button" id="btnNo" class="btn btn-danger" style="margin: 20px"><i class="fas fa-times"></i> No</button>';
+		cadena=cadena +'</div>';
+		$('#contenidoModal').append(cadena);
+		$('#modalGeneral').modal("show");
+		$('#btnSi').on('click',function(){
+			cw.limpiarModal();
+			ws.eliminarClase(clase);
+			cw.mostrarModal("<h4>La clase '"+clase+"' ha sido eliminada correctamente<h4>");
+		});
+		$('#btnNo').on('click',function(){
+			cw.limpiarModal();
+			cw.mostrarModal("<h4>No se ha eliminado ninguna clase<h4>");
 		});
 	}
 	//Función para limpiar todos los modales que vayan apareciendo

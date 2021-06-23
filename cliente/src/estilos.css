@@ -2,17 +2,22 @@ body{
 	color:black;
 	background-image:url("../images/bc.jpg"); 
 }
-/*#r31,#r32,#r41,#r42,#r51,#r52*/ /*#mostrar3,#mostrar31,#mostrar32,#mostrar4,*/
-/*#mostrar41,#mostrar42,#mostrar5,#mostrar51,#mostrar52,#mostrar1,#mostrar11,#mostrar12*/
-#mostrarI,#mostrarCC,#mostrarLC,#mostrarLA,#registrarA,#mostrarsearch,#mostrar31,#mostrar32,#mostrar41,#mostrar42,
-#mostrar11,#mostrar12,#mostrar51,#mostrar52,#r31,#r32,#r41,#r42,#r51,#r52{
+
+#mostrarI,#mostrarCC,#mostrarLC,#mostrarLA,#registrarA,#mostrarsearch,#mostrar31,#mostrar32,#mostrar41,#mostrar42
+,#mostrar51,#mostrar52,#r31,#r32,#r41,#r42,#r51,#r52,#mostrarR,#mostrar11,#mostrar12{
 	background-color: white; 
 	border: 3px solid #28A69B;
 	border-radius: 2em;
 	margin:10px;
-	padding: 50px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+	padding-bottom: 50px;
 	background: cover;
 }
+
+
+
 
 #mostrar3,#mostrar4,#mostrar5,#mostrar1{
 	background-color: white; 
@@ -54,11 +59,23 @@ body{
 	border-color: #1ABC9C;;
 }
 
-label, input,select,option{
+.btn-yellow{
+	background-color: #D4AC0D;
+	border-color: #D4AC0D;
+	color:white;
+}
+
+.btn-yellow:hover{
+	color:white;
+	background-color: #F9E79F;
+	border-color: #F9E79F;
+}
+
+label, input{
 	font-size:xx-large;
 }
 
-a{
+a,select,option{
 	font-size:x-large;
 }
 
@@ -72,12 +89,12 @@ h1, h2, h3,h4 , h5 ,h6, label,table,button, p, a, input, select, option{
 	font-family:cursive;
 }
 
-/*#inicio{
-	background: white;
-}*/
+p{
+	font-size:large;
+}
 
 table{
-	width: 100%;
+	width: 80%;
 	background-color: white;
 	text-align: center;
 	vertical-align: middle;
@@ -86,21 +103,20 @@ table{
 
 
 th, td{
-	border-spacing:1px solid #2874A6;
+	border-spacing: 5px solid #1A5276;
 	padding: 10px;
 }
 
 thead{
-	background-color: #2874A6;
-	border-bottom: solid 5px #2874A6;
+	background-color: #1A5276;
 	color:white;
 }
 
 tr:nth-child(even) {
-  background-color: #ddd;
+  background-color: #D6EAF8  ;
 }
 
 td:hover{
-	background-color: #2874A6;
+	background-color: #1A5276;
 	color:white;
 }

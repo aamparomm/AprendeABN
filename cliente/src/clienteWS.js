@@ -57,7 +57,7 @@ function ClienteWS(){
 				ws.listarAlumnos();
 			}else{
 				console.log("La clase no se ha creado correctamente: es indefinida");
-				cw.mostrarModal(" No se puede crear la clase ya que:<p></p> Ya existe una clase con ese nombre");
+				cw.mostrarModal("<p> No se puede crear la clase ya que:</p><p> Ya existe una clase con ese nombre</p>");
 			}
 		});
 		this.socket.on("claseEliminada",function(data){

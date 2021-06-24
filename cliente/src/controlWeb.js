@@ -29,10 +29,10 @@ function ControlWeb($){
 		});
 		$('#conf a').click(function () {
 			var num =StoreValue[0];
-			if(num==1){
-				msg="Aprende ABN es una pagina web creada y diseñada por Amparo Martínez.";
-				msg=msg+"<p>Esta aplicación fue implementada para dar soporte al método ABN en etapas tempranas de aprendizaje.";
-				msg=msg+" Así pues esta aplicación forma parte de un Trabajo de fin de Grado realizado durante el curso 2020/2021 en la UCLM.</p>"
+			if(num==1){	
+				msg="<p style='text-align:justify'> Esta aplicación fue implementada para dar soporte al método ABN en etapas tempranas de aprendizaje. Así pues esta aplicación forma parte de un Trabajo de fin de Grado realizado durante el curso 2020/2021 en la Escuela superior de ingeniería informática de Albacete, UCLM."
+				msg=msg+" Aprende ABN es una pagina web creada y diseñada por Amparo Martínez Martínez, estudiante de cuarto curso de la ESIIAB.</p><br>";
+				msg=msg+"<img src='cliente/images/uclm.png' width='200px' height='135px'></img><br>";
 				cw.mostrarModal(msg);
 			}
 			if(num==2){
@@ -198,9 +198,9 @@ function ControlWeb($){
 		$('#btnInfo').on('click',function(){
 			var msg="Para poder completar el registro de la clase con éxito será necesario rellenar todos los campos que se muestran.";
 			msg=msg+"<p>No se podrá crear una clase con más de 12 alumnos y tampoco se creará la clase si ya exite una clase con dicho nombre.</p>";
-			msg=msg+"<img src='cliente/images/help/28.png' width='700' height='350'></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/clases1.png' width='700' height='350'></img><p></p>";
 			msg=msg+"<p>Para eliminar una de las clases simplemente hay que introducir el nombre exacto de la clase y despues clicar en eliminar</p>";
-			msg=msg+"<img src='cliente/images/help/29.png' width='700' height='350'></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/eliminar.png' width='700' height='350'></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 		$('#btnAtras').on('click',function(){
@@ -282,11 +282,12 @@ function ControlWeb($){
 			ws.comprobarAlumnos();
 		});
 		$('#btnInfo').on('click',function(){
-			var msg="Para poder completar el registro del alumno con éxito será necesario rellenar todos los campos que se muestran.";
-			msg=msg+"<img src='cliente/images/help/8.png' width='700' height='350'></img><p></p>";
+			var msg="Para poder completar el registro del alumno con éxito será necesario rellenar todos los campos que se muestran.<br>";
+			msg=msg+"<img src='cliente/images/ayuda/registro2.png' width='700' height='350'></img><p></p>";
 			msg=msg+"<p>Para cambiar el avatar del alumno simplemente hay que clicar sobre dicho icono</p>";
-			msg=msg+"<img src='cliente/images/help/9.png' width='700' height='350'></img><p></p>";
-			msg=msg+"<p>Si se repite el nombre de los alumnos, se editará el alumno con dicho nombre</p>";
+			msg=msg+"<img src='cliente/images/ayuda/registro3.png' width='700' height='350'></img><p></p>";
+			msg=msg+"<p>Si se repite el nombre de los alumnos se mostrará un mensaje de error</p>";
+			msg=msg+"<img src='cliente/images/ayuda/registro5.png' width='700' height='350'></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 
@@ -335,11 +336,11 @@ function ControlWeb($){
 			$('#btnInfo').on('click',function(){
 			cw.limpiarModal();
 			var msg="Para poder registrar a un alumno simplemente pulse en el botón de 'Registrar alumno.'";
-			msg=msg+"<img src='cliente/images/help/1.png'width='700' height='350'></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/registro1.png'width='700' height='350'></img><p></p>";
 			msg=msg+"<p>Para comenzar con las actividades de un alumno seleccione a uno de los alumnos de la lista y pulse 'Comenzar'</p>";
-			msg=msg+"<img src='cliente/images/help/2.png' width='700' height='350'></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/ejercicios.png' width='700' height='350'></img><p></p>";
 			msg=msg+"<p>Para eliminar a uno de los alumnos de la clase seleccione a uno de los alumnos de la lista y pulse 'Eliminar'</p>";
-			msg=msg+"<img src='cliente/images/help/3.png' width='700' height='350'></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/registro6.png' width='700' height='350'></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 		}else{
@@ -358,7 +359,7 @@ function ControlWeb($){
 			$('#btnInfo').on('click',function(){
 			cw.limpiarModal();
 			var msg="Para poder registrar a un alumno simplemente pulse en el botón de 'Registrar alumno'.";
-			msg=msg+"<img src='cliente/images/help/0.png' width='700' height='350'></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/registro1.png' width='700' height='350'></img><p></p>";
 			msg=msg+"<p>Para volver al inicio pulse en el boton azul con la flecha</p>";
 			cw.mostrarModal(msg);
 		});
@@ -412,7 +413,7 @@ function ControlWeb($){
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Para poder realizar uno de los ejercicios seleccione una de las imagenes que aparecen";
-			msg=msg+"<img src='cliente/images/help/4.png' width='700' height='350' ></img>";
+			msg=msg+"<img src='cliente/images/ayuda/3.png' width='700' height='350' ></img>";
 			cw.mostrarModal(msg);
 		});
 	}
@@ -451,9 +452,9 @@ function ControlWeb($){
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
-			msg=msg+"<img src='cliente/images/help/10.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/31.png' width='700' height='350' ></img><p></p>";
 			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
-			msg=msg+"<img src='cliente/images/help/11.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/311.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 	}
@@ -563,9 +564,9 @@ function ControlWeb($){
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
-			msg=msg+"<img src='cliente/images/help/12.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/32.png' width='700' height='350' ></img><p></p>";
 			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
-			msg=msg+"<img src='cliente/images/help/13.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/322.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 	}
@@ -655,7 +656,7 @@ function ControlWeb($){
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Para poder realizar uno de los ejercicios seleccione una de las imagenes que aparecen";
-			msg=msg+"<img src='cliente/images/help/5.png' width='700' height='350' ></img>";
+			msg=msg+"<img src='cliente/images/ayuda/4.png' width='700' height='350' ></img>";
 			cw.mostrarModal(msg);
 		});
 
@@ -729,9 +730,9 @@ function ControlWeb($){
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
-			msg=msg+"<img src='cliente/images/help/14.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/41.png' width='700' height='350' ></img><p></p>";
 			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
-			msg=msg+"<img src='cliente/images/help/15.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/411.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 	}
@@ -869,9 +870,9 @@ function ControlWeb($){
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Selecciona el número de objetos de la imagen pulsando uno de los botones que contengan números";
-			msg=msg+"<img src='cliente/images/help/26.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/42.png' width='700' height='350' ></img><p></p>";
 			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
-			msg=msg+"<img src='cliente/images/help/27.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/422.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 	}
@@ -979,7 +980,7 @@ function ControlWeb($){
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Para poder realizar uno de los ejercicios seleccione una de las imagenes que aparecen";
-			msg=msg+"<img src='cliente/images/help/6.png' width='700' height='350' ></img>";
+			msg=msg+"<img src='cliente/images/ayuda/5.png' width='700' height='350' ></img>";
 			cw.mostrarModal(msg);
 		});
 
@@ -1021,9 +1022,9 @@ function ControlWeb($){
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Pulse en la imagen de la mano hasta encontrar la solucion correcta despues clique en 'Hecho'";
-			msg=msg+"<img src='cliente/images/help/16.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/51.png' width='700' height='350' ></img><p></p>";
 			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
-			msg=msg+"<img src='cliente/images/help/17.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/511.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 	}
@@ -1099,9 +1100,9 @@ function ControlWeb($){
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Pulse en la imagen de la mano hasta encontrar la solucion correcta despues clique en 'Hecho'";
-			msg=msg+"<img src='cliente/images/help/18.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/52.png' width='700' height='350' ></img><p></p>";
 			msg=msg+"<p>Una vez seleccionado ese botón se mostrará si la solucion es o no correcta y para continuar se deberá de clicar el boton 'Siguiente'</p>";
-			msg=msg+"<img src='cliente/images/help/19.png' width='700' height='350' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/522.png' width='700' height='350' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 	}
@@ -1177,7 +1178,7 @@ function ControlWeb($){
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Para poder realizar uno de los ejercicios seleccione una de las imagenes que aparecen";
-			msg=msg+"<img src='cliente/images/help/7.png' width='700' height='350' ></img>";
+			msg=msg+"<img src='cliente/images/ayuda/1.png' width='700' height='350' ></img>";
 			cw.mostrarModal(msg);
 		});
 
@@ -1616,11 +1617,11 @@ function ControlWeb($){
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Pulse en los distintos botones de 'Elegir'";
-			msg=msg+"<img src='cliente/images/help/20.png' width='700' height='400' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/11.png' width='800' height='450' ></img><p></p>";
 			msg=msg+"<p>Seleccione uno de las opciones que se le proporcionan</p>";
-			msg=msg+"<img src='cliente/images/help/21.png' width='700' height='400' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/112.png' width='800' height='450' ></img><p></p>";
 			msg=msg+"<p>Para continuar con el siguiente ejercicio pulse 'Siguiente'</p>";
-			msg=msg+"<img src='cliente/images/help/22.png' width='700' height='400' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/113.png' width='800' height='450' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 	}
@@ -1803,11 +1804,11 @@ function ControlWeb($){
 
 		$('#btnInfo').on('click',function(){
 			var msg="Pulse en los distintos botones de 'Elegir'";
-			msg=msg+"<img src='cliente/images/help/23.png' width='700' height='400' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/12.png' width='800' height='450' ></img><p></p>";
 			msg=msg+"<p>Seleccione uno de las opciones que se le proporcionan </p>";
-			msg=msg+"<img src='cliente/images/help/24.png' width='700' height='400' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/122.png' width='800' height='450' ></img><p></p>";
 			msg=msg+"<p>Para continuar con el siguiente ejercicio pulse 'Siguiente'</p>";
-			msg=msg+"<img src='cliente/images/help/25.png' width='700' height='400' ></img><p></p>";
+			msg=msg+"<img src='cliente/images/ayuda/123.png' width='800' height='450' ></img><p></p>";
 			cw.mostrarModal(msg);
 		});
 	}

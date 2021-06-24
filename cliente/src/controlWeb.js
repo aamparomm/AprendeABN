@@ -2158,7 +2158,6 @@ function ControlWeb($){
 		$('#btnSi').on('click',function(){
 			cw.limpiarModal();
 			ws.eliminarClase(clase);
-			cw.mostrarModal("<h4>La clase '"+clase+"' ha sido eliminada correctamente<h4>");
 		});
 		$('#btnNo').on('click',function(){
 			cw.limpiarModal();

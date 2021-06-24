@@ -61,8 +61,13 @@ function ClienteWS(){
 			}
 		});
 		this.socket.on("claseEliminada",function(data){
-			cw.mostrarInicio();
-			cw.mostrarModal(" Clase "+nclase+" eliminada");
+			if(data!=undefined){
+				cw.mostrarModal("La clase '"+data+"' ha sido eliminada");
+				cw.mostrarInicio();
+			}else{
+				cw.mostrarModal("No se ha podido eliminar la clase porque dicha clase no existe.")
+			}
+			
 		});
 		this.socket.on("mostrarLista",function(lista){
 			console.log(lista);

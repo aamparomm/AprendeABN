@@ -27,10 +27,12 @@ function ServidorWS(){
                 
             });
             socket.on('eliminarClase', function(nclase) {
-                var nclase=app.eliminarClase(nclase); 
-                if(nclase!=undefined){
+                var clase=app.eliminarClase(nclase); 
+                if(clase!=undefined){
                     console.log("Se ha eliminado la clase "+nclase+"");              
                     cli.enviarRemitente(socket,"claseEliminada",nclase);
+                }else{
+                    cli.enviarRemitente(socket,"claseEliminada",undefined);
                 }
                 
             });

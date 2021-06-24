@@ -61,7 +61,10 @@ function ABN(){
 			console.log(alumno);
 			if(clase.igualMaximo()){
 				return undefined;
-			}	
+			}
+			if (alumno==0){
+				return alumno;
+			}
 		}else{
 			console.log("No se puede registrar en la clase: clase ya definida o el cupo de la clase esta completo");
 		}
@@ -84,6 +87,14 @@ function ABN(){
 			if(this.clases[nclase].numMax==this.clases[nclase].numAlumnos()){
 				res=1;
 			}	
+		}
+		return res;
+	}
+	//Funcion para comprobar si no caben más alumnos en la case
+	this.comprobarAlumnos=function(nclase){
+		var res=0;
+		if(this.clases[nclase].numMax==this.clases[nclase].numAlumnos()){
+			res=1;
 		}
 		return res;
 	}
@@ -118,14 +129,19 @@ function Clase(nclase, profesor,num, ABN){
 	 //Función que  añade un alumno a la clase
 	this.agregarAlumno=function(nombre,apellido,curso,icono){
 		let n=nombre;
-		this.alumnos[n]=new Alumno(nombre,apellido,curso,icono);
-		this.alumnos[n].clase=this;
-		var a=this.alumnos[nombre];
-		var nombre=a.nombre;
-		var apellidos=a.apellido;
-		var curso=a.curso;
-		var icono = a.icono;
-		return {"clase":this.nombre,"nombre":nombre,"apellidos":apellidos,"curso":curso,"id_Icono":icono};
+		if(this.alumnos[n]){
+			return 0;
+		}else{
+			this.alumnos[n]=new Alumno(nombre,apellido,curso,icono);
+			this.alumnos[n].clase=this;
+			var a=this.alumnos[nombre];
+			var nombre=a.nombre;
+			var apellidos=a.apellido;
+			var curso=a.curso;
+			var icono = a.icono;
+			return {"clase":this.nombre,"nombre":nombre,"apellidos":apellidos,"curso":curso,"id_Icono":icono};
+		}
+		
 	}
 
 	this.eliminarAlumno=function(nombre){

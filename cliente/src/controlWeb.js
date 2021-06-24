@@ -1,11 +1,11 @@
 function ControlWeb($){
 
-	var acierto=new Audio('/cliente/images/audio/acierto.mp3');
-	var fallo=new Audio('/cliente/images/audio/fallo.mp3');
-	var musica=new Audio('/cliente/images/audio/musica.mp3');
+	const acierto=new Audio('/cliente/images/audio/acierto.mp3');
+	const fallo=new Audio('/cliente/images/audio/fallo.mp3');
+	const musica=new Audio('/cliente/images/audio/musica.mp3');
 	var ms=0;
-	var bien="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam fa-2x'></i>";
-	var mal="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown fa-2x'></i>";
+	const bien="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam fa-2x'></i>";
+	const mal="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown fa-2x'></i>";
 	//Sirve para mostrar alguna configuración de la pantalla
 	//<i class="fas fa-play"></i> / <i class="fas fa-pause"></i>
 	this.configuracion=function(){
@@ -14,10 +14,11 @@ function ControlWeb($){
 		cadena=cadena+'<button id="btnConf" type="button" class="btn btn-config btn-lg dropdown-toggle" data-toggle="dropdown"><i class="fas fa-cog"></i></button>';
 		cadena=cadena +'<div class="dropdown-menu" id="conf" role="menu">';
 		cadena = cadena + '<a class="dropdown-item" href="#" value="1"><h4 style="text-align:center;"><i class="fas fa-user-friends"></i> Sobre nosotros </h4> </a>';
+		cadena=cadena+'<div class="divider"></div>';
 		cadena = cadena + '<a class="dropdown-item" href="#" value="2"><h4 style="text-align:center;"> <i class="fas fa-music"></i> Música</h4> </a>';
 		//cadena = cadena + '<a class="dropdown-item  href="#" value="3"></button><h4 style="text-align:center;"> Fondo </h4> </a>';
 		cadena=cadena+'<div class="divider"></div>';
-		cadena = cadena + '<a class="dropdown-item" href="https://www.google.com/" value="4"><h4 style="text-align:center;"><i class="fas fa-question"></i> Ayuda</h4> </a>';
+		cadena = cadena + '<a class="dropdown-item" href="../cliente/ayuda.html" value="4"><h4 style="text-align:center;"><i class="fas fa-question"></i> Ayuda</h4> </a>';
 		cadena=cadena+'</td>';
 		$('#conf').append(cadena);
 
@@ -278,9 +279,7 @@ function ControlWeb($){
 			cw.registrarAlumno(num%12,lista);
 		});
 		$('#btnAtras').on('click',function(){
-			cw.limpiar();
-			ws.listarAlumnos();
-			cw.mostrarClase();
+			ws.comprobarAlumnos();
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Para poder completar el registro del alumno con éxito será necesario rellenar todos los campos que se muestran.";
@@ -403,9 +402,7 @@ function ControlWeb($){
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
 		$('#btnAtras').on('click',function(){
-			cw.limpiar();
-			ws.listarAlumnos();
-			cw.mostrarClase();
+			ws.comprobarAlumnos();
 		});
 		$('#btn31').on('click',function(){
 			cw.ejercicio31(0,1,0);
@@ -648,9 +645,7 @@ function ControlWeb($){
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
 		$('#btnAtras').on('click',function(){
-			cw.limpiar();
-			ws.listarAlumnos();
-			cw.mostrarClase();
+			ws.comprobarAlumnos();
 		});
 		$('#btn41').on('click',function(){
 			cw.ejercicio41(0,1,0);
@@ -974,9 +969,7 @@ function ControlWeb($){
 		cadena =cadena+ '</div>';
 		$('#ejercicios').append(cadena);
 		$('#btnAtras').on('click',function(){
-			cw.limpiar();
-			ws.listarAlumnos();
-			cw.mostrarClase();
+			ws.comprobarAlumnos();
 		});
 		$('#btn51').on('click',function(){
 			cw.ejercicio51(0,1,0,0);
@@ -1180,9 +1173,7 @@ function ControlWeb($){
 		});
 
 		$('#btnAtras').on('click',function(){
-			cw.limpiar();
-			ws.listarAlumnos();
-			cw.mostrarClase();
+			ws.comprobarAlumnos();
 		});
 		$('#btnInfo').on('click',function(){
 			var msg="Para poder realizar uno de los ejercicios seleccione una de las imagenes que aparecen";

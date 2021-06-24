@@ -71,6 +71,12 @@ function ServidorWS(){
                     cli.enviarRemitente(socket,"mostrar1");
                 }            
             });
+            socket.on('comprobarAlumnos', function(nclase) {
+                var res=app.comprobarAlumnos(nclase);
+                console.log("Comprobar alumnos,",res);
+                cli.enviarRemitente(socket,"alumnosComprobados",res);
+                
+            });
             
         });
     }

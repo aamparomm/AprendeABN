@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Guia Aprende ABN</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+  body {
+    font: 400 15px/1.8 Lato, sans-serif;
+    color: #777;
+  }
+  h3, h4 {
+    margin: 10px 0 30px 0;
+    letter-spacing: 10px;      
+    font-size: 30px;
+    color: black;
+  }
+  p{
+    margin: 10px 0 30px 0;
+    letter-spacing: 1px;      
+    font-size: 20px;
+    color: black;
+  }
+  .bg-2 {
+    background: #fff;
+    padding: 0px 180px;
+    color: #000;
+    padding-bottom:50px;
+  }
+  .bg-2 h3{
+  	color: #000;
+  	padding-left:100px;
+  	padding-top: 50px;
+  	text-align: justify;
+  }
+  .bg-2 p,img{
+  	color: #000;
+  	padding-left:100px;
+  	text-align: justify;
+  }
+  .carousel-inner img {
+    -webkit-filter: grayscale(50%);
+    /*filter: grayscale(90%); *//* make all photos black and white */ 
+    width: 100%; /* Set width to 100% */
+    margin: auto;
+  }
+  .carousel-caption h3 {
+    color: #000 !important;
+  }
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+    }
+  }
+  .bg-1 {
+    background: #117A65 ;
+    padding: 0px 180px;
+    color: #bdbdbd;
+    padding-bottom:50px;
+  }
+  .bg-1 h3{
+  	color: #fff;
+  	padding-left:100px;
+  	padding-top: 50px;
+  	text-align: justify;
+  }
+  .bg-1 p,img{
+  	color: #fff;
+  	padding-left:100px;
+  	text-align: justify;
+  }
+  
+  .list-group-item:first-child {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+  .list-group-item:last-child {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .thumbnail {
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+  }
+  .thumbnail p {
+    margin-top: 15px;
+    color: #555;
+  }
+  .btn {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #f1f1f1;
+    border-radius: 0;
+    transition: .2s;
+  }
+  .btn:hover, .btn:focus {
+    border: 1px solid #333;
+    background-color: #fff;
+    color: #000;
+  }
+  .modal-header, h4, .close {
+    background-color: #333;
+    color: #fff !important;
+    text-align: center;
+    font-size: 30px;
+  }
+  .nav-tabs li a {
+    color: #777;
+  } 
+  .navbar {
+    font-family: Montserrat, sans-serif;
+    margin-bottom: 0;
+    background-color: #117A65 ;
+    border: 0;
+    font-size: 11px !important;
+    letter-spacing: 4px;
+    opacity: 0.9;
+  }
+  .navbar li a, .navbar .navbar-brand { 
+    color: #fff !important;
+  }
+  .navbar-nav li a:hover {
+    color: #fff !important;
+  }
+  .navbar-nav li.active a {
+    color: #fff !important;
+    background-color: #45B39D !important;
+  }
+  .navbar-default .navbar-toggle {
+    border-color: transparent;
+  }
+  footer {
+    background-color: #fff;
+    color: #117A65;
+    padding: 32px;
+  }
+  footer a {
+    color: #117A65;
+  }
+  footer p {
+    color: #117A65;
+  }
+  footer a:hover {
+    color: #45B39D;
+    text-decoration: none;
+  }  
+  .form-control {
+    border-radius: 0;
+  }
+  textarea {
+    resize: none;
+  }
+  </style>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#myPage">Guia Aprende ABN</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#myPage">PAGINA DE INICIO</a></li>
+        <li><a href="#clase">CREACIÓN DE CLASES</a></li>
+        <li><a href="#registroAlumnos">REGISTRO DE ALUMNOS</a></li>
+        <li><a href="#juego">¿CÓMO JUGAR?</a></li>
+        <li><a href="#configuracion">CONFIGURACION</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="/cliente/images/ayuda/inicio.png" width="1200" height="700">
+        <div class="carousel-caption">
+          <h3 >PÁGINA DE INICIO</h3>
+        </div>      
+      </div>
+
+      <div class="item">
+        <img src="/cliente/images/ayuda/inicio1.png" width="1200" height="700">
+        <div class="carousel-caption">
+          <h3 >CREACIÓN DE CLASES</h3>
+        </div>      
+      </div>
+    
+      <div class="item">
+        <img src="/cliente/images/ayuda/inicio2.png" width="1200" height="700">
+        <div class="carousel-caption">
+          <h3 >BÚSQUEDA DE CLASES</h3>
+        </div>      
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<!-- Container (CREACION DE LAS CLASES) -->
+<div id="clase" class="bg-2" style="text-align:justify">
+  <h3>CREACIÓN DE CLASES</h3>
+  <p><em><strong>¿Cómo crear clases?</strong></em></p>
+  <p> Para crear una clase simplemente tenemos que rellenar TODOS los apartados pertinentes (Nombre de la clase, nombre del profesor y número de participantes), teniendo en cuenta que no se registrarán clases con los mismos nombres y que el número máximo de participantes es 12.</p>
+  <br>
+  <p style="text-align: center"><strong>Interfaz creación de clases</strong></p>
+  <img src="/cliente/images/ayuda/clases.png" alt="Creación de clases" width="100%" height="50%">
+      
+  <div class="row">
+    <div class="col-sm-12">
+      	<p style="text-align: center"><strong>Completar campos y pulsar 'Crear clase'</strong></p>
+      	<a href="#demo" data-toggle="collapse">
+        	<img src="/cliente/images/ayuda/clases1.png" alt="Creación de clases" width="100%" height="50%">
+      	</a>
+    	</div>
+	</div>
+  <p> Una vez rellenados todos los apartados simplemente se tendrá que clicar en el boton 'Crear Clase' y se mostrará una interfaz similar a la que se muestra a continuación.</p>
+  
+<div class="row">
+    <div class="col-sm-12">
+      <p style="text-align: center"><strong>Interfaz de la clase</strong></p>
+      <a href="#demo" data-toggle="collapse">
+        <img src="/cliente/images/ayuda/registro.png" alt="Creación de clases" width="100%" height="50%">
+      </a>
+    </div>
+  </div>
+  <br>
+  <p><em><strong>¿Cómo eliminar clases?</strong></em></p><br>
+  <p> Para eliminar una clase simplemente se tendrá que introducir el nombre exacto de la clase que se quiere eliminar y pulsar el boton de eliminar</p>
+  <div class="row">
+    <div class="col-sm-12">
+      <p style="text-align: center"><strong>Eliminar la clase</strong></p>
+      <a href="#demo" data-toggle="collapse">
+        <img src="/cliente/images/ayuda/eliminar.png" alt="Creación de clases" width="100%" height="50%">
+      </a>
+    </div>
+  </div>
+  <p> En este caso se mostrará un mensaje de confirmación  para la eliminación</p>
+  <div class="row">
+    <div class="col-sm-12">
+      <p style="text-align: center"><strong>Confirmación eliminar</strong></p>
+      <a href="#demo" data-toggle="collapse">
+        <img src="/cliente/images/ayuda/eliminar1.png" alt="Creación de clases" width="100%" height="50%">
+      </a>
+    </div>
+  </div>
+  <br><p><em><strong>¿Cómo buscar una clase?</strong></em></p><br>
+  <p> Para buscar una clase simplemente se tendrá que introducir en la barra de búsqueda el nombre de la clase que se quiere encontrar y posteriormente clicar en el botón de la lupa</p>
+  <div class="row">
+    <div class="col-sm-12">
+      <p style="text-align: center"><strong>Buscar clase</strong></p>
+      <a href="#demo" data-toggle="collapse">
+        <img src="/cliente/images/ayuda/buscar.png" alt="Creación de clases" width="100%" height="50%">
+      </a>
+    </div>
+  </div>
+  <p> Una vez encontrada la clase, se clicará en la clase en la que se quiere entrar y posteriormente ´se pulsará en el botón 'Entrar'. Posteriormente se mostrará la interfaz de la clase.</p>
+  <div class="row">
+    <div class="col-sm-12">
+      <p style="text-align: center"><strong>Entrar clase</strong></p>
+      <a href="#demo" data-toggle="collapse">
+        <img src="/cliente/images/ayuda/buscar1.png" alt="Creación de clases" width="100%" height="50%">
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- Container (TOUR Section) -->
+<div id="registroAlumnos" class="bg-1">
+  <h3 class="text-center">REGISTRO DE ALUMNOS</h3>
+    
+    
+</div>
+  
+
+<!-- Container (Contact Section) -->
+<div id="juego" class="bg-2">
+  <h3 >¿CÓMO SE JUEGA?</h3>
+  <p ><em>We love our fans!</em></p>
+</div>
+
+<!-- Image of location/map -->
+<img src="map.jpg" class="img-responsive" style="width:100%">
+
+<div id="configuracion" class="bg-1" style="text-align: center;">
+  
+  <h3>CONFIGURACIÓN</h3>
+  <p><em><strong>¿Qué podemos ver en el apartado de configuración?</strong></em></p><br>
+  <p> En este apartado de configuración encontramos tres opciones principales.</p>
+  <p> 	1º Sobre nosotros: En el cual se muestra alguna información sobre la página web.</p>
+  <p> 	2º Música: Al pulsar en este apartado se escuchará musica de fondo. Si se vuelve a pulsar la música se pausará.</p>
+  <p> 	3º Ayuda: Al pulsarlo nos redirigirá a otra página web donde se muestra una guía para el usuario sobre como usar la aplicación.</p>
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
+      	<p style="text-align: center"><strong>Interfaz de configuración</strong></p>
+      	<a href="#demo" data-toggle="collapse">
+        	<img src="/cliente/images/ayuda/configuracion.png" width="100%" height="50%">
+      	</a>
+    	</div>
+	</div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center">
+  <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="PÁGINA DE INICIO">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a><br><br>
+  <p>Aprende ABN -Guia del usuario-<a href="../" data-toggle="tooltip" title="Visita AprendeABN">www.AprendeABN.com</a></p> 
+</footer>
+
+<script>
+$(document).ready(function(){
+  // Initialize Tooltip
+  $('[data-toggle="tooltip"]').tooltip(); 
+  
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+})
+</script>
+
+</body>
+</html>

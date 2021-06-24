@@ -40,6 +40,9 @@ function ClienteWS(){
 		this.curso=curso;
 		this.socket.emit("mostrarEjercicios",curso);
 	}
+	this.comprobarAlumnos=function(){
+		this.socket.emit("comprobarAlumnos",this.nclase);
+	}
 	this.lanzarSocketSrv=function(){
 		var cli=this;
 		this.socket.on('connect',function(){
@@ -71,14 +74,17 @@ function ClienteWS(){
 		});
 		this.socket.on("alumnoRegistrado",function(lista){
 			//console.log(lista);
-			if(lista!=undefined){
-				cw.limpiar();
-				ws.listarAlumnos();
-				cw.mostrarClase();
+			if(lista==0){
+				cw.mostrarModal("Ya se ha registrado un alumno con ese nombre.<p> Por favor, introduzca otro nombre en el apartado 'Nombre del alumno'.</p>");
 			}else{
-				cw.limpiar();
-				ws.listarAlumnos();	
-			}	
+				if(lista!=undefined){
+					cw.limpiar();
+					ws.listarAlumnos();
+					cw.mostrarClase();
+				}else{
+					cw.limpiar();
+					ws.listarAlumnos();	
+			}}	
 		});
 		this.socket.on("alumnoEliminado",function(lista){
 			cw.limpiar();
@@ -103,6 +109,13 @@ function ClienteWS(){
 		});
 		this.socket.on("mostrar1",function(){
 			cw.mostrarEjercicios1();
+		});
+		this.socket.on("alumnosComprobados",function(res){
+			cw.limpiar();
+			ws.listarAlumnos();
+			if(res!=1){
+				cw.mostrarClase();
+			}
 		});
 		
 	}

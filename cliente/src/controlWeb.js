@@ -16,7 +16,7 @@ function ControlWeb($){
 		cadena = cadena + '<a class="dropdown-item" href="#" value="1"><h4 style="text-align:center;"><i class="fas fa-user-friends"></i> Sobre nosotros </h4> </a>';
 		cadena=cadena+'<div class="divider"></div>';
 		cadena = cadena + '<a class="dropdown-item" href="#" value="2"><h4 style="text-align:center;"> <i class="fas fa-music"></i> Música</h4> </a>';
-		//cadena = cadena + '<a class="dropdown-item  href="#" value="3"></button><h4 style="text-align:center;"> Fondo </h4> </a>';
+		cadena = cadena + '<a class="dropdown-item  href="#" value="3"></button><h4 style="text-align:center;"><i class="far fa-image"></i> Fondo </h4> </a>';
 		cadena=cadena+'<div class="divider"></div>';
 		cadena = cadena + '<a class="dropdown-item" href="../cliente/ayuda.html" value="4"><h4 style="text-align:center;"><i class="fas fa-question"></i> Ayuda</h4> </a>';
 		cadena=cadena+'</td>';
@@ -45,8 +45,45 @@ function ControlWeb($){
 				}
 				console.log(ms);	
 			}
+			if (num==3){
+				cw.modalFondo();
+			}
 		});
 
+	}
+	this.modalFondo=function(){
+		cw.limpiarModal();
+		var cadena='<div id="modalFondo"><h4>Elige el estilo del fondo</h4>';		
+		cadena =cadena+'<div class="input-group">';
+	  	cadena=cadena+'<div><input type="radio" class="form-check-input" name="optradio" value="white">Blanco</div>';
+	  	cadena=cadena+'<div><input type="radio" class="form-check-input" name="optradio" value="#28A69B">Azul</div>';
+	  	cadena=cadena+'<div><input type="radio" class="form-check-input" name="optradio" value="#F9E79F">Amarillo</div>';
+	  	cadena=cadena+'<div><input type="radio" class="form-check-input" name="optradio" value="imagen">Estampado</div>';
+		cadena=cadena+'</div>';
+		cadena=cadena+'<button type="button" id="op" class="btn btn-secondary"><i class="fas fa-angle-double-right"></i> Hecho</button>';
+		//cadena=cadena'</div>';
+		$('#contenidoModal').append(cadena);
+		$('#modalGeneral').modal("show");
+		
+		var num=undefined;
+		$('.input-group input').on('change', function() {
+		   value=$('input[name=optradio]:checked', '.input-group').val(); 
+		});
+		$('#op').click(function(){
+			cw.cambiarFondo(value);
+		});
+}
+
+	this.cambiarFondo=function(color){
+		console.log(color);
+		var body=document.getElementById("body");
+		console.log(body);
+		if(color!="imagen"){
+			body.style.background=color;
+		}else{
+			body.style.backgroundImage= "url(cliente/images/bc.jpg)";
+		}
+		
 	}
 
 	//Interfaz de inicio don de se da la opción la creación o la búsqueda de clase.
@@ -2169,7 +2206,7 @@ function ControlWeb($){
 		$('#info').remove();
 		$('#confirmacion').remove();
 		$('#modal').remove();
-		//$('#opcion').remove();
+		$('#modalFondo').remove();
 		//$('#op').remove();					
 	}
 	//Función necesaria para que no se muestren ninguna de las interfaces implementadas anteriormente

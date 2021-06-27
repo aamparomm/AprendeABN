@@ -22,7 +22,7 @@ function ControlWeb($){
 		cadena=cadena +'<li><a class="trigger right-caret"><i class="fas fa-image"></i> Fondo</a>';
 		cadena=cadena +'<ul class="dropdown-menu sub-menu" id="fondo">';
 		cadena=cadena +'<li><a href="#" value="white">Blanco</a></li>';
-		cadena=cadena +'<li><a href="#" value="#28A69B">Azul</a></li>';
+		cadena=cadena +'<li><a href="#" value="#EBF5FB">Azul</a></li>';
         cadena=cadena+'<li><a href="#" value="#F2D7D5">Rosa</a></li>';
         cadena=cadena+'<li><a href="#" value="imagen">Dibujo</a></li>';
         cadena=cadena+'</ul></li>';
@@ -90,11 +90,21 @@ function ControlWeb($){
 	this.cambiarFondo=function(color){
 		console.log(color);
 		var body=document.getElementById("body");
+		var encabezado=document.getElementById("encabezado");
 		console.log(body);
-		if(color!="imagen"&&color!=""){
+		if(color=="white"){
 			body.style.background=color;
+			encabezado.style.background="#28A69B";
+		}else if(color=="#EBF5FB"){
+			body.style.background=color;
+			encabezado.style.background="#7FB3D5";
+		}else if(color=="#F2D7D5"){
+			body.style.background=color;
+			encabezado.style.background="#EA899A";
+			encabezado.style.color="#ffffff";
 		}else{
 			body.style.backgroundImage= "url(cliente/images/bc.jpg)";
+			encabezado.style.background="#28A69B";
 		}
 		
 	}

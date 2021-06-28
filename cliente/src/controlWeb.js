@@ -6,7 +6,7 @@ function ControlWeb($){
 	var ms=0;
 	const bien="¡Enhorabuena, has acertado! <i style='color:#00893f' class='far fa-laugh-beam fa-2x'></i>";
 	const mal="Ohhh, has fallado, intentalo otra vez <i style='color:#ff0000' class='far fa-frown fa-2x'></i>";
-	
+	var ce=0;
 	//Sirve para mostrar ´las distintas opciones de configuración por pantalla
 	//En este caso se podrá mostrar información sobre la página web, activar la música,cambiar el color de fondo
 	//y dirigirnos a otra página web que nos muestra las instrucciones de la aplicación.
@@ -1194,16 +1194,43 @@ function ControlWeb($){
 		var btn=["btn-info","btn-info","btn-info","btn-info","btn-info","btn-info"];
 		var btn2=["Elige","Elige","Elige","Elige","Elige","Elige"];
 		var disable=["","","","","disabled"];
+		var disabled=["disabled","disabled","disabled","disabled","disabled","disabled"];
+		var matriz=new Array();
+		var disabled2=["","","","","",""];
+		var b=[];
+		var b2=[];
+		for(var x=0;x<7;x++){
+			matriz[x]=new Array();
+			for(var y=0;y<3;y++){
+				matriz[x][y]=undefined;
+			}
+		}
+		for(var y=0;y<12;y++){
+			b[y]="Elige";
+			b2[y]="btn-info";
+		}
 		var cadena='<div id="mostrar1">';
 		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
 		cadena=cadena +'<h1>EJERCICIOS DE 1º PRIMARIA</h1>';
 		cadena =cadena+ '<div class="form-group col-sm-12 col-md-6">';
 		cadena=cadena+'<button type="button" id="btn11" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/suma.png"></img></button>';
 		cadena=cadena +'<br>';
-		cadena=cadena +'<label >Suma</label>';
+		cadena=cadena +'<label >Suma Guiada</label>';
 		cadena =cadena+ '</div>';
 		cadena =cadena+ '<div class="form-group col-sm-12 col-md-6">';
 		cadena=cadena+'<button type="button" id="btn12" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/resta.png"></img></button>';
+		cadena=cadena +'<br>';
+		cadena=cadena +'<label>Resta Guiada</label>';
+		cadena =cadena+ '</div>';
+		cadena=cadena +'<br>';
+		cadena =cadena+ '<div class="form-group col-sm-12 col-md-6">';
+		cadena=cadena+'<button type="button" id="btn13" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/suma.png"></img></button>';
+		cadena=cadena +'<br>';
+		cadena=cadena +'<label>Suma</label>';
+		cadena =cadena+ '</div>';
+		cadena=cadena +'<br>';
+		cadena =cadena+ '<div class="form-group col-sm-12 col-md-6">';
+		cadena=cadena+'<button type="button" id="btn14" class="btn btn-light btn-lg" style="margin: 50px"><img src="cliente/images/resta.png"></img></button>';
 		cadena=cadena +'<br>';
 		cadena=cadena +'<label>Resta</label>';
 		cadena =cadena+ '</div>';
@@ -1218,7 +1245,13 @@ function ControlWeb($){
 		$('#btn12').on('click',function(){
 			cw.ejercicio12(0,0,btn,btn2,disable);
 		});
-
+		
+		$('#btn13').on('click',function(){
+			cw.ejercicio13(0,0,1,matriz,disabled,disabled2,b,b2);
+		});
+		$('#btn14').on('click',function(){
+			cw.ejercicio14(0,0,1,matriz,disabled,disabled2,b,b2);
+		});
 		$('#btnAtras').on('click',function(){
 			ws.comprobarAlumnos();
 		});
@@ -1229,6 +1262,1077 @@ function ControlWeb($){
 		});
 
 	}
+
+	this.ejercicio13=function(e13,score,n,solucion,disabled,disabled2,btn,btn2){
+		this.limpiar();
+		var sumando1=[16,15,8,21,4,13,8,15,9,17];
+		var sumando2=[14,7,3,14,3,7,6,6,2,7];
+		var random=[];
+		
+		for(j=0;j<(n*4);j++){
+			random[j]=cw.getRandomArbitrary(0,31);
+		}
+		solucion[0][1]=sumando1[e13];
+		solucion[0][2]=sumando2[e13];
+		
+		for(let elemento in solucion){
+			console.log(elemento+"="+solucion[elemento]);
+		}
+		console.log(random);
+		var cadena='<div id="mostrar13">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena +'<h1>Suma ABN</h1>';
+		cadena=cadena +'<h3>'+(e13+1)+'/10 Pulsa las casillas y realiza la suma</h3>';
+		cadena=cadena +'<br>';
+		cadena=cadena +'<table class="table table-bordered" id="resta">';
+		cadena=cadena +'<thead>';
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td><h3>Suma <i class="fas fa-plus-circle"></i></h3></td>';
+		cadena=cadena +'<td><h3>'+sumando1[e13]+'</h3></td>';
+		cadena=cadena +'<td><h3>'+sumando2[e13]+'</h3></td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'</thead>';
+		cadena=cadena +'<tbody>';
+		
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td>';
+		cadena = cadena + '<div class="dropdown">' ;
+		cadena=cadena+'<button id="btnO1" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[0]+' >'+solucion[1][0]+'<span class="caret"></span></button>';
+		cadena=cadena +'<div class="dropdown-menu" id="o1" role="menu">';
+		for(l=1;l<=sumando2[e13];l++){
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+			cadena=cadena+'<p></p>';
+		}
+		cadena=cadena+'</td>';
+		cadena=cadena +'<td>';
+		cadena = cadena + '<div class="dropdown">' ;
+		cadena=cadena+'<button id="btnS1" type="button" class="btn '+btn2[0]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[0]+'>'+btn[0]+'<span class="caret"></span></button>';
+		cadena=cadena +'<div class="dropdown-menu" id="s1" role="menu">';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[0]+'"><h4 style="text-align:center;">'+random[0]+'</h4></a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[1][1]+'"><h4 style="text-align:center;">'+solucion[1][1]+'</h4></a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[1]+'"><h4 style="text-align:center;">'+random[1]+'</h4></a>';
+		cadena=cadena+'</td>';
+		cadena=cadena +'<td>';
+		cadena = cadena + '<div class="dropdown" >' ;
+		cadena=cadena+'<button id="btnS2" type="button" class="btn '+btn2[1]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[0]+'>'+btn[1]+' <span class="caret"></span></button>';
+		cadena=cadena +'<div class="dropdown-menu" id="s2" role="menu">';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[2]+'"><h4 style="text-align:center;">'+random[2]+'</h4></a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[1][2]+'"><h4 style="text-align:center;">'+solucion[1][2]+'</h4></a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[3]+'"><h4 style="text-align:center;">'+random[3]+'</h4></a>';
+		cadena=cadena+'</td>';
+		cadena=cadena +'</tr>';
+		if(n>=2){
+			cadena=cadena +'<tr>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnO2" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[1]+'>'+solucion[2][0]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="o2" role="menu">';
+			for(l=1;l<=solucion[1][2];l++){
+				cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+				cadena=cadena+'<p></p>';
+			}
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnS3" type="button" class="btn '+btn2[2]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[1]+'>'+btn[2]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s3" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[4]+'"><h4 style="text-align:center;">'+random[4]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[2][1]+'"><h4 style="text-align:center;">'+solucion[2][1]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[5]+'"><h4 style="text-align:center;">'+random[5]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown" >' ;
+			cadena=cadena+'<button id="btnS4" type="button" class="btn '+btn2[3]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[1]+'>'+btn[3]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s4" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[6]+'"><h4 style="text-align:center;">'+random[6]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[2][2]+'"><h4 style="text-align:center;">'+solucion[2][2]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[7]+'"><h4 style="text-align:center;">'+random[7]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'</tr>';
+		}
+		if(n>=3){
+			cadena=cadena +'<tr>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnO3" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[2]+' >'+solucion[3][0]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="o3" role="menu">';
+			for(l=1;l<=solucion[2][2];l++){
+				cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+				cadena=cadena+'<p></p>';
+			}
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnS5" type="button" class="btn '+btn2[4]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[2]+'>'+btn[4]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s5" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[8]+'"><h4 style="text-align:center;">'+random[8]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[3][1]+'"><h4 style="text-align:center;">'+solucion[3][1]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[9]+'"><h4 style="text-align:center;">'+random[9]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown" >' ;
+			cadena=cadena+'<button id="btnS6" type="button" class="btn '+btn2[5]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[2]+'>'+btn[5]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s6" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[10]+'"><h4 style="text-align:center;">'+random[10]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[3][2]+'"><h4 style="text-align:center;">'+solucion[3][2]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[11]+'"><h4 style="text-align:center;">'+random[11]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'</tr>';
+		}
+		if(n>=4){
+			cadena=cadena +'<tr>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnO4" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[3]+'>'+solucion[4][0]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="o4" role="menu">';
+			for(l=1;l<=solucion[3][2];l++){
+				cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+				cadena=cadena+'<p></p>';
+			}
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnS7" type="button" class="btn '+btn2[6]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[3]+'>'+btn[6]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s7" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[12]+'"><h4 style="text-align:center;">'+random[12]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[4][1]+'"><h4 style="text-align:center;">'+solucion[4][1]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[13]+'"><h4 style="text-align:center;">'+random[13]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown" >' ;
+			cadena=cadena+'<button id="btnS8" type="button" class="btn '+btn2[7]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[3]+'>'+btn[7]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s8" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[14]+'"><h4 style="text-align:center;">'+random[14]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[4][2]+'"><h4 style="text-align:center;">'+solucion[4][2]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[15]+'"><h4 style="text-align:center;">'+random[15]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'</tr>';			
+		}
+		if(n>=5){
+			cadena=cadena +'<tr>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnO5" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[4]+'>'+solucion[5][0]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="o5" role="menu">';
+			for(l=1;l<=solucion[4][2];l++){
+				cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+				cadena=cadena+'<p></p>';
+			}
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnS9" type="button" class="btn '+btn2[8]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[4]+'>'+btn[8]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s9" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[16]+'"><h4 style="text-align:center;">'+random[16]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[5][1]+'"><h4 style="text-align:center;">'+solucion[5][1]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[71]+'"><h4 style="text-align:center;">'+random[17]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown" >' ;
+			cadena=cadena+'<button id="btnS10" type="button" class="btn '+btn2[9]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[4]+'>'+btn[9]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s10" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[18]+'"><h4 style="text-align:center;">'+random[18]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[5][2]+'"><h4 style="text-align:center;">'+solucion[5][2]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[19]+'"><h4 style="text-align:center;">'+random[19]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'</tr>';			
+		}
+		if(n>=6){
+			cadena=cadena +'<tr>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnO6" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[5]+'>'+solucion[6][0]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="o6" role="menu">';
+			for(l=1;l<=solucion[5][2];l++){
+				cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+				cadena=cadena+'<p></p>';
+			}
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnS11" type="button" class="btn '+btn2[10]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[5]+'>'+btn[10]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s11" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[20]+'"><h4 style="text-align:center;">'+random[20]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[6][1]+'"><h4 style="text-align:center;">'+solucion[6][1]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[21]+'"><h4 style="text-align:center;">'+random[21]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown" >' ;
+			cadena=cadena+'<button id="btnS12" type="button" class="btn '+btn2[1]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[5]+'>'+btn[11]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s12" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[22]+'"><h4 style="text-align:center;">'+random[22]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[6][2]+'"><h4 style="text-align:center;">'+solucion[6][2]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[23]+'"><h4 style="text-align:center;">'+random[23]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'</tr>';	
+			
+		}
+		cadena=cadena +'</tbody>';
+		cadena=cadena +'</table>';
+		cadena=cadena+'<button type="button" id="btnMas" class="btn btn-primary btn-lg pull-left"><i class="fas fa-plus"></i></button>';
+		cadena=cadena+'<button type="button" id="btnHecho" class="btn btn-success btn-lg " style="margin-left:20px"><i class="fas fa-check"></i> Hecho</button>';
+		cadena=cadena+'<button type="button" id="btnMenos" class="btn btn-primary btn-lg pull-right" style="margin-left:20px"><i class="fas fa-minus"></i></button>';
+		cadena=cadena+'<h1></h1>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena=cadena +'</div>';
+
+		$('#ejercicios').append(cadena);
+		var StoreValue = []; //Declare array
+		$(".dropdown-menu a").click(function(){
+			StoreValue = []; //clear array
+			StoreValue.push($(this).attr("value")); // add text to array
+		});
+
+		$('#o1 a').click(function () {
+			var num =StoreValue[0];
+			disabled[0]= "";
+			disabled2[0]="disabled";
+			solucion[1][0]=num;
+			solucion[1][1]=parseInt(solucion[0][1])+parseInt(solucion[1][0]);
+			solucion[1][2]=solucion[0][2]-solucion[1][0];
+			if(solucion[1][2]!=0){n++;}
+			cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+		$('#o2 a').click(function () {
+			var num =StoreValue[0];
+			disabled[1]= "";
+			disabled2[1]="disabled";
+			solucion[2][0]=num;
+			solucion[2][1]= parseInt(solucion[1][1])+parseInt(solucion[2][0]);
+			solucion[2][2]=solucion[1][2]-solucion[2][0];
+			if(solucion[2][2]!=0){n++;}
+			cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+		$('#o3 a').click(function () {
+			var num =StoreValue[0];
+			disabled[2]= "";
+			disabled2[2]="disabled";
+			solucion[3][0]=num;
+			solucion[3][1]= parseInt(solucion[2][1])+parseInt(solucion[3][0]);
+			solucion[3][2]=solucion[2][2]-solucion[3][0];
+			if(solucion[3][2]!=0){n++;}
+			cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+		$('#o4 a').click(function () {
+			var num =StoreValue[0];
+			disabled[3]= "";
+			disabled2[3]="disabled";
+			solucion[4][0]=num;
+			solucion[4][1]= parseInt(solucion[3][1])+parseInt(solucion[4][0]);
+			solucion[4][2]=solucion[3][2]-solucion[4][0];
+			if(solucion[4][2]!=0){n++;}
+			cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+		$('#o5 a').click(function () {
+			var num =StoreValue[0];
+			disabled[4]= "";
+			disabled2[4]="disabled";
+			solucion[5][0]=num;
+			solucion[5][1]= parseInt(solucion[4][1])+ parseInt(solucion[5][0]);
+			solucion[5][2]=solucion[4][2]-solucion[5][0];
+			if(solucion[5][2]!=0){n++;}
+			cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+		$('#o6 a').click(function () {
+			var num =StoreValue[0];
+			disabled[5]= "";
+			disabled2[5]="disabled";
+			solucion[6][0]=num;
+			solucion[6][1]= parseInt(solucion[5][1])+parseInt(solucion[6][0]);
+			solucion[6][2]=solucion[0][2]-solucion[6][0];
+			cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+
+		$('#s1 a').click(function () {
+			btn[0]=solucion[1][1];
+			var num =StoreValue[0];
+			if(num==solucion[1][1]){
+				ce++;
+				acierto.play();
+				btn2[0]="btn-success";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[0]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s2 a').click(function () {
+			btn[1]=solucion[1][2];
+			var num =StoreValue[0];
+			if(num==solucion[1][2]){
+				ce++;
+				acierto.play();
+				btn2[1]="btn-success";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[1]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s3 a').click(function () {
+			btn[2]=solucion[2][1];
+			var num =StoreValue[0];
+			if(num==solucion[2][1]){
+				ce++;
+				btn2[2]="btn-success";
+				acierto.play();
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[2]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s4 a').click(function () {
+			btn[3]=solucion[2][2];
+			var num =StoreValue[0];
+			if(num==solucion[2][2]){
+				ce++;
+				acierto.play();
+				btn2[3]="btn-success";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[3]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s5 a').click(function () {
+			btn[4]=solucion[3][1];
+			var num =StoreValue[0];
+			if(num==solucion[3][1]){
+				ce++;
+				acierto.play();
+				btn2[4]="btn-success";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[4]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s6 a').click(function () {
+			btn[5]=solucion[3][2];
+			var num =StoreValue[0];
+			if(num==solucion[3][2]){
+				ce++;
+				acierto.play();
+				btn2[5]="btn-success";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[5]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+		});
+		$('#s7 a').click(function () {
+			btn[6]=solucion[4][1];
+			var num =StoreValue[0];
+			if(num==solucion[4][1]){
+				ce++;
+				acierto.play();
+				btn2[6]="btn-success";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[6]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s8 a').click(function () {
+			btn[7]=solucion[4][2];
+			var num =StoreValue[0];
+			if(num==solucion[4][2]){
+				ce++;
+				acierto.play();
+				btn2[7]="btn-success";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[7]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s9 a').click(function () {
+			btn[8]=solucion[5][1];
+			var num =StoreValue[0];
+			if(num==solucion[5][1]){
+				ce++;
+				acierto.play();
+				btn2[8]="btn-success";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[8]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s10 a').click(function () {
+			btn[9]=solucion[5][2];
+			var num =StoreValue[0];
+			if(num==solucion[5][2]){
+				ce++;
+				acierto.play();
+				btn2[9]="btn-success";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[9]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s11 a').click(function () {
+			btn[10]=solucion[6][1];
+			var num =StoreValue[0];
+			if(num==solucion[6][1]){
+				ce++;
+				acierto.play();
+				btn2[10]="btn-success";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[10]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s12 a').click(function () {
+			btn[11]=solucion[6][2];
+			var num =StoreValue[0];
+			if(num==solucion[6][2]){
+				ce++;
+				acierto.play();
+				btn2[11]="btn-success";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[11]="btn-danger";
+				cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);			}
+			
+		});
+
+		
+		$('#btnMas').on('click',function(){
+			if(n<6){n++;}
+			console.log(n);
+			cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+		});
+		$('#btnMenos').on('click',function(){
+			if(n>1){n--;}
+			cw.ejercicio13(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+		});
+		$('#btnHecho').on('click',function(){
+			e13++;
+			var disable=["","","","","disabled"];
+			var disabled=["disabled","disabled","disabled","disabled","disabled","disabled"];
+			var matriz=new Array();
+			var disabled2=["","","","","",""];
+			var b=[];
+			var b2=[];
+			for(var x=0;x<7;x++){
+				matriz[x]=new Array();
+				for(var y=0;y<3;y++){
+					matriz[x][y]=undefined;
+				}
+			}
+			for(var y=0;y<12;y++){
+				b[y]="Elige";
+				b2[y]="btn-info";
+			}
+			if(ce>n){
+				score++;
+			}
+			ce=0;
+			if(e13==10){
+				cw.mostrarResultados((score),1,13);
+			}else{
+				cw.ejercicio13((e13%10),score,1,matriz,disabled,disabled2,b,b2);
+			}
+			
+		});
+
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios1();
+		});
+
+	}
+
+this.ejercicio14=function(e13,score,n,solucion,disabled,disabled2,btn,btn2){
+		this.limpiar();
+		var minuendo=[14,25,8,37,12,8,24,17,10,13];
+		var sustraendo=[6,13,3,21,6,4,6,8,3,8];
+		var random=[];
+		
+		for(j=0;j<(n*4);j++){
+			random[j]=cw.getRandomArbitrary(0,31);
+		}
+		solucion[0][1]=minuendo[e13];
+		solucion[0][2]=sustraendo[e13];
+		
+		for(let elemento in solucion){
+			console.log(elemento+"="+solucion[elemento]);
+		}
+		console.log(random);
+		var cadena='<div id="mostrar14">';
+		cadena=cadena+'<button type="button" id="btnInfo" class="btn btn-success btn-lg pull-right"><i class="fas fa-question-circle"></i></button>';
+		cadena=cadena +'<h1>Resta ABN</h1>';
+		cadena=cadena +'<h3>'+(e13+1)+'/10 Pulsa las casillas y realiza la resta</h3>';
+		cadena=cadena +'<br>';
+		cadena=cadena +'<table class="table table-bordered" id="resta">';
+		cadena=cadena +'<thead>';
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td><h3>Resta <i class="fas fa-minus-circle"></i></h3></td>';
+		cadena=cadena +'<td><h3>'+minuendo[e13]+'</h3></td>';
+		cadena=cadena +'<td><h3>'+sustraendo[e13]+'</h3></td>';
+		cadena=cadena +'</tr>';
+		cadena=cadena +'</thead>';
+		cadena=cadena +'<tbody>';
+		
+		cadena=cadena +'<tr>';
+		cadena=cadena +'<td>';
+		cadena = cadena + '<div class="dropdown">' ;
+		cadena=cadena+'<button id="btnO1" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[0]+' >'+solucion[1][0]+'<span class="caret"></span></button>';
+		cadena=cadena +'<div class="dropdown-menu" id="o1" role="menu">';
+		for(l=1;l<=sustraendo[e13];l++){
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+			cadena=cadena+'<p></p>';
+		}
+		cadena=cadena+'</td>';
+		cadena=cadena +'<td>';
+		cadena = cadena + '<div class="dropdown">' ;
+		cadena=cadena+'<button id="btnS1" type="button" class="btn '+btn2[0]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[0]+'>'+btn[0]+'<span class="caret"></span></button>';
+		cadena=cadena +'<div class="dropdown-menu" id="s1" role="menu">';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[0]+'"><h4 style="text-align:center;">'+random[0]+'</h4></a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[1][1]+'"><h4 style="text-align:center;">'+solucion[1][1]+'</h4></a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[1]+'"><h4 style="text-align:center;">'+random[1]+'</h4></a>';
+		cadena=cadena+'</td>';
+		cadena=cadena +'<td>';
+		cadena = cadena + '<div class="dropdown" >' ;
+		cadena=cadena+'<button id="btnS2" type="button" class="btn '+btn2[1]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[0]+'>'+btn[1]+' <span class="caret"></span></button>';
+		cadena=cadena +'<div class="dropdown-menu" id="s2" role="menu">';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[2]+'"><h4 style="text-align:center;">'+random[2]+'</h4></a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[1][2]+'"><h4 style="text-align:center;">'+solucion[1][2]+'</h4></a>';
+		cadena=cadena+'<p></p>';
+		cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[3]+'"><h4 style="text-align:center;">'+random[3]+'</h4></a>';
+		cadena=cadena+'</td>';
+		cadena=cadena +'</tr>';
+		if(n>=2){
+			cadena=cadena +'<tr>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnO2" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[1]+'>'+solucion[2][0]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="o2" role="menu">';
+			for(l=1;l<=solucion[1][2];l++){
+				cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+				cadena=cadena+'<p></p>';
+			}
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnS3" type="button" class="btn '+btn2[2]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[1]+'>'+btn[2]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s3" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[4]+'"><h4 style="text-align:center;">'+random[4]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[2][1]+'"><h4 style="text-align:center;">'+solucion[2][1]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[5]+'"><h4 style="text-align:center;">'+random[5]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown" >' ;
+			cadena=cadena+'<button id="btnS4" type="button" class="btn '+btn2[3]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[1]+'>'+btn[3]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s4" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[6]+'"><h4 style="text-align:center;">'+random[6]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[2][2]+'"><h4 style="text-align:center;">'+solucion[2][2]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[7]+'"><h4 style="text-align:center;">'+random[7]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'</tr>';
+		}
+		if(n>=3){
+			cadena=cadena +'<tr>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnO3" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[2]+' >'+solucion[3][0]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="o3" role="menu">';
+			for(l=1;l<=solucion[2][2];l++){
+				cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+				cadena=cadena+'<p></p>';
+			}
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnS5" type="button" class="btn '+btn2[4]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[2]+'>'+btn[4]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s5" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[8]+'"><h4 style="text-align:center;">'+random[8]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[3][1]+'"><h4 style="text-align:center;">'+solucion[3][1]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[9]+'"><h4 style="text-align:center;">'+random[9]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown" >' ;
+			cadena=cadena+'<button id="btnS6" type="button" class="btn '+btn2[5]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[2]+'>'+btn[5]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s6" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[10]+'"><h4 style="text-align:center;">'+random[10]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[3][2]+'"><h4 style="text-align:center;">'+solucion[3][2]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[11]+'"><h4 style="text-align:center;">'+random[11]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'</tr>';
+		}
+		if(n>=4){
+			cadena=cadena +'<tr>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnO4" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[3]+'>'+solucion[4][0]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="o4" role="menu">';
+			for(l=1;l<=solucion[3][2];l++){
+				cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+				cadena=cadena+'<p></p>';
+			}
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnS7" type="button" class="btn '+btn2[6]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[3]+'>'+btn[6]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s7" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[12]+'"><h4 style="text-align:center;">'+random[12]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[4][1]+'"><h4 style="text-align:center;">'+solucion[4][1]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[13]+'"><h4 style="text-align:center;">'+random[13]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown" >' ;
+			cadena=cadena+'<button id="btnS8" type="button" class="btn '+btn2[7]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[3]+'>'+btn[7]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s8" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[14]+'"><h4 style="text-align:center;">'+random[14]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[4][2]+'"><h4 style="text-align:center;">'+solucion[4][2]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[15]+'"><h4 style="text-align:center;">'+random[15]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'</tr>';			
+		}
+		if(n>=5){
+			cadena=cadena +'<tr>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnO5" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[4]+'>'+solucion[5][0]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="o5" role="menu">';
+			for(l=1;l<=solucion[4][2];l++){
+				cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+				cadena=cadena+'<p></p>';
+			}
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnS9" type="button" class="btn '+btn2[8]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[4]+'>'+btn[8]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s9" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[16]+'"><h4 style="text-align:center;">'+random[16]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[5][1]+'"><h4 style="text-align:center;">'+solucion[5][1]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[71]+'"><h4 style="text-align:center;">'+random[17]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown" >' ;
+			cadena=cadena+'<button id="btnS10" type="button" class="btn '+btn2[9]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[4]+'>'+btn[9]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s10" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[18]+'"><h4 style="text-align:center;">'+random[18]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[5][2]+'"><h4 style="text-align:center;">'+solucion[5][2]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[19]+'"><h4 style="text-align:center;">'+random[19]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'</tr>';			
+		}
+		if(n>=6){
+			cadena=cadena +'<tr>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnO6" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[5]+'>'+solucion[6][0]+'<span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="o6" role="menu">';
+			for(l=1;l<=solucion[5][2];l++){
+				cadena = cadena + '<a class="dropdown-item" href="#" value="'+l+'"><h4 style="text-align:center;">'+l+'</h4></a>';
+				cadena=cadena+'<p></p>';
+			}
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown">' ;
+			cadena=cadena+'<button id="btnS11" type="button" class="btn '+btn2[10]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[5]+'>'+btn[10]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s11" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[20]+'"><h4 style="text-align:center;">'+random[20]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[6][1]+'"><h4 style="text-align:center;">'+solucion[6][1]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[21]+'"><h4 style="text-align:center;">'+random[21]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'<td>';
+			cadena = cadena + '<div class="dropdown" >' ;
+			cadena=cadena+'<button id="btnS12" type="button" class="btn '+btn2[1]+' btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled[5]+'>'+btn[11]+' <span class="caret"></span></button>';
+			cadena=cadena +'<div class="dropdown-menu" id="s12" role="menu">';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[22]+'"><h4 style="text-align:center;">'+random[22]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+solucion[6][2]+'"><h4 style="text-align:center;">'+solucion[6][2]+'</h4></a>';
+			cadena=cadena+'<p></p>';
+			cadena = cadena + '<a class="dropdown-item" href="#" value="'+random[23]+'"><h4 style="text-align:center;">'+random[23]+'</h4></a>';
+			cadena=cadena+'</td>';
+			cadena=cadena +'</tr>';	
+			
+		}
+		cadena=cadena +'</tbody>';
+		cadena=cadena +'</table>';
+		cadena=cadena+'<button type="button" id="btnMas" class="btn btn-primary btn-lg pull-left"><i class="fas fa-plus"></i></button>';
+		cadena=cadena+'<button type="button" id="btnHecho" class="btn btn-success btn-lg " style="margin-left:20px"><i class="fas fa-check"></i> Hecho</button>';
+		cadena=cadena+'<button type="button" id="btnMenos" class="btn btn-primary btn-lg pull-right" style="margin-left:20px"><i class="fas fa-minus"></i></button>';
+		cadena=cadena+'<h1></h1>';
+		cadena=cadena+'<button type="button" id="btnAtras" class="btn btn-primary btn-lg pull-right"><i class="fas fa-arrow-circle-left"></i></button>';
+		cadena=cadena +'</div>';
+
+		$('#ejercicios').append(cadena);
+		var StoreValue = []; //Declare array
+		$(".dropdown-menu a").click(function(){
+			StoreValue = []; //clear array
+			StoreValue.push($(this).attr("value")); // add text to array
+		});
+
+		$('#o1 a').click(function () {
+			var num =StoreValue[0];
+			disabled[0]= "";
+			disabled2[0]="disabled";
+			solucion[1][0]=num;
+			solucion[1][1]=parseInt(solucion[0][1])-parseInt(solucion[1][0]);
+			solucion[1][2]=solucion[0][2]-solucion[1][0];
+			if(solucion[1][2]!=0){n++;}
+			cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+		$('#o2 a').click(function () {
+			var num =StoreValue[0];
+			disabled[1]= "";
+			disabled2[1]="disabled";
+			solucion[2][0]=num;
+			solucion[2][1]= parseInt(solucion[1][1])-parseInt(solucion[2][0]);
+			solucion[2][2]=solucion[1][2]-solucion[2][0];
+			if(solucion[2][2]!=0){n++;}
+			cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+		$('#o3 a').click(function () {
+			var num =StoreValue[0];
+			disabled[2]= "";
+			disabled2[2]="disabled";
+			solucion[3][0]=num;
+			solucion[3][1]= parseInt(solucion[2][1])-parseInt(solucion[3][0]);
+			solucion[3][2]=solucion[2][2]-solucion[3][0];
+			if(solucion[3][2]!=0){n++;}
+			cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+		$('#o4 a').click(function () {
+			var num =StoreValue[0];
+			disabled[3]= "";
+			disabled2[3]="disabled";
+			solucion[4][0]=num;
+			solucion[4][1]= parseInt(solucion[3][1])-parseInt(solucion[4][0]);
+			solucion[4][2]=solucion[3][2]-solucion[4][0];
+			if(solucion[4][2]!=0){n++;}
+			cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+		$('#o5 a').click(function () {
+			var num =StoreValue[0];
+			disabled[4]= "";
+			disabled2[4]="disabled";
+			solucion[5][0]=num;
+			solucion[5][1]= parseInt(solucion[4][1])-parseInt(solucion[5][0]);
+			solucion[5][2]=solucion[4][2]-solucion[5][0];
+			if(solucion[5][2]!=0){n++;}
+			cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+		$('#o6 a').click(function () {
+			var num =StoreValue[0];
+			disabled[5]= "";
+			disabled2[5]="disabled";
+			solucion[6][0]=num;
+			solucion[6][1]= parseInt(solucion[5][1])-parseInt(solucion[6][0]);
+			solucion[6][2]=solucion[0][2]-solucion[6][0];
+			cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			
+		});
+
+		$('#s1 a').click(function () {
+			btn[0]=solucion[1][1];
+			var num =StoreValue[0];
+			if(num==solucion[1][1]){
+				ce++;
+				acierto.play();
+				btn2[0]="btn-success";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[0]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s2 a').click(function () {
+			btn[1]=solucion[1][2];
+			var num =StoreValue[0];
+			if(num==solucion[1][2]){
+				ce++;
+				acierto.play();
+				btn2[1]="btn-success";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[1]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s3 a').click(function () {
+			btn[2]=solucion[2][1];
+			var num =StoreValue[0];
+			if(num==solucion[2][1]){
+				ce++;
+				btn2[2]="btn-success";
+				acierto.play();
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[2]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s4 a').click(function () {
+			btn[3]=solucion[2][2];
+			var num =StoreValue[0];
+			if(num==solucion[2][2]){
+				ce++;
+				acierto.play();
+				btn2[3]="btn-success";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[3]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s5 a').click(function () {
+			btn[4]=solucion[3][1];
+			var num =StoreValue[0];
+			if(num==solucion[3][1]){
+				ce++;
+				acierto.play();
+				btn2[4]="btn-success";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[4]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s6 a').click(function () {
+			btn[5]=solucion[3][2];
+			var num =StoreValue[0];
+			if(num==solucion[3][2]){
+				ce++;
+				acierto.play();
+				btn2[5]="btn-success";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[5]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+		});
+		$('#s7 a').click(function () {
+			btn[6]=solucion[4][1];
+			var num =StoreValue[0];
+			if(num==solucion[4][1]){
+				ce++;
+				acierto.play();
+				btn2[6]="btn-success";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[6]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s8 a').click(function () {
+			btn[7]=solucion[4][2];
+			var num =StoreValue[0];
+			if(num==solucion[4][2]){
+				ce++;
+				acierto.play();
+				btn2[7]="btn-success";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[7]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s9 a').click(function () {
+			btn[8]=solucion[5][1];
+			var num =StoreValue[0];
+			if(num==solucion[5][1]){
+				ce++;
+				acierto.play();
+				btn2[8]="btn-success";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[8]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s10 a').click(function () {
+			btn[9]=solucion[5][2];
+			var num =StoreValue[0];
+			if(num==solucion[5][2]){
+				ce++;
+				acierto.play();
+				btn2[9]="btn-success";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[9]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s11 a').click(function () {
+			btn[10]=solucion[6][1];
+			var num =StoreValue[0];
+			if(num==solucion[6][1]){
+				ce++;
+				acierto.play();
+				btn2[10]="btn-success";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[10]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}
+			
+		});
+		$('#s12 a').click(function () {
+			btn[11]=solucion[6][2];
+			var num =StoreValue[0];
+			if(num==solucion[6][2]){
+				ce++;
+				acierto.play();
+				btn2[11]="btn-success";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+			}else{
+				fallo.play();
+				btn2[11]="btn-danger";
+				cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);			}
+			
+		});
+
+		
+		$('#btnMas').on('click',function(){
+			if(n<6){n++;}
+			console.log(n);
+			cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+		});
+		$('#btnMenos').on('click',function(){
+			if(n>1){n--;}
+			cw.ejercicio14(e13,score,n,solucion,disabled,disabled2,btn,btn2);
+		});
+		$('#btnHecho').on('click',function(){
+			e13++;
+			var disable=["","","","","disabled"];
+			var disabled=["disabled","disabled","disabled","disabled","disabled","disabled"];
+			var matriz=new Array();
+			var disabled2=["","","","","",""];
+			var b=[];
+			var b2=[];
+			for(var x=0;x<7;x++){
+				matriz[x]=new Array();
+				for(var y=0;y<3;y++){
+					matriz[x][y]=undefined;
+				}
+			}
+			for(var y=0;y<12;y++){
+				b[y]="Elige";
+				b2[y]="btn-info";
+			}
+			if(ce>n){
+				score++;
+			}
+			ce=0;
+			if(e13==10){
+				cw.mostrarResultados((score),1,14);
+			}else{
+				cw.ejercicio14((e13%10),score,1,matriz,disabled,disabled2,b,b2);
+			}
+			
+		});
+
+		$('#btnAtras').on('click',function(){
+			cw.mostrarEjercicios1();
+		});
+
+	}
+
 	this.ejercicio11=function(e11,score,btn,btn2,disable){
 		this.limpiar();
 		var m="";
@@ -1738,6 +2842,22 @@ function ControlWeb($){
 		btn=["btn-info","btn-info","btn-info","btn-info"];
 		disable=["","","","","disabled"];
 		btn2=["Elige","Elige","Elige","Elige"];
+		var disable=["","","","","disabled"];
+		var disabled=["disabled","disabled","disabled","disabled","disabled","disabled"];
+		var matriz=new Array();
+		var disabled2=["","","","","",""];
+		var b=[];
+		var b2=[];
+		for(var x=0;x<7;x++){
+			matriz[x]=new Array();
+			for(var y=0;y<3;y++){
+				matriz[x][y]=undefined;
+			}
+		}
+		for(var y=0;y<12;y++){
+			b[y]="Elige";
+			b2[y]="btn-info";
+		}
 		var cadena='<div id="mostrarR">';
 		cadena=cadena +'<h1>RESULTADOS</h1>';
 		cadena=cadena +'<p></p>';
@@ -1786,8 +2906,12 @@ function ControlWeb($){
 				cw.ejercicio52(0,1,0,0);
 			}else if(e==11){
 				cw.ejercicio11(0,0,btn,btn2,disable);
-			}else if(e=12){
+			}else if(e==12){
 				cw.ejercicio12(0,0,btn,btn2,disable);
+			}else if(e=13){
+				cw.ejercicio13(0,0,1,matriz,disabled,disabled2,b,b2);
+			}else if(e=14){
+				cw.ejercicio14(0,0,1,matriz,disabled,disabled2,b,b2);
 			}
 			
 		});
@@ -1868,6 +2992,8 @@ function ControlWeb($){
 		$('#mostrar1').remove();
 		$('#mostrar11').remove();
 		$('#mostrar12').remove();
+		$('#mostrar13').remove();
+		$('#mostrar14').remove();
 		$('#mostrarR').remove();
 		$('#mostrarsearch').remove();
 		$('#r31').remove();

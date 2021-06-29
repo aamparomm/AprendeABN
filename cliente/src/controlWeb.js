@@ -1792,6 +1792,18 @@ function ControlWeb($){
 			
 		});
 
+		$('#btnInfo').on('click',function(){
+			var msg="Pulse en los distintos botones de undefined o 'Elegir',siempre y cuando esten habilitados";
+			msg=msg+"<img src='cliente/images/ayuda/14.png' width='800' height='350' ></img><p></p>";
+			msg=msg+"<p>Seleccione una de las opciones que se le proporcionan para cada uno de los botones </p>";
+			msg=msg+"<img src='cliente/images/ayuda/142.png' width='800' height='350' ></img><p></p>";
+			msg=msg+"<p>Una vez acabada la suma Para continuar con el siguiente ejercicio pulse 'Hecho'</p>";
+			msg=msg+"<img src='cliente/images/ayuda/143.png' width='800' height='350' ></img><p></p>";
+			msg=msg+"<p> Como bien se puede intuir, en la primera columna se podrán elegir aquellos números que se van a sumar al primer sumando y restar al segundo, y en las columnas sucesivas se tendrán que elegir las opciones correctas para completar la suma.</p>";
+			msg=msg+"<h3> ¡Atención! El número máximo de filas que se podrán añadir para realizar la suma serán 6</h3>";
+			cw.mostrarModal(msg);
+		});
+
 		$('#btnAtras').on('click',function(){
 			cw.mostrarEjercicios1();
 		});
@@ -2325,6 +2337,18 @@ this.ejercicio14=function(e13,score,n,solucion,disabled,disabled2,btn,btn2){
 				cw.ejercicio14((e13%10),score,1,matriz,disabled,disabled2,b,b2);
 			}
 			
+		});
+
+		$('#btnInfo').on('click',function(){
+			var msg="Pulse en los distintos botones de undefined o Elegir,siempre y cuando esten habilitados";
+			msg=msg+"<img src='cliente/images/ayuda/13.png' width='800' height='350' ></img><p></p>";
+			msg=msg+"<p>Seleccione una de las opciones que se le proporcionan para cada uno de los botones </p>";
+			msg=msg+"<img src='cliente/images/ayuda/132.png' width='800' height='350' ></img><p></p>";
+			msg=msg+"<p>Una vez finalizada la resta, para continuar con el siguiente ejercicio pulse 'Hecho'</p>";
+			msg=msg+"<img src='cliente/images/ayuda/133.png' width='800' height='350' ></img><p></p>";
+			msg=msg+"<p> Como bien se puede intuir, en la primera columna se podrán elegir aquellos números que se van a restar tanto al minuendo como al sustraendo, y en las columnas sucesivas se tendrán que elegir las opciones correctas para completar la resta</p>";
+			msg=msg+"<h3> ¡Atención! El número máximo de filas que se podrán añadir para realizar la resta serán 6</h3>";
+			cw.mostrarModal(msg);
 		});
 
 		$('#btnAtras').on('click',function(){

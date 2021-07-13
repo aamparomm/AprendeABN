@@ -24,6 +24,7 @@ function ControlWeb($){
 		cadena=cadena +'<li><a href="#" value="white">Blanco</a></li>';
 		cadena=cadena +'<li><a href="#" value="#EBF5FB">Azul</a></li>';
         cadena=cadena+'<li><a href="#" value="#F2D7D5">Rosa</a></li>';
+        cadena=cadena+'<li><a href="#" value="#333C87">Azul Oscuro</a></li>';
         cadena=cadena+'<li><a href="#" value="imagen">Dibujo</a></li>';
         cadena=cadena+'</ul></li>';
         cadena=cadena+'<li><a href="../cliente/ayuda.html"><i class="fas fa-question"></i> Ayuda</a></li>';
@@ -98,6 +99,9 @@ function ControlWeb($){
 		}else if(color=="#EBF5FB"){
 			body.style.background=color;
 			encabezado.style.background="#7FB3D5";
+		}else if(color=="#333C87"){
+			body.style.background="white";
+			encabezado.style.background=color;
 		}else if(color=="#F2D7D5"){
 			body.style.background=color;
 			encabezado.style.background="#EA899A";
@@ -1297,6 +1301,7 @@ function ControlWeb($){
 		cadena=cadena +'<tr>';
 		cadena=cadena +'<td>';
 		cadena = cadena + '<div class="dropdown">' ;
+		if(solucion[1][0]==undefined){solucion[1][0]='Elige'}
 		cadena=cadena+'<button id="btnO1" type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" '+disabled2[0]+' >'+solucion[1][0]+'<span class="caret"></span></button>';
 		cadena=cadena +'<div class="dropdown-menu" id="o1" role="menu">';
 		for(l=1;l<=sumando2[e13];l++){
@@ -1326,6 +1331,7 @@ function ControlWeb($){
 		cadena=cadena+'</td>';
 		cadena=cadena +'</tr>';
 		if(n>=2){
+			if(solucion[2][0]==undefined){solucion[2][0]='Elige'}
 			cadena=cadena +'<tr>';
 			cadena=cadena +'<td>';
 			cadena = cadena + '<div class="dropdown">' ;
@@ -1359,6 +1365,7 @@ function ControlWeb($){
 			cadena=cadena +'</tr>';
 		}
 		if(n>=3){
+			if(solucion[3][0]==undefined){solucion[3][0]='Elige'}
 			cadena=cadena +'<tr>';
 			cadena=cadena +'<td>';
 			cadena = cadena + '<div class="dropdown">' ;
@@ -1392,6 +1399,7 @@ function ControlWeb($){
 			cadena=cadena +'</tr>';
 		}
 		if(n>=4){
+			if(solucion[4][0]==undefined){solucion[4][0]='Elige'}
 			cadena=cadena +'<tr>';
 			cadena=cadena +'<td>';
 			cadena = cadena + '<div class="dropdown">' ;
@@ -1425,6 +1433,7 @@ function ControlWeb($){
 			cadena=cadena +'</tr>';			
 		}
 		if(n>=5){
+			if(solucion[5][0]==undefined){solucion[5][0]='Elige'}
 			cadena=cadena +'<tr>';
 			cadena=cadena +'<td>';
 			cadena = cadena + '<div class="dropdown">' ;
@@ -1458,6 +1467,7 @@ function ControlWeb($){
 			cadena=cadena +'</tr>';			
 		}
 		if(n>=6){
+			if(solucion[6][0]==undefined){solucion[6][0]='Elige'}
 			cadena=cadena +'<tr>';
 			cadena=cadena +'<td>';
 			cadena = cadena + '<div class="dropdown">' ;
@@ -1840,7 +1850,7 @@ this.ejercicio14=function(e13,score,n,solucion,disabled,disabled2,btn,btn2){
 		cadena=cadena +'</tr>';
 		cadena=cadena +'</thead>';
 		cadena=cadena +'<tbody>';
-		
+		if(solucion[1][0]==undefined){solucion[1][0]='Elige'}
 		cadena=cadena +'<tr>';
 		cadena=cadena +'<td>';
 		cadena = cadena + '<div class="dropdown">' ;
@@ -1873,6 +1883,7 @@ this.ejercicio14=function(e13,score,n,solucion,disabled,disabled2,btn,btn2){
 		cadena=cadena+'</td>';
 		cadena=cadena +'</tr>';
 		if(n>=2){
+			if(solucion[2][0]==undefined){solucion[2][0]='Elige'}
 			cadena=cadena +'<tr>';
 			cadena=cadena +'<td>';
 			cadena = cadena + '<div class="dropdown">' ;
@@ -1906,6 +1917,7 @@ this.ejercicio14=function(e13,score,n,solucion,disabled,disabled2,btn,btn2){
 			cadena=cadena +'</tr>';
 		}
 		if(n>=3){
+			if(solucion[3][0]==undefined){solucion[3][0]='Elige'}
 			cadena=cadena +'<tr>';
 			cadena=cadena +'<td>';
 			cadena = cadena + '<div class="dropdown">' ;
@@ -1939,6 +1951,7 @@ this.ejercicio14=function(e13,score,n,solucion,disabled,disabled2,btn,btn2){
 			cadena=cadena +'</tr>';
 		}
 		if(n>=4){
+			if(solucion[4][0]==undefined){solucion[4][0]='Elige'}
 			cadena=cadena +'<tr>';
 			cadena=cadena +'<td>';
 			cadena = cadena + '<div class="dropdown">' ;
@@ -1972,6 +1985,7 @@ this.ejercicio14=function(e13,score,n,solucion,disabled,disabled2,btn,btn2){
 			cadena=cadena +'</tr>';			
 		}
 		if(n>=5){
+			if(solucion[5][0]==undefined){solucion[5][0]='Elige'}
 			cadena=cadena +'<tr>';
 			cadena=cadena +'<td>';
 			cadena = cadena + '<div class="dropdown">' ;
@@ -2005,6 +2019,7 @@ this.ejercicio14=function(e13,score,n,solucion,disabled,disabled2,btn,btn2){
 			cadena=cadena +'</tr>';			
 		}
 		if(n>=6){
+			if(solucion[6][0]==undefined){solucion[6][0]='Elige'}
 			cadena=cadena +'<tr>';
 			cadena=cadena +'<td>';
 			cadena = cadena + '<div class="dropdown">' ;
